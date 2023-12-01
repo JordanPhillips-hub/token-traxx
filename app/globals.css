@@ -2,26 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Custom styles or overrides */
+.swiper {
+  @apply static !important
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.swiper-button-next {
+  @apply -right-9 !important;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.swiper-button-prev {
+  @apply -left-9 !important
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  @apply bg-primary500 w-11 h-11 rounded-full flex items-center justify-center top-[104px] !important
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  @apply text-white text-[1rem] !important
+}
+
+.focused-primary {
+  @apply focus:border focus:border-primary500 focus:outline-none focus:ring-0;
 }

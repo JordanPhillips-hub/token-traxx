@@ -5,7 +5,7 @@ import marketChartReducer from './features/charts/marketChartSlice';
 import coinsReducer from './features/coinMarketSlice/coinMarketSlice';
 import timePeriodReducer from './features/charts/timePeriodSlice';
 import globalsReducer from './features/globalSlice/globalSlice';
-import compareChartsReducer from './features/charts/compareChartsSlice'
+import compareChartsReducer from './features/charts/compareChartSlice'
 
 export const store = configureStore({
   reducer: {

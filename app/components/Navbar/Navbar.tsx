@@ -2,8 +2,8 @@
 import NavInfoDisplay from "./NavInfoDisplay";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setActiveLink } from "../../store/features/pageLinkSlice/pageLinkSlice";
-import CustomSelect from "../Inputs/CustomSelect/CustomSelect";
-import FormInput from "../Inputs/FormInput/FormInput";
+import CustomSelect from "../Form/CustomSelect";
+import FormInput from "../Form/FormInput";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import ThemeButton from "../Buttons/ThemeButton";
 import Icon from "../Icon/Icon";

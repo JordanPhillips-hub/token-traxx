@@ -12,21 +12,21 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useGetMarketChartQuery } from "../../store/api/coingecko";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useGetMarketChartQuery } from "../../../store/api/coingecko";
 import {
   setPriceVolumes,
   setPriceDates,
   setPrices,
   setVolumeDates,
-} from "../../store/features/charts/marketChartSlice";
+} from "../../../store/features/charts/marketChartSlice";
 import {
   setComparedPrices,
   setComparedVolumes,
-} from "../../store/features/charts/compareChartSlice";
-import { filterMonthData } from "../../utils/filterMonthData";
-import { optionalCapitalize } from "../../utils/optionalCapitalize";
-import { formatPrice } from "../../utils/numberFormatting";
+} from "../../../store/features/charts/compareChartSlice";
+import { filterMonthData } from "../../../utils/filterMonthData";
+import { optionalCapitalize } from "../../../utils/optionalCapitalize";
+import { formatPrice } from "../../../utils/numberFormatting";
 
 ChartJS.register(
   CategoryScale,

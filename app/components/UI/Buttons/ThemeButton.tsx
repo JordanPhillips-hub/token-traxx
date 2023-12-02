@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import Icon from "../Icon/Icon";
+import Icon from "../../Icon/Icon";
 
 export default function ThemeButton() {
   const { theme, setTheme } = useTheme();

@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { ChartProps, GradientContext } from "./types";
+import { createGraphLabel, createAxisLabel } from "./utils";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useGetMarketChartQuery } from "../../../store/api/coingecko";
 import {
@@ -26,8 +27,6 @@ import {
   setComparedVolumes,
 } from "../../../store/features/charts/compareChartSlice";
 import { filterMonthData } from "../../../utils/filterMonthData";
-import { optionalCapitalize } from "../../../utils/optionalCapitalize";
-import { formatPrice } from "../../../utils/numberFormatting";
 
 ChartJS.register(
   CategoryScale,
@@ -108,26 +107,6 @@ export default function CoinChart({ chartType, coinId, days }: ChartProps) {
   const { isComparing, comparedCoins, comparedPrices, comparedVolumes } =
     useAppSelector((state) => state.compareCharts);
 
-  function createGraphLabel(
-    len: number,
-    coinId: string,
-    priceType: "current_price" | "total_volume",
-    unit: string
-  ) {
-    const isGreaterThan = comparedCoins.length >= len;
-    const coinName = optionalCapitalize(coinId);
-    const findCoin = coins.find((coin) => coin.id === coinId);
-    const currentPrice = formatPrice(findCoin?.[priceType]);
-    return isGreaterThan ? `${coinName} $${currentPrice} ${unit}` : "";
-  }
-
-  function createAxisLabel(arr: number[]) {
-    const label = arr.map((date: string | number | Date) =>
-      new Date(date).getDate()
-    );
-    return label;
-  }
-
   function setComparedData(arr: number[][], secondIndex: number[]) {
     const newComparedArr = [...arr];
     newComparedArr.push(secondIndex);
@@ -201,13 +180,27 @@ export default function CoinChart({ chartType, coinId, days }: ChartProps) {
     labels: createAxisLabel(priceDates),
     datasets: [
       {
-        label: createGraphLabel(1, comparedCoins[0], "current_price", "min"),
+        label: createGraphLabel(
+          comparedCoins,
+          1,
+          comparedCoins[0],
+          coins,
+          "current_price",
+          "min"
+        ),
         data: comparedPrices[0],
         borderColor: "hsl(240, 93%, 73%)",
         backgroundColor: "hsla(240, 93%, 73%, 0.5)",
       },
       {
-        label: createGraphLabel(2, comparedCoins[1], "current_price", "min"),
+        label: createGraphLabel(
+          comparedCoins,
+          2,
+          comparedCoins[1],
+          coins,
+          "current_price",
+          "min"
+        ),
         data: comparedPrices[1],
         borderColor: "hsl(284, 93%, 73%)",
         backgroundColor: "hsla(284, 93%, 73%, 0.5)",
@@ -233,14 +226,28 @@ export default function CoinChart({ chartType, coinId, days }: ChartProps) {
     datasets: [
       {
         fill: true,
-        label: createGraphLabel(1, comparedCoins[0], "total_volume", "bin"),
+        label: createGraphLabel(
+          comparedCoins,
+          1,
+          comparedCoins[0],
+          coins,
+          "total_volume",
+          "bin"
+        ),
         data: comparedVolumes[0],
         backgroundColor: (context: GradientContext) =>
           getGradientBackgroundColor(context, lineBackgroundColors),
       },
       {
         fill: true,
-        label: createGraphLabel(2, comparedCoins[1], "total_volume", "bin"),
+        label: createGraphLabel(
+          comparedCoins,
+          2,
+          comparedCoins[1],
+          coins,
+          "total_volume",
+          "bin"
+        ),
         data: comparedVolumes[1],
         backgroundColor: (context: GradientContext) =>
           getGradientBackgroundColor(context, barBackgroundColors),

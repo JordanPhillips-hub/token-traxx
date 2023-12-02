@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { ChartProps, GradientContext } from "./types";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useGetMarketChartQuery } from "../../../store/api/coingecko";
 import {
@@ -38,22 +39,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-type ChartProps = {
-  chartType: string;
-  coinId: string;
-  days: number;
-};
-
-type GradientContext = {
-  chart: {
-    chartArea?: {
-      top: number;
-      bottom: number;
-    };
-    ctx?: CanvasRenderingContext2D;
-  };
-};
 
 const options = {
   responsive: true,

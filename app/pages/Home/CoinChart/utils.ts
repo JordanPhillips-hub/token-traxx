@@ -11,7 +11,7 @@ export function createGraphLabel(
 ) {
   const isGreaterThan = comparedCoins.length >= len;
   const coinName = optionalCapitalize(coinId);
-  const findCoin = coins.find((coin) => coin.id === coinId);
+  const findCoin = coins.find((coin: { id: string }) => coin.id === coinId);
   const currentPrice = formatPrice(findCoin?.[priceType]);
   return isGreaterThan ? `${coinName} $${currentPrice} ${unit}` : "";
 }

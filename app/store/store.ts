@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { coingeckoApi } from './api/coingecko';
-import activeLinkReducer from './features/pageLinkSlice/pageLinkSlice';
+import { coingeckoApi } from "./api/coingecko";
+import activeLinkReducer from './features/pageLinkSlice';
 import marketChartReducer from './features/charts/marketChartSlice';
-import coinsReducer from './features/coinMarketSlice/coinMarketSlice';
 import timePeriodReducer from './features/charts/timePeriodSlice';
-import globalsReducer from './features/globalSlice/globalSlice';
 import compareChartsReducer from './features/charts/compareChartSlice'
+import coinsReducer from './features/coinMarketSlice';
+import globalsReducer from './features/globalSlice';
 
 export const store = configureStore({
   reducer: {

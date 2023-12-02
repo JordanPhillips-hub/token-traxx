@@ -1,4 +1,4 @@
-import Icon from "../Icon/Icon";
+import Icon from "../UI/Icon";
 
 type CustomSelectProps = {
   iconRight: string;

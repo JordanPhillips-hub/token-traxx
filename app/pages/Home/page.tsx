@@ -1,26 +1,26 @@
 "use client";
 import { useEffect } from "react";
 import { SwiperSlide } from "swiper/react";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { useGetMarketsQuery } from "./store/api/coingecko";
-import { setChartTimePeriod } from "./store/features/charts/timePeriodSlice";
+import ChartContainer from "./CoinChart/ChartContainer";
+import CoinChart from "./CoinChart/CoinChart";
+import CurrencySelector from "./CurrencySelector";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useGetMarketsQuery } from "@/app/store/api/coingecko";
+import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import {
-  setCoinMarkets,
   setCoinId,
-} from "./store/features/coinMarketSlice/coinMarketSlice";
+  setCoinMarkets,
+} from "@/app/store/features/coinMarketSlice";
 import {
   setIsComparing,
   setComparedCoins,
-} from "./store/features/charts/compareChartSlice";
-import ChartContainer from "./components/Charts/ChartContainer";
-import CurrencySelectChart from "./components/Charts/CurrencySelectChart";
-import Carousel from "./components/Carousel/Carousel";
-import CurrencySelector from "./components/CurrencySelector/CurrencySelector";
-import PrimaryButton from "./components/Buttons/PrimaryButton";
-import Icon from "./components/Icon/Icon";
-import TimePeriodSelector from "./components/TimePeriodSelector/TimePeriodSelector";
-import { optionalCapitalize } from "./utils/optionalCapitalize";
-import { formatPrice } from "./utils/numberFormatting";
+} from "@/app/store/features/charts/compareChartSlice";
+import Carousel from "@/app/components/UI/Carousel";
+import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import Icon from "@/app/components/UI/Icon";
+import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
+import { optionalCapitalize } from "@/app/utils/optionalCapitalize";
+import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -134,11 +134,7 @@ export default function Home() {
                 date={date}
                 type={type}
               >
-                <CurrencySelectChart
-                  chartType={type}
-                  coinId={coinId}
-                  days={timePeriod}
-                />
+                <CoinChart chartType={type} coinId={coinId} days={timePeriod} />
               </ChartContainer>
             );
           })}

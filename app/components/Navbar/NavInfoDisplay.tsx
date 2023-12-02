@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import CoinInfo from "./CoinInfo";
-import { useGetGlobalsQuery } from "../../store/api/coingecko";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setCoinGlobals } from "../../store/features/globalSlice/globalSlice";
-import { formatNum3_2, checkNumberScale } from "../../utils/numberFormatting";
+import { useGetGlobalsQuery } from "@/app/store/api/coingecko";
+import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
+import { setCoinGlobals } from "@/app/store/features/globalSlice";
+import { formatNum3_2, checkNumberScale } from "@/app/utils/numberFormatting";
 
 export default function NavInfoDisplay() {
   const dispatch = useAppDispatch();

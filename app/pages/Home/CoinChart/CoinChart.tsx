@@ -14,19 +14,19 @@ import {
 } from "chart.js";
 import { ChartProps, GradientContext } from "./types";
 import { createGraphLabel, createAxisLabel } from "./utils";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useGetMarketChartQuery } from "../../../store/api/coingecko";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useGetMarketChartQuery } from "@/app/store/api/coingecko";
 import {
   setPriceVolumes,
   setPriceDates,
   setPrices,
   setVolumeDates,
-} from "../../../store/features/charts/marketChartSlice";
+} from "@/app/store/features/charts/marketChartSlice";
 import {
   setComparedPrices,
   setComparedVolumes,
-} from "../../../store/features/charts/compareChartSlice";
-import { filterMonthData } from "../../../utils/filterMonthData";
+} from "@/app/store/features/charts/compareChartSlice";
+import { filterMonthData } from "@/app/utils/filterMonthData";
 
 ChartJS.register(
   CategoryScale,

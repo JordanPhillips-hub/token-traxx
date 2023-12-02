@@ -1,14 +1,14 @@
 "use client";
 import NavInfoDisplay from "./NavInfoDisplay";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setActiveLink } from "../../store/features/pageLinkSlice/pageLinkSlice";
+import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
+import { setActiveLink } from "@/app/store/features/pageLinkSlice";
 import CustomSelect from "../Form/CustomSelect";
 import FormInput from "../Form/FormInput";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import ThemeButton from "../Buttons/ThemeButton";
-import Icon from "../Icon/Icon";
-import PageLink from "../Links/PageLink/PageLink";
-import Logo from "../Logo/Logo";
+import PrimaryButton from "../UI/Buttons/PrimaryButton";
+import ThemeButton from "../UI/Buttons/ThemeButton";
+import Icon from "../UI/Icon";
+import PageLink from "../UI/Links/PageLink";
+import Logo from "../UI/Logo";
 
 const pageLinks = [
   { id: "coinsLink", href: "/", text: "Home" },

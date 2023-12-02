@@ -1,5 +1,5 @@
 import { ChartContainerProps } from "./types";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "@/app/store/hooks";
 
 export default function ChartContainer({
   children,

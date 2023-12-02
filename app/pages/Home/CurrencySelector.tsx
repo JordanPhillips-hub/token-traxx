@@ -1,6 +1,6 @@
 import Image from "next/image";
-import PrimaryButton from "./Buttons/PrimaryButton";
-import PriceChange from "../PriceChange/PriceChange";
+import PrimaryButton from "../../components/UI/Buttons/PrimaryButton";
+import PriceChange from "../../components/UI/PriceChange";
 
 type CurrencySelectorProps = {
   img: string;

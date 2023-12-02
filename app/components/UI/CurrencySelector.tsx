@@ -1,5 +1,5 @@
 import Image from "next/image";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryButton from "./Buttons/PrimaryButton";
 import PriceChange from "../PriceChange/PriceChange";
 
 type CurrencySelectorProps = {

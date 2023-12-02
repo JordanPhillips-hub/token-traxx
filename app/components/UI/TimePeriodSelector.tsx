@@ -1,4 +1,4 @@
-import PeriodToggleButton from "../Buttons/PeriodToggleButton";
+import PeriodToggleButton from "../UI/Buttons/PeriodToggleButton";
 
 type TimePeriodSelectorProps = {
   onTimePeriodChange: (timePeriod: number) => void;

@@ -101,11 +101,7 @@ function getGradientBackgroundColor(
   return createGradient(ctx!, top, bottom, colors);
 }
 
-export default function CurrencySelectChart({
-  chartType,
-  coinId,
-  days,
-}: ChartProps) {
+export default function CoinChart({ chartType, coinId, days }: ChartProps) {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
 

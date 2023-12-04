@@ -1,7 +1,8 @@
 "use client";
-import ChartContainer from "./CoinChart/ChartContainer";
-import CoinChart from "./CoinChart/CoinChart";
+import ChartContainer from "./ChartContainer";
+import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
+import { formatChartName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -9,7 +10,6 @@ import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { optionalCapitalize } from "@/app/utils/optionalCapitalize";
 import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function Home() {
@@ -19,10 +19,6 @@ export default function Home() {
   const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
-
-  function formatChartName(name: string, symbol: string) {
-    return `${optionalCapitalize(name)} (${symbol.toUpperCase()})`;
-  }
 
   const charts = [
     {

@@ -1,6 +1,6 @@
 import ProgressBar from "@ramonak/react-progress-bar";
-import Icon from "../Icon/Icon";
-import PriceChange from "../PriceChange/PriceChange";
+import Icon from "../UI/Icon";
+import PriceChange from "../UI/PriceChange";
 
 type CoinInfoProps = {
   icon?: string;

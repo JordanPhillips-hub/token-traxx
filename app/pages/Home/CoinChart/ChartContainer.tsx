@@ -1,12 +1,5 @@
-import { useAppSelector } from "../../store/hooks";
-
-type ChartContainerProps = {
-  children: React.ReactNode;
-  name: string;
-  price: number | string;
-  date: string;
-  type: string;
-};
+import { ChartContainerProps } from "./types";
+import { useAppSelector } from "@/app/store/hooks";
 
 export default function ChartContainer({
   children,

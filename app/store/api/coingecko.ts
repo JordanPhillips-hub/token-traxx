@@ -15,7 +15,7 @@ export const coingeckoApi = createApi({
       query: ({ coinId, days }) => `coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=daily`,
     }),
     getMarkets: builder.query<[], []>({
-      query: () => `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`,
+      query: () => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en`,
     }),
     getGlobals: builder.query<{}, {}>({
       query: () => `/global`,

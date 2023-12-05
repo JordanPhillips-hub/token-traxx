@@ -1,72 +1,43 @@
 "use client";
-import { useEffect } from "react";
-import { SwiperSlide } from "swiper/react";
-import ChartContainer from "./CoinChart/ChartContainer";
-import CoinChart from "./CoinChart/CoinChart";
+import ChartContainer from "./ChartContainer";
+import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { formatChartName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
-import {
-  setCoinId,
-  setCoinMarkets,
-} from "@/app/store/features/coinMarketSlice";
-import {
-  setIsComparing,
-  setComparedCoins,
-} from "@/app/store/features/charts/compareChartSlice";
-import Carousel from "@/app/components/UI/Carousel";
+import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { optionalCapitalize } from "@/app/utils/optionalCapitalize";
 import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { data: coinMarkets, isLoading, isError } = useGetMarketsQuery([]);
+  const { isLoading, isError } = useGetMarketsQuery([]);
+  const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
+  const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
-  const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-  const { isComparing, comparedCoins } = useAppSelector(
-    (state) => state.compareCharts
-  );
 
   const charts = [
     {
-      name: `${optionalCapitalize(
-        selectedCoin?.id
-      )} (${selectedCoin?.symbol.toUpperCase()})`,
+      type: "line",
+      name: formatChartName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
       err: "Prices not available",
       loading: "Loading Price",
       value: `${formatPrice(selectedCoin?.current_price) ?? ""} min`,
       date: new Date().toDateString(),
-      type: "line",
     },
     {
+      type: "bar",
       name: "Volume 24hr",
       err: "Volumes not available",
       loading: "Loading Volumes",
       value: `${formatPrice(selectedCoin?.total_volume) ?? ""} bin`,
       date: new Date().toDateString(),
-      type: "bar",
     },
   ];
-
-  function handleChartData(id: string) {
-    dispatch(setCoinId(id));
-    if (comparedCoins.length < 2) {
-      dispatch(setComparedCoins([...comparedCoins, id]));
-    } else if (comparedCoins.length === 2) {
-      dispatch(setComparedCoins([comparedCoins[1], id]));
-    }
-  }
-
-  useEffect(() => {
-    if (coinMarkets) {
-      dispatch(setCoinMarkets(coinMarkets));
-    }
-  }, [coinMarkets, isComparing, dispatch]);
 
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
@@ -85,41 +56,7 @@ export default function Home() {
           </div>
         </div>
 
-        {isError ? (
-          <p>
-            We are having trouble fetching the coin data. Please try again later
-          </p>
-        ) : (
-          <Carousel>
-            {coins.map((coin) => {
-              const {
-                id,
-                image,
-                symbol,
-                current_price: price,
-                price_change_percentage_24h: priceChange,
-              } = coin;
-
-              return (
-                <SwiperSlide key={id}>
-                  {isLoading ? (
-                    <p>Loading Coin</p>
-                  ) : (
-                    <CurrencySelector
-                      img={image}
-                      name={`${optionalCapitalize(
-                        id
-                      )} (${symbol.toUpperCase()})`}
-                      price={formatPrice(price)}
-                      percentage={parseFloat(priceChange.toFixed(2))}
-                      onClick={() => handleChartData(id)}
-                    />
-                  )}
-                </SwiperSlide>
-              );
-            })}
-          </Carousel>
-        )}
+        <CurrencySelector />
       </section>
 
       <section className="container flex-col mb-16 mx-auto">

@@ -1,6 +1,10 @@
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { optionalCapitalize } from "@/app/utils/optionalCapitalize";
 
+export function formatChartName(name: string, symbol: string) {
+  return `${optionalCapitalize(name)} (${symbol.toUpperCase()})`;
+}
+
 export function createGraphLabel(
   comparedCoins: string[],
   len: number,

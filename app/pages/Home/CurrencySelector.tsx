@@ -14,7 +14,11 @@ import PriceChange from "@/app/components/UI/PriceChange";
 
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
-  const { data: coinMarkets, isLoading, isError } = useGetMarketsQuery([]);
+  const {
+    data: coinMarkets,
+    isLoading,
+    isError,
+  } = useGetMarketsQuery({ page: 1 });
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
   const { coins } = useAppSelector((state) => state.coinMarkets);
 
@@ -49,7 +53,7 @@ export default function CurrencySelector() {
               current_price: price,
               price_change_percentage_24h: priceChange,
             }) => (
-              <SwiperSlide key={id}>
+              <SwiperSlide key={Math.random()}>
                 <div className="max-w-[250px]">
                   <PrimaryButton size="xl" onClick={() => handleComparison(id)}>
                     <div className="flex items-center gap-4 pointer-events-none">

@@ -2,7 +2,8 @@
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
-import { formatChartName } from "./utils";
+import CoinTable from "./CoinTable";
+import { formatCoinName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -23,7 +24,7 @@ export default function Home() {
   const charts = [
     {
       type: "line",
-      name: formatChartName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
+      name: formatCoinName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
       err: "Prices not available",
       loading: "Loading Price",
       value: `${formatPrice(selectedCoin?.current_price) ?? ""} min`,
@@ -83,7 +84,10 @@ export default function Home() {
           }
         />
       </section>
-      {/* TABLE HERE */}
+
+      <section className="container mx-auto">
+        <CoinTable />
+      </section>
     </main>
   );
 }

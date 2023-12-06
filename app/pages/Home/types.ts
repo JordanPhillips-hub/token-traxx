@@ -21,3 +21,7 @@ export type GradientContext = {
     ctx?: CanvasRenderingContext2D;
   };
 };
+
+export type SparklineProps = {
+  sparklinePrice: number[];
+};

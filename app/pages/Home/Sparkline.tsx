@@ -1,0 +1,38 @@
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { SparklineProps } from "./types";
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+  },
+  scales: {
+    x: { display: false },
+    y: { display: false },
+  },
+};
+
+export default function Sparkline({ sparklinePrice }: SparklineProps) {
+  const data = {
+    labels: sparklinePrice,
+    datasets: [
+      {
+        data: sparklinePrice,
+        borderColor: "hsla(284, 93%, 73%, 0.5)",
+        pointRadius: 0,
+        tension: 0.4,
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  return <Line width={150} height={50} options={options} data={data} />;
+}

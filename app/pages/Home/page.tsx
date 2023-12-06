@@ -15,7 +15,7 @@ import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { isLoading, isError } = useGetMarketsQuery([]);
+  const { isLoading, isError } = useGetMarketsQuery({ page: 0 });
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
   const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);

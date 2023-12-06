@@ -35,7 +35,7 @@ function createStatusBar(data1: number, data2: number) {
   );
 }
 
-export default function CoinCard() {
+export default function CoinTable() {
   const { coins } = useAppSelector((state) => state.coinMarkets);
 
   return (

@@ -2,7 +2,7 @@
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
-import CoinCard from "./CoinCard";
+import CoinTable from "./CoinTable";
 import { formatCoinName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       <section className="container mx-auto">
-        <CoinCard />
+        <CoinTable />
       </section>
     </main>
   );

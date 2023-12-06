@@ -43,7 +43,9 @@ export default function CoinTable() {
       <thead className="text-left text-sm text-neutral400">
         <tr>
           {tableHeaders.map((header, index) => (
-            <th key={index}>{header}</th>
+            <th className="pl-3" key={index}>
+              {header}
+            </th>
           ))}
         </tr>
       </thead>
@@ -68,7 +70,7 @@ export default function CoinTable() {
           ) => (
             <tr className="bg-primary800 rounded-2xl p-3 " key={id}>
               <td className="py-2 pl-3">{index + 1}</td>
-              <td className="flex gap-2 mt-3">
+              <td className="flex gap-2 mt-1.5">
                 <Image src={image} alt={`${id} icon`} width={32} height={32} />
                 <button>{formatCoinName(id, symbol)}</button>
               </td>
@@ -78,7 +80,7 @@ export default function CoinTable() {
               <td>{createPriceChange(changeIn7d)}</td>
               <td>{createStatusBar(total_volume, market_cap)}</td>
               <td>{createStatusBar(circulating_supply, total_supply)}</td>
-              <td className="max-w-[120px] pr-3">
+              <td className="max-w-[200px]">
                 <Sparkline sparklinePrice={sparkline.price} />
               </td>
             </tr>

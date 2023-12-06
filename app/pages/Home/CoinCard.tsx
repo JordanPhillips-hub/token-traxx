@@ -78,7 +78,7 @@ export default function CoinCard() {
               <td>{createPriceChange(changeIn7d)}</td>
               <td>{createStatusBar(total_volume, market_cap)}</td>
               <td>{createStatusBar(circulating_supply, total_supply)}</td>
-              <td className="max-w-[120px]">
+              <td className="max-w-[120px] pr-3">
                 <Sparkline sparklinePrice={sparkline.price} />
               </td>
             </tr>

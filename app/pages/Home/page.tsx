@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
@@ -12,14 +13,32 @@ import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
+import {
+  setCoinMarkets,
+  setIsMarketsLoading,
+  setMarketsHasError,
+} from "@/app/store/features/coinMarketSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { isLoading, isError } = useGetMarketsQuery({ page: 0 });
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
   const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
+
+  const {
+    data: coinMarkets,
+    isLoading,
+    isError,
+  } = useGetMarketsQuery({ page: 1 });
+
+  useEffect(() => {
+    dispatch(setIsMarketsLoading(isLoading));
+    dispatch(setMarketsHasError(isError));
+    if (coinMarkets) {
+      dispatch(setCoinMarkets(coinMarkets));
+    }
+  }, [coinMarkets, dispatch, isError, isLoading]);
 
   const charts = [
     {
@@ -40,6 +59,7 @@ export default function Home() {
     },
   ];
 
+  console.log("rendered");
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
       <section className="container mx-auto relative">

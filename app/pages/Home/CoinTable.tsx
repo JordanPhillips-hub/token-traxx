@@ -7,9 +7,9 @@ import PriceChange from "@/app/components/UI/PriceChange";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import {
-  setCoinMarkets,
+  setTableCoins,
   setCoinPage,
-} from "@/app/store/features/coinMarketSlice";
+} from "@/app/store/features/coinTableSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const tableHeaders = [
@@ -43,7 +43,7 @@ function createStatusBar(data1: number, data2: number) {
 
 export default function CoinTable() {
   const dispatch = useAppDispatch();
-  let { coins, coinPage } = useAppSelector((state) => state.coinMarkets);
+  let { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
 
   const { data: updatedCoins, isError } = useGetMarketsQuery({
     page: coinPage,
@@ -51,13 +51,13 @@ export default function CoinTable() {
 
   return (
     <InfiniteScroll
-      dataLength={coins.length}
+      dataLength={tableCoins.length}
       next={() => {
         if (updatedCoins && !isError) {
           setTimeout(() => {
             dispatch(setCoinPage(coinPage + 1));
             console.log(updatedCoins);
-            dispatch(setCoinMarkets(coins.concat(updatedCoins)));
+            dispatch(setTableCoins(tableCoins.concat(updatedCoins)));
           }, 7000);
         }
       }}
@@ -75,7 +75,7 @@ export default function CoinTable() {
           </tr>
         </thead>
         <tbody>
-          {coins.map(
+          {tableCoins.map(
             (
               {
                 id,

@@ -11,6 +11,7 @@ import {
 import Carousel from "@/app/components/UI/Carousel";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import PriceChange from "@/app/components/UI/PriceChange";
+import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
@@ -67,7 +68,9 @@ export default function CurrencySelector() {
                           {isLoading ? "Loading Coin" : name}
                         </p>
                         <div className="flex items-center gap-2">
-                          <p className="text-left">{price} USD</p>
+                          <p className="text-left">
+                            {`$${formatPrice(price)}`} USD
+                          </p>
                           <PriceChange
                             percentage={parseFloat(priceChange.toFixed(2))}
                           />

@@ -44,6 +44,7 @@ function createStatusBar(data1: number, data2: number) {
 export default function CoinTable() {
   const dispatch = useAppDispatch();
   let { coins, coinPage } = useAppSelector((state) => state.coinMarkets);
+
   const { data: updatedCoins, isError } = useGetMarketsQuery({
     page: coinPage,
   });
@@ -57,7 +58,7 @@ export default function CoinTable() {
             dispatch(setCoinPage(coinPage + 1));
             console.log(updatedCoins);
             dispatch(setCoinMarkets(coins.concat(updatedCoins)));
-          }, 1500);
+          }, 7000);
         }
       }}
       hasMore={true}
@@ -92,19 +93,20 @@ export default function CoinTable() {
               },
               index
             ) => (
-              <tr
-                className="bg-primary800 rounded-2xl p-3 "
-                key={Math.random()}
-              >
-                <td className="py-2 pl-3">{index + 1}</td>
-                <td className="flex gap-2 mt-1.5">
+              <tr className="bg-primary800" key={Math.random()}>
+                <td className="pl-3 py-5">{index + 1}</td>
+                <td>
                   <Image
+                    className="inline"
                     src={image}
                     alt={`${id} icon`}
                     width={32}
                     height={32}
                   />
-                  <button>{formatCoinName(id, symbol)}</button>
+
+                  <button className="ml-1.5">
+                    {formatCoinName(id, symbol)}
+                  </button>
                 </td>
                 <td>{`$${formatPrice(current_price)}`}</td>
                 <td>{createPriceChange(changeIn1h)}</td>
@@ -112,7 +114,7 @@ export default function CoinTable() {
                 <td>{createPriceChange(changeIn7d)}</td>
                 <td>{createStatusBar(total_volume, market_cap)}</td>
                 <td>{createStatusBar(circulating_supply, total_supply)}</td>
-                <td className="max-w-[200px]">
+                <td className="max-w-[150px] pr-3">
                   <Sparkline sparklinePrice={sparkline.price} />
                 </td>
               </tr>

@@ -59,7 +59,6 @@ export default function Home() {
     },
   ];
 
-  console.log("rendered");
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
       <section className="container mx-auto relative">

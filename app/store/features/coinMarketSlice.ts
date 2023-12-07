@@ -5,7 +5,6 @@ type CoinMarketState = {
   isMarketsLoading: boolean;
   marketsHasError: boolean;
   coinId: string;
-  coinPage: number;
 };
 
 const initialState: CoinMarketState = {
@@ -13,7 +12,6 @@ const initialState: CoinMarketState = {
   isMarketsLoading: false,
   marketsHasError: false,
   coinId: 'bitcoin',
-  coinPage: 2,
 };
 
 const coinMarketSlice = createSlice({
@@ -26,9 +24,6 @@ const coinMarketSlice = createSlice({
     setCoinId(state, action: PayloadAction<string>) {
       state.coinId = action.payload
     },
-    setCoinPage(state, action: PayloadAction<number>) {
-      state.coinPage = action.payload
-    },
     setIsMarketsLoading(state, action: PayloadAction<boolean>) {
       state.isMarketsLoading = action.payload
     },
@@ -38,5 +33,5 @@ const coinMarketSlice = createSlice({
   }
 });
 
-export const { setCoinMarkets, setIsMarketsLoading, setMarketsHasError, setCoinId, setCoinPage } = coinMarketSlice.actions;
+export const { setCoinMarkets, setIsMarketsLoading, setMarketsHasError, setCoinId } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;

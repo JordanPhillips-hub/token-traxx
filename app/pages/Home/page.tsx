@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
       <section className="container mx-auto relative">
-        <div className="flex mb-6">
+        <div className="flex mb-3">
           <div>
             <PrimaryButton
               size="med"
@@ -79,7 +79,7 @@ export default function Home() {
         <CurrencySelector />
       </section>
 
-      <section className="container flex-col mb-16 mx-auto">
+      <section className="container flex-col mb-16 mt-3 mx-auto">
         <div className="flex gap-8">
           {charts.map((chart) => {
             const { name, value, date, type } = chart;

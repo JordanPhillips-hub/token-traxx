@@ -9,15 +9,16 @@ import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
-import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
-import Icon from "@/app/components/UI/Icon";
-import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { formatPrice } from "@/app/utils/numberFormatting";
 import {
   setCoinMarkets,
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
+import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import Icon from "@/app/components/UI/Icon";
+import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
+import { formatPrice } from "@/app/utils/numberFormatting";
+import { setTableCoins } from "@/app/store/features/coinTableSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -37,8 +38,9 @@ export default function Home() {
     dispatch(setMarketsHasError(isError));
     if (coinMarkets) {
       dispatch(setCoinMarkets(coinMarkets));
+      dispatch(setTableCoins(coinMarkets));
     }
-  }, [coinMarkets, dispatch, isError, isLoading]);
+  }, [coinMarkets, isError, isLoading, dispatch]);
 
   const charts = [
     {

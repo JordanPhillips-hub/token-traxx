@@ -39,7 +39,7 @@ export default function CurrencySelector() {
               current_price: price,
               price_change_percentage_24h: priceChange,
             }) => (
-              <SwiperSlide key={Math.random()}>
+              <SwiperSlide key={id}>
                 <div className="max-w-[250px]">
                   <PrimaryButton size="xl" onClick={() => handleComparison(id)}>
                     <div className="flex items-center gap-4 pointer-events-none">

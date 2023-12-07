@@ -1,4 +1,5 @@
 import Image from "next/image";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Sparkline from "./Sparkline";
 import { formatCoinName } from "./utils";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -10,7 +11,6 @@ import {
   setTableCoins,
   setCoinPage,
 } from "@/app/store/features/coinTableSlice";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 const tableHeaders = [
   "#",
@@ -44,7 +44,6 @@ function createStatusBar(data1: number, data2: number) {
 export default function CoinTable() {
   const dispatch = useAppDispatch();
   let { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
-
   const { data: updatedCoins, isError } = useGetMarketsQuery({
     page: coinPage,
   });
@@ -56,13 +55,18 @@ export default function CoinTable() {
         if (updatedCoins && !isError) {
           setTimeout(() => {
             dispatch(setCoinPage(coinPage + 1));
-            console.log(updatedCoins);
             dispatch(setTableCoins(tableCoins.concat(updatedCoins)));
           }, 7000);
         }
       }}
       hasMore={true}
-      loader={<h4>Loading...</h4>}
+      loader={
+        <h4 className="text-center mb-4">
+          {isError
+            ? "We are experiencing technical difficulties. Please try again later"
+            : "Loading Coins..."}
+        </h4>
+      }
     >
       <table className="min-w-full border-separate border-spacing-y-2 text-sm">
         <thead className="text-left text-sm text-neutral400">
@@ -93,7 +97,7 @@ export default function CoinTable() {
               },
               index
             ) => (
-              <tr className="bg-primary800" key={Math.random()}>
+              <tr className="bg-primary800" key={id}>
                 <td className="pl-3 py-5">{index + 1}</td>
                 <td>
                   <Image

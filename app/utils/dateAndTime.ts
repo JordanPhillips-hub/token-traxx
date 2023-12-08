@@ -12,3 +12,13 @@ export function getDateTime24H() {
   const shortDate = new Intl.DateTimeFormat("en-US", options).format(date);
   return shortDate;
 }
+
+export function timestampToDate(timestamp: string | number | Date) {
+  const date = new Date(timestamp);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString(undefined, options);
+};

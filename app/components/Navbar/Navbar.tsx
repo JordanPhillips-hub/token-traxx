@@ -40,6 +40,7 @@ export default function NavBar() {
           <div className="flex items-center justify-between mb-14">
             <Logo />
             <ul className="py-1 px-1 w-1/3 text-1xl flex rounded-md">
+              <p>test push</p>
               {pageLinks.map((link) => (
                 <li className="w-1/4" key={link.id}>
                   <PageLink

@@ -1,13 +1,8 @@
-import { useEffect } from "react";
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
-import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
-import {
-  setCoinMarkets,
-  setCoinId,
-} from "@/app/store/features/coinMarketSlice";
+import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import Carousel from "@/app/components/UI/Carousel";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import PriceChange from "@/app/components/UI/PriceChange";
@@ -15,15 +10,10 @@ import { formatPrice } from "@/app/utils/numberFormatting";
 
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
-  const { data: coinMarkets, isLoading, isError } = useGetMarketsQuery([]);
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
-  const { coins } = useAppSelector((state) => state.coinMarkets);
-
-  useEffect(() => {
-    if (coinMarkets) {
-      dispatch(setCoinMarkets(coinMarkets));
-    }
-  }, [coinMarkets, dispatch]);
+  const { coins, isMarketsLoading, marketsHasError } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   function handleComparison(id: string) {
     dispatch(setCoinId(id));
@@ -36,7 +26,7 @@ export default function CurrencySelector() {
 
   return (
     <>
-      {isError ? (
+      {marketsHasError ? (
         <p>
           We are experiencing technical difficulties. Please try again later
         </p>
@@ -65,7 +55,7 @@ export default function CurrencySelector() {
 
                       <div className="text-sm flex-col">
                         <p className="font-medium text-left">
-                          {isLoading ? "Loading Coin" : name}
+                          {isMarketsLoading ? "Loading Coin" : name}
                         </p>
                         <div className="flex items-center gap-2">
                           <p className="text-left">

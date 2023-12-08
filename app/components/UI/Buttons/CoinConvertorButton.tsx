@@ -12,7 +12,7 @@ export default function CoinConvertorButton({
   onClick,
 }: Props) {
   const defaultStyles =
-    "bg-primary700 text-neutral100 w-full p-4 rounded-md focus:outline-none shadow-md";
+    "text-neutral100 w-full p-4 rounded-md focus:outline-none shadow-md";
 
   let buttonClass = `${defaultStyles}`;
 

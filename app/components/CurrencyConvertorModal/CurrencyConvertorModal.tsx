@@ -28,8 +28,10 @@ export default function CurrencyConvertorModal({
       </button>
 
       <section>
-        <h3>Online currency convertor</h3>
-        <p>{getDateTime24H()}</p>
+        <header>
+          <h3>Online currency convertor</h3>
+          <p>{getDateTime24H()}</p>
+        </header>
       </section>
     </dialog>
   );

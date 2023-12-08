@@ -34,5 +34,5 @@ export default function Sparkline({ sparklinePrice }: SparklineProps) {
     ],
   };
 
-  return <Line width={150} height={50} options={options} data={data} />;
+  return <Line width={150} height={30} options={options} data={data} />;
 }

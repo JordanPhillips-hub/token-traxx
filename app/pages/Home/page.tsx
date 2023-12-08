@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
@@ -8,18 +9,38 @@ import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
+import {
+  setCoinMarkets,
+  setIsMarketsLoading,
+  setMarketsHasError,
+} from "@/app/store/features/coinMarketSlice";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
+import { setTableCoins } from "@/app/store/features/coinTableSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { isLoading, isError } = useGetMarketsQuery([]);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
   const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
+
+  const {
+    data: coinMarkets,
+    isLoading,
+    isError,
+  } = useGetMarketsQuery({ page: 1 });
+
+  useEffect(() => {
+    dispatch(setIsMarketsLoading(isLoading));
+    dispatch(setMarketsHasError(isError));
+    if (coinMarkets) {
+      dispatch(setCoinMarkets(coinMarkets));
+      dispatch(setTableCoins(coinMarkets));
+    }
+  }, [coinMarkets, isError, isLoading, dispatch]);
 
   const charts = [
     {
@@ -43,7 +64,7 @@ export default function Home() {
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
       <section className="container mx-auto relative">
-        <div className="flex mb-6">
+        <div className="flex mb-3">
           <div>
             <PrimaryButton
               size="med"
@@ -60,7 +81,7 @@ export default function Home() {
         <CurrencySelector />
       </section>
 
-      <section className="container flex-col mb-16 mx-auto">
+      <section className="container flex-col mb-16 mt-3 mx-auto">
         <div className="flex gap-8">
           {charts.map((chart) => {
             const { name, value, date, type } = chart;

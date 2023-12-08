@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import Icon from "@/app/components/UI/Icon";
+import { getDateTime24H } from "@/app/utils/dateAndTime";
 
 type ConvertorProps = {
   isOpen: boolean;
@@ -27,7 +28,8 @@ export default function CurrencyConvertorModal({
       </button>
 
       <section>
-        <p>This is a modal</p>
+        <h3>Online currency convertor</h3>
+        <p>{getDateTime24H()}</p>
       </section>
     </dialog>
   );

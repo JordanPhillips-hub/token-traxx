@@ -1,5 +1,4 @@
-"use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
@@ -61,10 +60,26 @@ export default function Home() {
     },
   ];
 
+  const coinsButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (coinsButton.current) {
+      coinsButton.current.focus();
+    }
+  }, []);
+
   return (
-    <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24 pt-20">
-      <section className="container mx-auto relative">
-        <div className="flex mb-3">
+
+    <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
+      <section className="container mx-auto">
+        <div className="bg-primary800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">
+          <PrimaryButton ref={coinsButton} size="lrg" text="Coins" />
+          <PrimaryButton size="lrg" text="Convertor" />
+        </div>
+      </section>
+
+      <section className=" container relative mx-auto mb-4">
+        <div className="flex mb-6">
           <div>
             <PrimaryButton
               size="med"
@@ -81,7 +96,7 @@ export default function Home() {
         <CurrencySelector />
       </section>
 
-      <section className="container flex-col mb-16 mt-3 mx-auto">
+      <section className=" container flex-col mb-16 mx-auto">
         <div className="flex gap-8">
           {charts.map((chart) => {
             const { name, value, date, type } = chart;

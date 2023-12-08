@@ -35,7 +35,7 @@ export default function NavBar() {
   return (
     <>
       <NavInfoDisplay />
-      <nav className="font-medium container mb-4 mx-auto">
+      <nav className="font-medium container  mx-auto">
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-between mb-14">
             <Logo />
@@ -70,13 +70,6 @@ export default function NavBar() {
               <CustomSelect iconRight="chevDown" iconLeft="dollar" />
               <ThemeButton />
             </form>
-          </div>
-
-          <div>
-            <div className="bg-primary800 text-1xl flex w-1/3 py-1 px-1 rounded-md">
-              <PrimaryButton size="lrg" text="Coins" />
-              <PrimaryButton size="lrg" text="Convertor" />
-            </div>
           </div>
         </div>
       </nav>

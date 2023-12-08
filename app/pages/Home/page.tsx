@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
@@ -69,7 +70,6 @@ export default function Home() {
   }, []);
 
   return (
-
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
       <section className="container mx-auto">
         <div className="bg-primary800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">

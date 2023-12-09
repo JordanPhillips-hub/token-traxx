@@ -1,5 +1,3 @@
-import React, { ForwardedRef } from "react";
-
 type PrimaryButtonProps = {
   text?: string;
   size: string;
@@ -7,10 +5,12 @@ type PrimaryButtonProps = {
   onClick?: () => void;
 };
 
-function PrimaryButton(
-  { text, size, children, onClick }: PrimaryButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>
-) {
+export default function PrimaryButton({
+  text,
+  size,
+  children,
+  onClick,
+}: PrimaryButtonProps) {
   const defaultStyles = `bg-primary700 focus:bg-primary500 text-neutral100 w-full rounded-md focus:outline-none shadow-md focus:shadow-indigo-500/50`;
 
   let buttonClass = `${defaultStyles}`;
@@ -30,11 +30,9 @@ function PrimaryButton(
   }
 
   return (
-    <button ref={ref} className={buttonClass} onClick={onClick}>
+    <button className={buttonClass} onClick={onClick}>
       {text}
       {children}
     </button>
   );
 }
-
-export default React.forwardRef(PrimaryButton);

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import ChartContainer from "./ChartContainer";
 import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
@@ -14,7 +14,9 @@ import {
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
+import CurrencyConvertorModal from "@/app/components/CurrencyConvertorModal/CurrencyConvertorModal";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
@@ -22,6 +24,7 @@ import { setTableCoins } from "@/app/store/features/coinTableSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
   const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
@@ -61,20 +64,21 @@ export default function Home() {
     },
   ];
 
-  const coinsButton = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (coinsButton.current) {
-      coinsButton.current.focus();
-    }
-  }, []);
-
   return (
     <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
       <section className="container mx-auto">
         <div className="bg-primary800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">
-          <PrimaryButton ref={coinsButton} size="lrg" text="Coins" />
-          <PrimaryButton size="lrg" text="Convertor" />
+          <CoinConvertorButton
+            isModalOpen={isModalOpen}
+            text="Coins"
+            activeStyles="Coins"
+          />
+          <CoinConvertorButton
+            isModalOpen={isModalOpen}
+            text="Convertor"
+            activeStyles="Convertor"
+            onClick={() => setIsModalOpen(true)}
+          />
         </div>
       </section>
 
@@ -124,6 +128,13 @@ export default function Home() {
       <section className="container mx-auto">
         <CoinTable />
       </section>
+
+      <aside>
+        <CurrencyConvertorModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      </aside>
     </main>
   );
 }

@@ -1,13 +1,3 @@
-export function timestampToDate(timestamp: string | number | Date) {
-  const date = new Date(timestamp);
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return date.toLocaleDateString(undefined, options);
-};
-
 export function formatPrice(price: number | undefined) {
   if (price === undefined) {
     return "N/A";

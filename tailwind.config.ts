@@ -14,6 +14,7 @@ const config: Config = {
         neutral50: "hsla(0, 0%, 100%, 0.5)",
         neutral100: "hsl(0, 0%, 100%)",
         neutral400: "hsl(0, 0%, 82%)",
+        neutral500: '	hsl(0, 0%, 62%)',
         // PRIMARY'S
         primary400: "hsl(253, 35%, 15%)",
         primary500: "hsl(240, 65%, 63%)",

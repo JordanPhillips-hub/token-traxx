@@ -7,6 +7,7 @@ import compareChartsReducer from './features/charts/compareChartSlice'
 import coinsReducer from './features/coinMarketSlice';
 import tableCoinsReducer from './features/coinTableSlice';
 import globalsReducer from './features/globalSlice';
+import convertorReducer from './features/convertorSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     chartTimePeriod: timePeriodReducer,
     globals: globalsReducer,
     compareCharts: compareChartsReducer,
+    convertor: convertorReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(coingeckoApi.middleware),

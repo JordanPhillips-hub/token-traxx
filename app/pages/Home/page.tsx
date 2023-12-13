@@ -14,7 +14,7 @@ import {
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
-import CurrencyConvertorModal from "@/app/components/CurrencyConvertorModal/CurrencyConvertorModal";
+import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
 import Icon from "@/app/components/UI/Icon";
@@ -85,7 +85,7 @@ export default function Home() {
 
         {isModalOpen ? (
           <aside>
-            <CurrencyConvertorModal
+            <CurrencyConvertor
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
             />

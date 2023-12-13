@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef } from "react";
 import Icon from "@/app/components/UI/Icon";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
-import CurrencyCard from "./CurrencyCard";
+import SellCard from "./SellCard";
+import BuyCard from "./BuyCard";
 
 type ConvertorProps = {
   isOpen: boolean;
@@ -12,20 +13,20 @@ export default function CurrencyConvertorModal({
   isOpen,
   onClose,
 }: ConvertorProps) {
-  const ref = useRef<HTMLDialogElement>(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   useLayoutEffect(() => {
-    if (isOpen && !ref.current?.open) {
-      ref.current?.showModal();
-    } else if (!isOpen && ref.current?.open) {
-      ref.current.close();
+    if (isOpen && !modalRef.current?.open) {
+      modalRef.current?.showModal();
+    } else if (!isOpen && modalRef.current?.open) {
+      modalRef.current.close();
     }
   }, [isOpen]);
 
   return (
     <dialog
       className="container bg-transparent w-full h-full mt-[270px] relative"
-      ref={ref}
+      ref={modalRef}
     >
       <button
         className="bg-primary700 focus:bg-primary500 hover:bg-primary500 absolute right-0 px-2 py-1 rounded"
@@ -44,8 +45,8 @@ export default function CurrencyConvertorModal({
 
       <section>
         <div className="flex gap-3">
-          <CurrencyCard cardType="You Sell" />
-          <CurrencyCard cardType="You Buy" />
+          <SellCard />
+          <BuyCard />
         </div>
       </section>
     </dialog>

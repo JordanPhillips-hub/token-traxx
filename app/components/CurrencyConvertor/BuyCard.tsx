@@ -11,23 +11,16 @@ export default function BuyCard() {
     <div className="container bg-primary600 p-6 rounded-2xl">
       <p className="text-sm text-neutral400 mb-10">You Buy</p>
 
-      {selectedCoin && (
-        <>
-          <div className="flex justify-between mb-1">
-            <div className="relative">
-              <ConvertorDropdown componentType="buy" {...selectedCoin} />
-            </div>
-            <p>{Math.floor(sellPrice / selectedCoin.current_price)}</p>
-          </div>
+      <div className="flex justify-between mb-1">
+        <div className="relative">
+          <ConvertorDropdown componentType="buy" {...selectedCoin} />
+        </div>
+        <p>{Math.floor(sellPrice / selectedCoin.current_price)}</p>
+      </div>
 
-          <hr />
+      <hr />
 
-          <Legend
-            symbol={selectedCoin.symbol}
-            price={selectedCoin.current_price}
-          />
-        </>
-      )}
+      <Legend symbol={selectedCoin.symbol} price={selectedCoin.current_price} />
     </div>
   );
 }

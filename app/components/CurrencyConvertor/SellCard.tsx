@@ -29,11 +29,9 @@ export default function SellCard() {
       <p className="text-sm text-neutral400 mb-10">You Sell</p>
 
       <div className="flex justify-between mb-1">
-        {selectedCoin && (
-          <div className="relative">
-            <ConvertorDropdown componentType="sell" {...selectedCoin} />
-          </div>
-        )}
+        <div className="relative">
+          <ConvertorDropdown componentType="sell" {...selectedCoin} />
+        </div>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -50,12 +48,7 @@ export default function SellCard() {
 
       <hr />
 
-      {selectedCoin && (
-        <Legend
-          symbol={selectedCoin.symbol}
-          price={selectedCoin.current_price}
-        />
-      )}
+      <Legend symbol={selectedCoin.symbol} price={selectedCoin.current_price} />
     </div>
   );
 }

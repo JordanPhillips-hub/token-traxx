@@ -14,7 +14,7 @@ export default function ChartContainer({
     <div
       className={`bg-white100 ${
         type === "line" ? "dark:bg-primary600" : "dark:bg-primary400"
-      } w-full max-w-3xl h-auto max-h-[465px] p-4 rounded-xl`}
+      } w-full h-auto max-h-[465px] p-4 rounded-xl`}
     >
       <div className="mb-3">
         <p className="text-xl">{!isComparing && name}</p>

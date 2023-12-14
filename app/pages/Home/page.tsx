@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import CoinTable from "./CoinTable";
-import { formatCoinName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -19,6 +18,7 @@ import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import { setTableCoins } from "@/app/store/features/coinTableSlice";
 import { Chart } from "@/app/components/Charts/Chart";
 

@@ -1,5 +1,5 @@
 import { formatPrice } from "@/app/utils/numberFormatting";
-import { optionalCapitalize } from "@/app/utils/optionalCapitalize";
+import { optionalCapitalize } from "@/app/utils/generalHelpers";
 import { LineDataset, BarDataset } from "./types";
 
 export function createGraphLabel(

@@ -44,7 +44,7 @@ ChartJS.register(
   Legend
 );
 
-export function Chart({ chartType, coinId, days }: ChartProps) {
+export default function Chart({ chartType, coinId, days }: ChartProps) {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
 

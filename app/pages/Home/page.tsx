@@ -12,6 +12,7 @@ import {
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
 import ChartContainer from "@/app/components/Charts/ChartContainer";
+import Chart from "@/app/components/Charts/Chart";
 import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
@@ -20,7 +21,6 @@ import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 import { setTableCoins } from "@/app/store/features/coinTableSlice";
-import { Chart } from "@/app/components/Charts/Chart";
 
 export default function Home() {
   const dispatch = useAppDispatch();

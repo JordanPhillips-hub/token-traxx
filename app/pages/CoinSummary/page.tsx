@@ -1,3 +1,15 @@
-export default function Portfolio() {
-  return <h1>Coin Summary Page</h1>;
+import CardHeader from "./CardHeader";
+
+export default function CoinSummary() {
+  return (
+    <main>
+      <section>
+        <CardHeader />
+      </section>
+
+      <hr />
+
+      <section></section>
+    </main>
+  );
 }

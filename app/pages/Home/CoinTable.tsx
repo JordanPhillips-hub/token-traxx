@@ -1,11 +1,11 @@
 import Image from "next/image";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Sparkline from "./Sparkline";
-import { formatCoinName } from "./utils";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import Sparkline from "@/app/components/Charts/Sparkline";
 import StatusBar from "@/app/components/UI/StatusBar";
 import PriceChange from "@/app/components/UI/PriceChange";
 import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import {
   setTableCoins,

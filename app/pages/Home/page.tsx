@@ -1,10 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import ChartContainer from "./ChartContainer";
-import CoinChart from "./CoinChart";
 import CurrencySelector from "./CurrencySelector";
 import CoinTable from "./CoinTable";
-import { formatCoinName } from "./utils";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -14,12 +11,15 @@ import {
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
+import ChartContainer from "@/app/components/Charts/ChartContainer";
+import Chart from "@/app/components/Charts/Chart";
 import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import { setTableCoins } from "@/app/store/features/coinTableSlice";
 
 export default function Home() {
@@ -127,7 +127,7 @@ export default function Home() {
                       date={date}
                       type={type}
                     >
-                      <CoinChart
+                      <Chart
                         chartType={type}
                         coinId={coinId}
                         days={timePeriod}

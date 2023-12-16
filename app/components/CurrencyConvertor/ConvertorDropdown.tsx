@@ -7,7 +7,7 @@ import {
   setNumToSell,
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
-import { formatCoinName } from "@/app/pages/Home/utils";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import Icon from "@/app/components/UI/Icon";
 
 type DropdownProps = {

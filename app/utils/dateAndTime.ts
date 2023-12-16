@@ -16,8 +16,6 @@ export function getDateTime24H() {
 export function timestampToDate(timestamp: string | number | Date) {
   const date = new Date(timestamp);
   const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
     day: "numeric",
   };
   return date.toLocaleDateString(undefined, options);

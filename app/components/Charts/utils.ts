@@ -18,10 +18,10 @@ export function createGraphLabel(
 }
 
 export function createAxisLabel(arr: number[]) {
-  const label = arr.map((date: string | number | Date) =>
+  const labels = arr.map((date: string | number | Date) =>
     new Date(date).getDate()
   );
-  return label;
+  return labels;
 }
 
 export function setCompareData(arr: number[][], secondIndex: number[]) {

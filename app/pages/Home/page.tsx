@@ -5,7 +5,11 @@ import CoinTable from "./CoinTable";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
-import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
+import { setTableCoins } from "@/app/store/features/coinTableSlice";
+import {
+  setIsComparing,
+  setComparedCoins,
+} from "@/app/store/features/charts/compareChartSlice";
 import {
   setCoinMarkets,
   setIsMarketsLoading,
@@ -20,15 +24,16 @@ import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
-import { setTableCoins } from "@/app/store/features/coinTableSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-  const { isComparing } = useAppSelector((state) => state.compareCharts);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
+  const { isComparing, comparedCoins } = useAppSelector(
+    (state) => state.compareCharts
+  );
 
   const {
     data: coinMarkets,
@@ -39,11 +44,20 @@ export default function Home() {
   useEffect(() => {
     dispatch(setIsMarketsLoading(isLoading));
     dispatch(setMarketsHasError(isError));
+
     if (coinMarkets) {
       dispatch(setCoinMarkets(coinMarkets));
       dispatch(setTableCoins(coinMarkets));
     }
   }, [coinMarkets, isError, isLoading, dispatch]);
+
+  useEffect(() => {
+    if (!isComparing) {
+      const resetComparedCoins = [...comparedCoins];
+      resetComparedCoins.splice(0, 2, "bitcoin");
+      dispatch(setComparedCoins(resetComparedCoins));
+    }
+  }, [isComparing]);
 
   const charts = [
     {
@@ -87,7 +101,10 @@ export default function Home() {
           <aside>
             <CurrencyConvertor
               isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
+              onClose={() => {
+                setIsModalOpen(false);
+                dispatch(setIsComparing(false));
+              }}
             />
           </aside>
         ) : (
@@ -115,6 +132,7 @@ export default function Home() {
                   const { name, value, date, type } = chart;
                   return (
                     <ChartContainer
+                      location="home"
                       key={name}
                       name={
                         isLoading

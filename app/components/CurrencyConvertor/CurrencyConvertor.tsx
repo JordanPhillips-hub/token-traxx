@@ -30,13 +30,6 @@ export default function CurrencyConvertorModal({
   const sellCoin = findCoinById(sellCoinId);
   const buyCoin = findCoinById(buyCoinId);
 
-  useLayoutEffect(() => {
-    const modal = modalRef.current;
-    if (modal) {
-      isOpen ? modal.showModal() : modal.close();
-    }
-  }, [isOpen]);
-
   function generateName(id: string, symbol: string) {
     return formatCoinName(id ?? "", symbol ?? "");
   }
@@ -44,6 +37,13 @@ export default function CurrencyConvertorModal({
   function findCoinById(id: string) {
     return coins.find((coin) => coin.id === id);
   }
+
+  useLayoutEffect(() => {
+    const modal = modalRef.current;
+    if (modal) {
+      isOpen ? modal.showModal() : modal.close();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     dispatch(setIsComparing(true));

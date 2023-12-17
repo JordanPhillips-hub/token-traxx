@@ -1,28 +1,31 @@
 "use client";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 import MainCard from "./MainCard";
 import { store } from "@/app/store/store";
-import { useAppSelector } from "@/app/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinQuery } from "@/app/store/api/coingecko";
+import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
 
 export default function CoinSummary() {
+  const dispatch = useAppDispatch();
   const { coinSummaryId } = useAppSelector((state) => state.activeLink);
+  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
   const { data: coinInfo, isError } = useGetCoinQuery({ id: coinSummaryId });
 
-  if (coinInfo) {
-    console.log(coinInfo);
-  }
+  useEffect(() => {
+    if (coinInfo) {
+      dispatch(setSummaryCoin(coinInfo));
+      console.log(summaryCoin);
+    }
+  });
 
   return (
     <Provider store={store}>
-      {coinInfo && (
+      {summaryCoin && (
         <main className="container mx-auto">
           <section>
-            <MainCard
-              header={`${coinInfo.name} (${coinInfo.symbol.toUpperCase()})`}
-              site={coinInfo.links.homepage[0]}
-              image={coinInfo.image.small}
-            />
+            <MainCard />
           </section>
 
           <hr />

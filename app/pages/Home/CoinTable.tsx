@@ -8,11 +8,11 @@ import PriceChange from "@/app/components/UI/PriceChange";
 import PageLink from "@/app/components/UI/Links/PageLink";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
+import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 import {
   setTableCoins,
   setCoinPage,
 } from "@/app/store/features/coinTableSlice";
-import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 
 const tableHeaders = [
   "#",

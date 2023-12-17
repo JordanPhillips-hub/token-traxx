@@ -5,12 +5,14 @@ import { formatCoinName } from "./utils";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import StatusBar from "@/app/components/UI/StatusBar";
 import PriceChange from "@/app/components/UI/PriceChange";
+import PageLink from "@/app/components/UI/Links/PageLink";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import {
   setTableCoins,
   setCoinPage,
 } from "@/app/store/features/coinTableSlice";
+import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 
 const tableHeaders = [
   "#",
@@ -47,6 +49,10 @@ export default function CoinTable() {
   const { data: updatedCoins, isError } = useGetMarketsQuery({
     page: coinPage,
   });
+
+  function handleActiveLink(id: string) {
+    dispatch(setCoinSummaryId(id));
+  }
 
   return (
     <InfiniteScroll
@@ -99,18 +105,21 @@ export default function CoinTable() {
             ) => (
               <tr className="bg-primary800" key={id}>
                 <td className="pl-3 py-5">{index + 1}</td>
-                <td>
+                <td className="flex gap-1 py-5">
                   <Image
-                    className="inline"
                     src={image}
                     alt={`${id} icon`}
                     width={32}
                     height={32}
                   />
 
-                  <button className="ml-1.5">
+                  <PageLink
+                    href="./pages/CoinSummary"
+                    id={id}
+                    onClick={() => handleActiveLink(id)}
+                  >
                     {formatCoinName(id, symbol)}
-                  </button>
+                  </PageLink>
                 </td>
                 <td>{`$${formatPrice(current_price)}`}</td>
                 <td>{createPriceChange(changeIn1h)}</td>

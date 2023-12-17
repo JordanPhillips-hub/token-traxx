@@ -6,6 +6,7 @@ import { VscGraphLine } from "react-icons/vsc";
 import { GiCardExchange } from "react-icons/gi";
 import { RiHome5Fill, RiHome4Line, RiCoinFill } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import { MdOutlineContentCopy } from "react-icons/md";
 import {
   PiCurrencyDollarFill,
   PiCaretUpBold,
@@ -33,6 +34,7 @@ const icons: Icons = {
   coin: RiCoinFill,
   exchange: GiCardExchange,
   exit: RxCross2,
+  copy: MdOutlineContentCopy,
 };
 
 type props = {

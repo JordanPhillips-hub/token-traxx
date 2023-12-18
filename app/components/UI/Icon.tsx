@@ -1,7 +1,7 @@
 import { CiSearch } from "react-icons/ci";
 import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
 import { BsSun, BsMoon } from "react-icons/bs";
-import { IoLayersSharp, IoLayersOutline } from "react-icons/io5";
+import { IoLayersSharp, IoLayersOutline, IoTriangle } from "react-icons/io5";
 import { VscGraphLine } from "react-icons/vsc";
 import { GiCardExchange } from "react-icons/gi";
 import { RiHome5Fill, RiHome4Line, RiCoinFill } from "react-icons/ri";
@@ -35,6 +35,7 @@ const icons: Icons = {
   exchange: GiCardExchange,
   exit: RxCross2,
   copy: MdOutlineContentCopy,
+  triangle: IoTriangle,
 };
 
 type props = {

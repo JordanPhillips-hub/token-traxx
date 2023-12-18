@@ -11,7 +11,11 @@ export default function CoinSummary() {
   const dispatch = useAppDispatch();
   const { coinSummaryId } = useAppSelector((state) => state.activeLink);
   const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { data: coinInfo, isError } = useGetCoinQuery({ id: coinSummaryId });
+  const {
+    data: coinInfo,
+    isLoading,
+    isError,
+  } = useGetCoinQuery({ id: coinSummaryId });
 
   useEffect(() => {
     if (coinInfo) {
@@ -21,7 +25,11 @@ export default function CoinSummary() {
 
   return (
     <Provider store={store}>
-      {summaryCoin && (
+      {isLoading && <p className="text-xl text-center">Loading...</p>}
+      {isError && (
+        <p className="text-xl text-center">Error loading coin information</p>
+      )}
+      {!isLoading && !isError && summaryCoin && (
         <main className="container mx-auto">
           <section>
             <MainCard />

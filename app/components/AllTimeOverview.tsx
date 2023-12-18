@@ -1,4 +1,4 @@
-import Icon from "./Icon";
+import Icon from "./UI/Icon";
 import { useAppSelector } from "@/app/store/hooks";
 import { formatPrice } from "@/app/utils/numberFormatting";
 import { formatDateString } from "@/app/utils/dateAndTime";

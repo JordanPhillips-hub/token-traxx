@@ -7,8 +7,10 @@ import {
   setNumToSell,
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
-import { formatCoinName } from "@/app/utils/generalHelpers";
+import { setCoinId } from "@/app/store/features/coinMarketSlice";
+import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
 import Icon from "@/app/components/UI/Icon";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 
 type DropdownProps = {
   componentType: string;
@@ -28,6 +30,7 @@ export default function ConvertorDropdown({
   const dispatch = useAppDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { comparedCoins } = useAppSelector((state) => state.compareCharts);
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -41,6 +44,15 @@ export default function ConvertorDropdown({
     dispatch(setNumToSell(0));
     dispatch(setSellPrice(0));
     setIsDropdownOpen(false);
+  }
+
+  function handleCoinComparison(id: string) {
+    dispatch(setCoinId(id));
+    if (componentType === "sell" || componentType === "buy") {
+      const updatedComparedCoins = [...comparedCoins];
+      updatedComparedCoins[componentType === "sell" ? 0 : 1] = id;
+      dispatch(setComparedCoins(updatedComparedCoins));
+    }
   }
 
   return (
@@ -67,7 +79,10 @@ export default function ConvertorDropdown({
           <button
             key={coin.id}
             className="flex items-center gap-2 mb-3 hover:text-base hover:font-medium"
-            onClick={() => handleCoinSelect(coin.id)}
+            onClick={() => {
+              handleCoinSelect(coin.id);
+              handleCoinComparison(coin.id);
+            }}
           >
             <Image src={coin.image} alt={coin.name} width={25} height={25} />
             <p> {formatCoinName(coin.id ?? "", coin.symbol ?? "")}</p>

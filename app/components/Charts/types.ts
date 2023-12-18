@@ -1,9 +1,10 @@
 export type ChartContainerProps = {
   children: React.ReactNode;
   name: string;
-  price: number | string;
-  date: string;
+  price?: number | string;
+  date?: string;
   type: string;
+  location: string;
 };
 
 export type ChartProps = {

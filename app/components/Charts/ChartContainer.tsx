@@ -7,6 +7,7 @@ export default function ChartContainer({
   price,
   date,
   type,
+  location,
 }: ChartContainerProps) {
   const { isComparing } = useAppSelector((state) => state.compareCharts);
 
@@ -17,7 +18,9 @@ export default function ChartContainer({
       } w-full h-auto max-h-[465px] p-4 rounded-xl`}
     >
       <div className="mb-3">
-        <p className="text-xl">{!isComparing && name}</p>
+        <p className="text-xl">
+          {(!isComparing || location === "convertor") && name}
+        </p>
         <p className="text-3xl">{!isComparing && price}</p>
         <p className={`${isComparing ? "text-3xl mb-1" : "text-base"}`}>
           {date}

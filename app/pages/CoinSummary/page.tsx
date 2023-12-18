@@ -10,7 +10,6 @@ import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
 export default function CoinSummary() {
   const dispatch = useAppDispatch();
   const { coinSummaryId } = useAppSelector((state) => state.activeLink);
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
   const {
     data: coinInfo,
     isLoading,
@@ -29,7 +28,7 @@ export default function CoinSummary() {
       {isError && (
         <p className="text-xl text-center">Error loading coin information</p>
       )}
-      {!isLoading && !isError && summaryCoin && (
+      {!isLoading && !isError && coinInfo && (
         <main className="container mx-auto">
           <section>
             <MainCard />

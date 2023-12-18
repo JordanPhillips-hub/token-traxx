@@ -16,7 +16,6 @@ export default function CoinSummary() {
   useEffect(() => {
     if (coinInfo) {
       dispatch(setSummaryCoin(coinInfo));
-      console.log(summaryCoin);
     }
   });
 

@@ -26,9 +26,9 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         <div>
           <div className="flex items-center">
             <Icon className={iconClass} iconVariant="triangle" />
-            <p className="ml-4">All time {allTime}:</p>
+            <p className="text-xl ml-4">All time {allTime}:</p>
           </div>
-          <p className="ml-8">
+          <p className="text-neutral600 ml-8">
             {allTimeIsHigh
               ? formatDateString(athDate.usd)
               : formatDateString(atlDate.usd)}
@@ -36,7 +36,7 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         </div>
 
         <div>
-          <span>
+          <span className="text-2xl	font-medium">
             {allTimeIsHigh
               ? `$${formatPrice(ath.usd)}`
               : `$${formatPrice(atl.usd)}`}

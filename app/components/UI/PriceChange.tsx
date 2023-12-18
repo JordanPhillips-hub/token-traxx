@@ -10,7 +10,7 @@ export default function PriceChange({ percentage }: PriceChangeProps) {
     if (negative) {
       return percentage.toString().substring(1);
     }
-    return percentage;
+    return percentage.toFixed(2);
   }
 
   return (

@@ -4,8 +4,9 @@ type CoinSummary = {
   id: string;
   name: string;
   symbol: string;
-  links: { homepage: string[] };
+  links: { homepage: string[], blockchain_site: string[] };
   image: { small: string };
+  description: { en: string };
   market_data: {
     current_price: { usd: number };
     price_change_percentage_1h_in_currency: { usd: number };
@@ -25,8 +26,9 @@ const initialState: CoinSummaryState = {
     id: '',
     name: '',
     symbol: '',
-    links: { homepage: [''] },
+    links: { homepage: [], blockchain_site: [] },
     image: { small: '' },
+    description: { en: '' },
     market_data: {
       current_price: { usd: 0 },
       price_change_percentage_1h_in_currency: { usd: 0 },

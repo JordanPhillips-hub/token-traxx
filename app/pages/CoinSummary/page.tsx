@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinQuery } from "@/app/store/api/coingecko";
 import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
 import Card from "@/app/components/UI/Card";
-import CopyLink from "@/app/components/UI/Buttons/CopyLink";
+import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 
 export default function CoinSummary() {
   const dispatch = useAppDispatch();
@@ -47,7 +47,7 @@ export default function CoinSummary() {
               <div className="flex flex-wrap gap-6 mt-6">
                 {siteLinks.map((link, index) => (
                   <Card key={index} className="w-fit rounded-xl py-4 px-6">
-                    <CopyLink toCopy={link} />
+                    <CopyButton toCopy={link} />
                   </Card>
                 ))}
               </div>

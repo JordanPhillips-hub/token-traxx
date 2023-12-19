@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useAppSelector } from "@/app/store/hooks";
-import CopyLink from "@/app/components/UI/CopyLink";
+import CopyLink from "@/app/components/UI/Buttons/CopyLink";
 
 export default function CardHeader() {
   const { summaryCoin } = useAppSelector((state) => state.coinSummary);

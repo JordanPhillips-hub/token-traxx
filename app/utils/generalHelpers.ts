@@ -10,4 +10,5 @@ export function formatCoinName(name: string, symbol: string) {
 
 export function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text);
+  alert(`${text} copied to clipboard`);
 };

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinQuery } from "@/app/store/api/coingecko";
 import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
 import Card from "@/app/components/UI/Card";
-import CopyLink from "@/app/components/UI/CopyLink";
+import CopyLink from "@/app/components/UI/Buttons/CopyLink";
 
 export default function CoinSummary() {
   const dispatch = useAppDispatch();

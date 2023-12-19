@@ -6,4 +6,8 @@ export function optionalCapitalize(string: string | undefined) {
 
 export function formatCoinName(name: string, symbol: string) {
   return `${optionalCapitalize(name)} (${symbol.toUpperCase()})`;
-}
+};
+
+export function copyToClipboard(text: string) {
+  navigator.clipboard.writeText(text);
+};

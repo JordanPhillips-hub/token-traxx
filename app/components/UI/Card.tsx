@@ -2,8 +2,12 @@ import React, { ReactNode } from "react";
 
 type CardProps = {
   children: ReactNode;
+  className?: string;
 };
 
-export default function Card({ children }: CardProps) {
-  return <div className="bg-primary400 py-10 px-8 rounded-xl">{children}</div>;
+export default function Card({ children, className }: CardProps) {
+  const defaultClass = "bg-primary400";
+  const mergedClass = className ? `${defaultClass} ${className}` : defaultClass;
+
+  return <div className={mergedClass}>{children}</div>;
 }

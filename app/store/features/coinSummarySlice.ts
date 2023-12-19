@@ -26,7 +26,7 @@ const initialState: CoinSummaryState = {
     id: '',
     name: '',
     symbol: '',
-    links: { homepage: [], blockchain_site: [] },
+    links: { homepage: [''], blockchain_site: [] },
     image: { small: '' },
     description: { en: '' },
     market_data: {

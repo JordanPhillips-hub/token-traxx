@@ -22,3 +22,17 @@ export function timestampToDate(timestamp: string | number | Date) {
   };
   return date.toLocaleDateString(undefined, options);
 };
+
+export function formatDateString(originalDate: string) {
+  const formattedDate = new Date(originalDate).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZoneName: 'short'
+  });
+
+  return formattedDate;
+};

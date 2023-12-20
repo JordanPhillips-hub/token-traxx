@@ -7,6 +7,7 @@ import { GiCardExchange } from "react-icons/gi";
 import { RiHome5Fill, RiHome4Line, RiCoinFill } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { MdOutlineContentCopy } from "react-icons/md";
+import { FiPlus } from "react-icons/fi";
 import {
   PiCurrencyDollarFill,
   PiCaretUpBold,
@@ -36,6 +37,7 @@ const icons: Icons = {
   exit: RxCross2,
   copy: MdOutlineContentCopy,
   triangle: IoTriangle,
+  plus: FiPlus,
 };
 
 type props = {

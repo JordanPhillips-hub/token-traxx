@@ -35,12 +35,14 @@ export default function CoinSummary() {
 
   const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
   const percentage = (circulating / max) * 100;
-  const volumeStats = { "Total Volume": volume.usd, "Volume/Market": ratio };
-  const SupplyStats = { "Max Supply": max, "Circulating Supply": circulating };
-  const marketStats = {
-    "Market Cap Change": changeIn24h,
-    "Market Cap": cap.usd,
-    "Fully Diluted Valuation": dilutedVal.usd,
+  const stats = {
+    volume: { "Total Volume": volume.usd, "Volume/Market": ratio },
+    supply: { "Max Supply": max, "Circulating Supply": circulating },
+    market: {
+      "Market Cap Change": changeIn24h,
+      "Market Cap": cap.usd,
+      "Fully Diluted Valuation": dilutedVal.usd,
+    },
   };
 
   useEffect(() => {
@@ -94,13 +96,13 @@ export default function CoinSummary() {
           <hr />
 
           <section className="grid grid-cols-2 gap-6 my-8">
-            <StatCard stats={marketStats} hasStatusBar={false} />
+            <StatCard stats={stats.market} hasStatusBar={false} />
             <StatCard
-              stats={SupplyStats}
+              stats={stats.supply}
               hasStatusBar={true}
               completed={percentage}
             />
-            <StatCard stats={volumeStats} hasStatusBar={false} />
+            <StatCard stats={stats.volume} hasStatusBar={false} />
           </section>
         </main>
       )}

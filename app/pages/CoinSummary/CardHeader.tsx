@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useAppSelector } from "@/app/store/hooks";
-import CopyLink from "@/app/components/UI/CopyLink";
+import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 
 export default function CardHeader() {
   const { summaryCoin } = useAppSelector((state) => state.coinSummary);
@@ -19,7 +19,7 @@ export default function CardHeader() {
         </div>
         <div className="inline-block">
           <h1 className="text-2xl	font-bold">{`${name} (${symbol.toUpperCase()})`}</h1>
-          <CopyLink toCopy={formattedLink} />
+          <CopyButton toCopy={formattedLink} />
         </div>
       </div>
     </header>

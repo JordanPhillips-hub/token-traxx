@@ -22,7 +22,7 @@ import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
 import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
       name: formatCoinName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
       err: "Prices not available",
       loading: "Loading Price",
-      value: `${formatPrice(selectedCoin?.current_price) ?? ""} min`,
+      value: `${formatCurrency(selectedCoin?.current_price) ?? ""} min`,
       date: new Date().toDateString(),
     },
     {
@@ -73,7 +73,7 @@ export default function Home() {
       name: "Volume 24hr",
       err: "Volumes not available",
       loading: "Loading Volumes",
-      value: `${formatPrice(selectedCoin?.total_volume) ?? ""} bin`,
+      value: `${formatCurrency(selectedCoin?.total_volume) ?? ""} bin`,
       date: new Date().toDateString(),
     },
   ];

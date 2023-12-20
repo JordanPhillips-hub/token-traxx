@@ -1,4 +1,4 @@
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 import { optionalCapitalize } from "@/app/utils/generalHelpers";
 import { LineDataset, BarDataset } from "./types";
 
@@ -13,7 +13,7 @@ export function createGraphLabel(
   const isGreaterThan = comparedCoins.length >= len;
   const coinName = optionalCapitalize(coinId);
   const findCoin = coins.find((coin: { id: string }) => coin.id === coinId);
-  const currentPrice = formatPrice(findCoin?.[priceType]);
+  const currentPrice = formatCurrency(findCoin?.[priceType]);
   return isGreaterThan ? `${coinName} $${currentPrice} ${unit}` : "";
 }
 

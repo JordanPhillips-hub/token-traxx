@@ -5,7 +5,7 @@ import Sparkline from "@/app/components/Charts/Sparkline";
 import StatusBar from "@/app/components/UI/StatusBar";
 import PriceChange from "@/app/components/UI/PriceChange";
 import PageLink from "@/app/components/UI/Links/PageLink";
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
@@ -121,7 +121,7 @@ export default function CoinTable() {
                     {formatCoinName(id, symbol)}
                   </PageLink>
                 </td>
-                <td>{`$${formatPrice(current_price)}`}</td>
+                <td>{`$${formatCurrency(current_price)}`}</td>
                 <td>{createPriceChange(changeIn1h)}</td>
                 <td>{createPriceChange(changeIn24h)}</td>
                 <td>{createPriceChange(changeIn7d)}</td>

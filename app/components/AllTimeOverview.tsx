@@ -1,6 +1,6 @@
 import Icon from "./UI/Icon";
 import { useAppSelector } from "@/app/store/hooks";
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatDateString } from "@/app/utils/dateAndTime";
 
 type AllTimeOverviewProps = { allTime: string };
@@ -38,8 +38,8 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         <div>
           <span className="text-2xl	font-medium">
             {allTimeIsHigh
-              ? `$${formatPrice(ath.usd)}`
-              : `$${formatPrice(atl.usd)}`}
+              ? `$${formatCurrency(ath.usd)}`
+              : `$${formatCurrency(atl.usd)}`}
           </span>
         </div>
       </div>

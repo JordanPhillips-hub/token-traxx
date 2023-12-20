@@ -1,7 +1,7 @@
 import ProgressBar from "@ramonak/react-progress-bar";
 import Card from "@/app/components/UI/Card";
 import CoinStat from "@/app/components/UI/CoinStat";
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 
 type StatCardProps = {
   stats: Record<string, number>;
@@ -18,7 +18,7 @@ export default function StatCard({
     <Card className="py-10 px-8">
       <div className="flex flex-col gap-8">
         {Object.entries(stats).map(([name, stat]) => (
-          <CoinStat key={name} statName={name} stat={formatPrice(stat)} />
+          <CoinStat key={name} statName={name} stat={formatCurrency(stat)} />
         ))}
         {hasStatusBar && completed !== undefined && (
           <div className="relative mt-8">

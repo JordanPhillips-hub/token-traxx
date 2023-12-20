@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/app/store/hooks";
 import PriceChange from "@/app/components/UI/PriceChange";
-import { formatPrice } from "@/app/utils/numberFormatting";
+import { formatCurrency } from "@/app/utils/numberFormatting";
 
 export default function PriceOverview() {
   const { summaryCoin } = useAppSelector((state) => state.coinSummary);
@@ -11,7 +11,7 @@ export default function PriceOverview() {
 
   return (
     <div className="flex gap-4 my-9">
-      <p className="text-3xl font-bold">{`$${formatPrice(
+      <p className="text-3xl font-bold">{`$${formatCurrency(
         current_price.usd
       )}`}</p>
       <PriceChange percentage={oneHourChangePercentage.usd} />

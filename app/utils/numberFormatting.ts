@@ -1,12 +1,12 @@
-export function formatPrice(price: number | undefined) {
-  if (price === undefined || price === null) {
+export function formatCurrency(number: number | undefined) {
+  if (number === undefined || number === null) {
     return "N/A";
   };
-  const formattedPrice = price.toLocaleString(undefined, {
+  const formattedCurrency = number.toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
-  return formattedPrice;
+  return formattedCurrency;
 };
 
 export function formatNum3_2(num: number) {

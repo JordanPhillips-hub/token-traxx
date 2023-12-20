@@ -53,8 +53,6 @@ export default function CoinSummary() {
     setReadMore(!readMore);
   }
 
-  console.log(summaryCoin);
-
   return (
     <Provider store={store}>
       {isLoading && <p className="text-xl text-center">Loading...</p>}

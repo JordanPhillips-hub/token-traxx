@@ -1,5 +1,5 @@
 export function formatPrice(price: number | undefined) {
-  if (price === undefined) {
+  if (price === undefined || price === null) {
     return "N/A";
   };
   const formattedPrice = price.toLocaleString(undefined, {

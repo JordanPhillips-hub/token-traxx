@@ -14,6 +14,13 @@ type CoinSummary = {
     ath_date: { usd: string };
     atl: { usd: number };
     atl_date: { usd: string };
+    total_volume: { usd: number };
+    market_cap: { usd: number };
+    market_cap_change_24h: number;
+    fully_diluted_valuation: { usd: number };
+    mcap_to_tvl_ratio: number;
+    max_supply: number;
+    circulating_supply: number;
   };
 };
 
@@ -36,6 +43,13 @@ const initialState: CoinSummaryState = {
       ath_date: { usd: '' },
       atl: { usd: 0 },
       atl_date: { usd: '' },
+      total_volume: { usd: 0 },
+      market_cap: { usd: 0 },
+      market_cap_change_24h: 0,
+      fully_diluted_valuation: { usd: 0 },
+      mcap_to_tvl_ratio: 0,
+      max_supply: 0,
+      circulating_supply: 0,
     }
   }
 };

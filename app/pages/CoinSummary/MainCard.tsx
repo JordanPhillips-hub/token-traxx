@@ -5,7 +5,7 @@ import AllTimeOverview from "@/app/components/AllTimeOverview";
 
 export default function MainCard() {
   return (
-    <Card className="py-10 px-8 rounded-xl">
+    <Card className="py-10 px-8">
       <CardHeader />
       <PriceOverview />
       <hr className="bg-neutral50 border-neutral50" />

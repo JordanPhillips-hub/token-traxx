@@ -4,7 +4,6 @@ import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setActiveLink } from "@/app/store/features/pageLinkSlice";
 import CustomSelect from "../Form/CustomSelect";
 import FormInput from "../Form/FormInput";
-import PrimaryButton from "../UI/Buttons/PrimaryButton";
 import ThemeButton from "../UI/Buttons/ThemeButton";
 import Icon from "../UI/Icon";
 import PageLink from "../UI/Links/PageLink";

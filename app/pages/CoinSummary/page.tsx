@@ -45,8 +45,8 @@ export default function CoinSummary() {
             <section>
               <p>{description.en}</p>
               <div className="flex flex-wrap gap-6 mt-6">
-                {siteLinks.map((link, index) => (
-                  <Card key={index} className="w-fit rounded-xl py-4 px-6">
+                {siteLinks.map((link) => (
+                  <Card key={link} className="w-fit rounded-xl py-4 px-6">
                     <CopyButton toCopy={link} />
                   </Card>
                 ))}

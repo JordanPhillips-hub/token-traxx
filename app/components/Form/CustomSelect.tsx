@@ -10,7 +10,7 @@ export default function CustomSelect({
   iconLeft,
 }: CustomSelectProps) {
   return (
-    <div className="dark:bg-primary800 relative py-2.5 px-3 rounded-md">
+    <div className="dark:bg-blue800 relative py-2.5 px-3 rounded-md">
       <button className="text-sm flex items-center gap-2">
         <div className="p-1 rounded-full">
           <Icon iconVariant={iconLeft} className="text-lg" />
@@ -20,7 +20,7 @@ export default function CustomSelect({
       </button>
 
       <div
-        className={`dark:bg-primary800 absolute w-full right-0 rounded-md top-12`}
+        className={`dark:bg-blue800 absolute w-full right-0 rounded-md top-12`}
       >
         <ul className="text-center hidden">
           <li>

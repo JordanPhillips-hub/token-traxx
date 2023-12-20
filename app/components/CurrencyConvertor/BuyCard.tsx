@@ -8,8 +8,8 @@ export default function BuyCard() {
   const selectedCoin = coins.find((coin) => coin.id === buyCoinId);
 
   return (
-    <div className="container bg-primary600 p-6 rounded-2xl">
-      <p className="text-sm text-neutral400 mb-10">You Buy</p>
+    <div className="container bg-blue600 p-6 rounded-2xl">
+      <p className="text-sm text-gray100 mb-10">You Buy</p>
 
       <div className="flex justify-between mb-1">
         <div className="relative">

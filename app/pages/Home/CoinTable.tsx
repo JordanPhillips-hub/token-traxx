@@ -75,7 +75,7 @@ export default function CoinTable() {
       }
     >
       <table className="min-w-full border-separate border-spacing-y-2 text-sm">
-        <thead className="text-left text-sm text-neutral400">
+        <thead className="text-left text-sm text-gray100">
           <tr>
             {tableHeaders.map((header, index) => (
               <th className="pl-3" key={index}>
@@ -103,7 +103,7 @@ export default function CoinTable() {
               },
               index
             ) => (
-              <tr className="bg-primary800" key={id}>
+              <tr className="bg-blue800" key={id}>
                 <td className="pl-3 py-5">{index + 1}</td>
                 <td className="flex gap-1 py-5">
                   <Image

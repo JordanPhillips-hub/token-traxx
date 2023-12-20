@@ -25,8 +25,8 @@ export default function SellCard() {
   }
 
   return (
-    <div className="container bg-primary600 p-6 rounded-2xl">
-      <p className="text-sm text-neutral400 mb-10">You Sell</p>
+    <div className="container bg-blue600 p-6 rounded-2xl">
+      <p className="text-sm text-gray100 mb-10">You Sell</p>
 
       <div className="flex justify-between mb-1">
         <div className="relative">
@@ -35,7 +35,7 @@ export default function SellCard() {
 
         <form onSubmit={handleSubmit}>
           <input
-            className=" p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-primary500"
+            className=" p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-purple500"
             type="number"
             name="toSell"
             id="toSell"

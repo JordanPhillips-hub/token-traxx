@@ -14,7 +14,7 @@ export default function ChartContainer({
   return (
     <div
       className={`bg-white100 ${
-        type === "line" ? "dark:bg-primary600" : "dark:bg-primary400"
+        type === "line" ? "dark:bg-blue600" : "dark:bg-purple700"
       } w-full h-auto max-h-[465px] p-4 rounded-xl`}
     >
       <div className="mb-3">
@@ -26,7 +26,7 @@ export default function ChartContainer({
           {date}
         </p>
         {isComparing && (
-          <p className="text-neutral400 text-sm">
+          <p className="text-gray100 text-sm">
             Please select currency to view statistics
           </p>
         )}

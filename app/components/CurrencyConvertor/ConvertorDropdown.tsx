@@ -71,7 +71,7 @@ export default function ConvertorDropdown({
       <div
         className={`${
           isDropdownOpen
-            ? "text-sm absolute bg-primary600 mt-3 px-4 rounded"
+            ? "text-sm absolute bg-blue600 mt-3 px-4 rounded"
             : "hidden"
         }`}
       >

@@ -31,7 +31,7 @@ export default function PageLink({
     <Link
       id={id}
       ref={linkRef}
-      className="text-neutral50 flex gap-2 items-center justify-center outline-none hover:text-neutral100 focus:text-neutral100"
+      className="text-whiteOpac900 flex gap-2 items-center justify-center outline-none hover:text-white focus:text-white"
       href={href}
       onClick={onClick}
     >

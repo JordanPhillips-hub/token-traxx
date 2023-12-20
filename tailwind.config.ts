@@ -10,23 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // NEUTRAL'S
-        neutral50: "hsla(0, 0%, 100%, 0.5)",
-        neutral100: "hsl(0, 0%, 100%)",
-        neutral400: "hsl(0, 0%, 82%)",
-        neutral500: "hsl(0, 0%, 62%)",
-        neutral600: "hsl(240, 1%, 73%)",
-        // PRIMARY'S
-        primary400: "hsl(253, 35%, 15%)",
-        primary500: "hsl(240, 65%, 63%)",
-        primary600: "hsl(240, 35%, 15%)",
-        primary700: "hsl(240, 22%, 18%)",
-        primary800: "hsl(240, 21%, 12%)",
-        primary900: "hsl(247, 20%, 9%)",
-        // Accents
-        accent100: "hsl(176, 100%, 48%)",
-        accent200: "hsl(337, 100%, 50%)",
-        accent300: "hsl(33, 93%, 54%)",
+        whiteOpac900: "hsla(0, 0%, 100%, 0.5)",
+        gray100: "hsl(0, 0%, 82%)",
+        gray200: "hsl(240, 1%, 73%)",
+        gray500: "hsl(0, 0%, 62%)",
+        purple500: "hsl(240, 65%, 63%)",
+        purple700: "hsl(253, 35%, 15%)",
+        green500: "hsl(176, 100%, 48%)",
+        red500: "hsl(337, 100%, 50%)",
+        orange500: "hsl(33, 93%, 54%)",
+        blue600: "hsl(240, 35%, 15%)",
+        blue700: "hsl(240, 22%, 18%)",
+        blue800: "hsl(240, 21%, 12%)",
+        blue900: "hsl(247, 20%, 9%)",
       },
       maxWidth: {
         "3.5xl": "52.1875rem",

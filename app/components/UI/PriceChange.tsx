@@ -4,7 +4,7 @@ type PriceChangeProps = { percentage: number };
 
 export default function PriceChange({ percentage }: PriceChangeProps) {
   const negative = percentage < 0;
-  const textColor = negative ? "text-accent200" : "text-accent100";
+  const textColor = negative ? "text-red500" : "text-green500";
 
   function formatPercent(percentage: number) {
     if (negative) {

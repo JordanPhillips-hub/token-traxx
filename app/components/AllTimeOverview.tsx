@@ -16,9 +16,7 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
 
   const allTimeIsHigh = allTime === "high";
 
-  const iconClass = allTimeIsHigh
-    ? "text-accent100"
-    : "text-accent200 rotate-180";
+  const iconClass = allTimeIsHigh ? "text-green500" : "text-red500 rotate-180";
 
   return (
     <div className="mt-7">
@@ -28,7 +26,7 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
             <Icon className={iconClass} iconVariant="triangle" />
             <p className="text-xl ml-4">All time {allTime}:</p>
           </div>
-          <p className="text-neutral600 ml-8">
+          <p className="text-gray200 ml-8">
             {allTimeIsHigh
               ? formatDateString(athDate.usd)
               : formatDateString(atlDate.usd)}

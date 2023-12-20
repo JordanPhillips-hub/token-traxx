@@ -32,7 +32,7 @@ export default function CoinInfo({
           <div className="flex items-center gap-1">
             {icon && <Icon iconVariant={icon} />}
             <div className="text-xs">
-              <span className="text-neutral400 mr-2">{name}</span>
+              <span className="text-gray100 mr-2">{name}</span>
               <span>
                 {typeof data === "string" || isNaN(data) ? "N/A" : data}
               </span>

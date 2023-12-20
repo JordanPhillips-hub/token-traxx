@@ -8,7 +8,7 @@ export default function MainCard() {
     <Card className="py-10 px-8">
       <CardHeader />
       <PriceOverview />
-      <hr className="bg-neutral50 border-neutral50" />
+      <hr className="bg-whiteOpac900 border-whiteOpac900" />
       <AllTimeOverview allTime="high" />
       <AllTimeOverview allTime="low" />
     </Card>

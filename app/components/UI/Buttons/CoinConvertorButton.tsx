@@ -12,7 +12,7 @@ export default function CoinConvertorButton({
   onClick,
 }: Props) {
   const defaultStyles =
-    "text-neutral100 w-full p-4 rounded-md focus:outline-none shadow-md";
+    "text-white w-full p-4 rounded-md focus:outline-none shadow-md";
 
   let buttonClass = `${defaultStyles}`;
 
@@ -20,15 +20,15 @@ export default function CoinConvertorButton({
     case "Coins":
       buttonClass += `${
         isModalOpen
-          ? " bg-primary700"
-          : " bg-primary500 shadow-md shadow-indigo-500/50"
+          ? " bg-blue700"
+          : " bg-purple500 shadow-md shadow-indigo-500/50"
       }`;
       break;
     case "Convertor":
       buttonClass += `${
         isModalOpen
-          ? " bg-primary500 shadow-md shadow-indigo-500/50"
-          : " bg-primary700"
+          ? " bg-purple500 shadow-md shadow-indigo-500/50"
+          : " bg-blue700"
       }`;
   }
 

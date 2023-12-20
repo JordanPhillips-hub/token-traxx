@@ -11,7 +11,7 @@ export default function PrimaryButton({
   children,
   onClick,
 }: PrimaryButtonProps) {
-  const defaultStyles = `bg-primary700 focus:bg-primary500 text-neutral100 w-full rounded-md focus:outline-none shadow-md focus:shadow-indigo-500/50`;
+  const defaultStyles = `bg-blue700 focus:bg-purple500 text-white w-full rounded-md focus:outline-none shadow-md focus:shadow-indigo-500/50`;
 
   let buttonClass = `${defaultStyles}`;
 

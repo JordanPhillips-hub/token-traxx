@@ -79,7 +79,7 @@ export default function CoinSummary() {
                 <p>{description.en}</p>
               </div>
 
-              <button className="text-primary500" onClick={toggleReadMore}>{`${
+              <button className="text-purple500" onClick={toggleReadMore}>{`${
                 !readMore ? "Read More..." : "Read Less..."
               }`}</button>
 

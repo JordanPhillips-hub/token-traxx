@@ -7,7 +7,7 @@ export default function ThemeButton() {
 
   return (
     <button
-      className="dark:bg-primary800 p-3 rounded-md focused-primary"
+      className="dark:bg-blue800 p-3 rounded-md focused-primary"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (

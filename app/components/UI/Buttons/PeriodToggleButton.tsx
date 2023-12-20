@@ -20,7 +20,7 @@ export default function PeriodToggleButton({
 
   return (
     <button
-      className="bg-primary700 focus:bg-primary500 text-neutral100 text-sm py-2 px-5 rounded focus:outline-none"
+      className="bg-blue700 focus:bg-purple500 text-white text-sm py-2 px-5 rounded focus:outline-none"
       onClick={handleClick}
     >
       {text}

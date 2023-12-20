@@ -8,7 +8,7 @@ type CopyLinkProps = {
 export default function CopyLink({ toCopy }: CopyLinkProps) {
   return (
     <button
-      className="font-medium flex items-center gap-2 ease-in-out hover:text-neutral600 hover:underline"
+      className="font-medium flex items-center gap-2 ease-in-out hover:text-gray200 hover:underline"
       onClick={() => copyToClipboard(toCopy)}
     >
       <span>{toCopy}</span>

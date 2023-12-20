@@ -34,7 +34,7 @@ export default function NavInfoDisplay() {
   }, [coinGlobals, dispatch]);
 
   return (
-    <div className="bg-primary400 flex items-center justify-center gap-8 mb-6 px-16 py-4 border-b-[1px] border-neutral100 border-opacity-[0.1]">
+    <div className="bg-purple700 flex items-center justify-center gap-8 mb-6 px-16 py-4 border-b-[1px] border-white border-opacity-[0.1]">
       <CoinInfo
         name="Coins"
         icon="coin"

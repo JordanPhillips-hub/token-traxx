@@ -22,7 +22,7 @@ export default function StatCard({
         ))}
         {hasStatusBar && completed !== undefined && (
           <div className="relative mt-8">
-            <p className="text-accent300 text-xs absolute bottom-2 left-0">
+            <p className="text-orange500 text-xs absolute bottom-2 left-0">
               {completed && isFinite(completed)
                 ? Math.floor(completed) + "%"
                 : "N/A"}

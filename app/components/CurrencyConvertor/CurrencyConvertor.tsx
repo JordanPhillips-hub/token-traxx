@@ -55,7 +55,7 @@ export default function CurrencyConvertorModal({
       ref={modalRef}
     >
       <button
-        className="bg-primary700 focus:bg-primary500 hover:bg-primary500 absolute right-0 px-2 py-1 rounded"
+        className="bg-blue700 focus:bg-purple500 hover:bg-purple500 absolute right-0 px-2 py-1 rounded"
         onClick={onClose}
       >
         <div className="flex items-center gap-1">
@@ -66,7 +66,7 @@ export default function CurrencyConvertorModal({
 
       <header className="mb-6">
         <h3 className="text-xl font-medium">Online currency convertor</h3>
-        <p className="text-neutral500">{getDateTime24H()}</p>
+        <p className="text-gray500">{getDateTime24H()}</p>
       </header>
 
       <section>

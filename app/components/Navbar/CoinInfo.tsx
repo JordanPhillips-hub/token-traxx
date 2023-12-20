@@ -7,7 +7,7 @@ type CoinInfoProps = {
   name?: string;
   data: number | string;
   hasProgressBar?: boolean;
-  completed: number | string;
+  completed: number;
   hasPriceChange?: boolean;
   changePercent: number;
 };
@@ -33,7 +33,9 @@ export default function CoinInfo({
             {icon && <Icon iconVariant={icon} />}
             <div className="text-xs">
               <span className="text-neutral400 mr-2">{name}</span>
-              <span>{data}</span>
+              <span>
+                {typeof data === "string" || isNaN(data) ? "N/A" : data}
+              </span>
             </div>
           </div>
 

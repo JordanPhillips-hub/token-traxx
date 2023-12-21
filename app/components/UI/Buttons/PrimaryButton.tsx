@@ -11,7 +11,6 @@ const defaultStyles =
 
 export default function PrimaryButton({
   className,
-  disabled,
   children,
   text,
   onClick,

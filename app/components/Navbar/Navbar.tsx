@@ -1,13 +1,14 @@
 "use client";
+import React from "react";
 import NavInfoDisplay from "./NavInfoDisplay";
+import SearchBar from "./SearchBar";
+import Logo from "@/app/components/UI/Logo";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setActiveLink } from "@/app/store/features/pageLinkSlice";
-import CustomSelect from "../Form/CustomSelect";
-import FormInput from "../Form/FormInput";
-import ThemeButton from "../UI/Buttons/ThemeButton";
-import Icon from "../UI/Icon";
-import PageLink from "../UI/Links/PageLink";
-import Logo from "../UI/Logo";
+import CustomSelect from "@/app/components/Form/CustomSelect";
+import ThemeButton from "@/app/components/UI/Buttons/ThemeButton";
+import Icon from "@/app/components/UI/Icon";
+import PageLink from "@/app/components/UI/Links/PageLink";
 
 const pageLinks = [
   { id: "coinsLink", href: "/", text: "Home" },
@@ -15,12 +16,8 @@ const pageLinks = [
 ];
 
 export default function NavBar() {
-  const activeLink = useAppSelector((state) => state.activeLink.value);
   const dispatch = useAppDispatch();
-
-  function handleActiveLink(id: string) {
-    dispatch(setActiveLink(id));
-  }
+  const activeLink = useAppSelector((state) => state.activeLink.value);
 
   function getIconVariant(linkId: string) {
     if (linkId === "coinsLink") {
@@ -34,42 +31,30 @@ export default function NavBar() {
   return (
     <>
       <NavInfoDisplay />
-      <nav className="font-medium container  mx-auto">
-        <div className="flex flex-col w-full">
-          <div className="flex items-center justify-between mb-14">
-            <Logo />
-            <ul className="py-1 px-1 w-1/3 text-1xl flex rounded-md">
-              {pageLinks.map((link) => (
-                <li className="w-1/4" key={link.id}>
-                  <PageLink
-                    id={link.id}
-                    href={link.href}
-                    text={link.text}
-                    onClick={() => handleActiveLink(link.id)}
-                  >
-                    <Icon iconVariant={getIconVariant(link.id)} />
-                  </PageLink>
-                </li>
-              ))}
-            </ul>
-            <form className=" flex gap-4" action="">
-              <div className="relative flex items-center">
-                <Icon
-                  className="text-xl absolute ml-2.5"
-                  iconVariant="search"
-                />
-                <FormInput
-                  label="Search"
-                  id="search"
-                  type="text"
-                  name="search"
-                  placeholder="Search..."
-                />
-              </div>
-              <CustomSelect iconRight="chevDown" iconLeft="dollar" />
-              <ThemeButton />
-            </form>
-          </div>
+      <nav className="container flex items-center justify-between font-medium mx-auto mb-16">
+        <div className="flex gap-20">
+          <Logo />
+
+          <ul className="flex gap-6 py-1 px-1  rounded-md">
+            {pageLinks.map(({ id, href, text }) => (
+              <li key={id}>
+                <PageLink
+                  id={id}
+                  href={href}
+                  text={text}
+                  onClick={() => dispatch(setActiveLink(id))}
+                >
+                  <Icon iconVariant={getIconVariant(id)} />
+                </PageLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex gap-4">
+          <SearchBar />
+          <CustomSelect iconRight="chevDown" iconLeft="dollar" />
+          <ThemeButton />
         </div>
       </nav>
     </>

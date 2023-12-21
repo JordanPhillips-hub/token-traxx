@@ -7,6 +7,7 @@ export default function FormInput({
   id,
   type,
   name,
+  value,
   placeholder,
   onChange,
 }: FormInputProps) {
@@ -20,6 +21,7 @@ export default function FormInput({
         id={id}
         type={type}
         name={name}
+        value={value}
         placeholder={placeholder}
         onChange={onChange}
       />

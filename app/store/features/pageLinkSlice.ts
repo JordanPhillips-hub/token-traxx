@@ -7,7 +7,7 @@ type LinkState = {
 
 const initialState: LinkState = {
   value: 'coinsLink',
-  coinSummaryId: 'bitcoin',
+  coinSummaryId: '',
 };
 
 const activeLinkSlice = createSlice({

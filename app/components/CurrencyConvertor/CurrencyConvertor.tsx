@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect } from "react";
 import SellCard from "./SellCard";
 import BuyCard from "./BuyCard";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
+import Modal from "@/app/components/UI/Modal";
 import Icon from "@/app/components/UI/Icon";
 import ChartContainer from "@/app/components/Charts/ChartContainer";
 import Chart from "@/app/components/Charts/Chart";
@@ -21,11 +22,9 @@ export default function CurrencyConvertorModal({
   onClose,
 }: ConvertorProps) {
   const dispatch = useAppDispatch();
-  const modalRef = useRef<HTMLDialogElement>(null);
   const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
   const { sellCoinId, buyCoinId } = useAppSelector((state) => state.convertor);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-
   const compareCoin = findCoinById(coinId);
   const sellCoin = findCoinById(sellCoinId);
   const buyCoin = findCoinById(buyCoinId);
@@ -38,21 +37,15 @@ export default function CurrencyConvertorModal({
     return coins.find((coin) => coin.id === id);
   }
 
-  useLayoutEffect(() => {
-    const modal = modalRef.current;
-    if (modal) {
-      isOpen ? modal.showModal() : modal.close();
-    }
-  }, [isOpen]);
-
   useEffect(() => {
     dispatch(setIsComparing(true));
   });
 
   return (
-    <dialog
+    <Modal
       className="container bg-transparent w-full h-full mt-[270px] relative"
-      ref={modalRef}
+      isOpen={isOpen}
+      onClose={onClose}
     >
       <button
         className="bg-blue700 focus:bg-purple500 hover:bg-purple500 absolute right-0 px-2 py-1 rounded"
@@ -94,6 +87,6 @@ export default function CurrencyConvertorModal({
           }
         />
       </section>
-    </dialog>
+    </Modal>
   );
 }

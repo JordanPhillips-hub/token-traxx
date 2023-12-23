@@ -113,13 +113,11 @@ export default function Home() {
               <div className="flex mb-6">
                 <div>
                   <PrimaryButton
-                    size="med"
+                    className="text-sm py-3 px-6"
+                    text={isComparing ? "Exit Comparison" : "Compare"}
                     onClick={() => dispatch(setIsComparing(!isComparing))}
                   >
-                    <div className="text-sm flex items-center gap-2">
-                      <Icon iconVariant={isComparing ? "exit" : "graph"} />
-                      {isComparing ? "Exit Comparison" : "Compare"}
-                    </div>
+                    <Icon iconVariant={isComparing ? "exit" : "graph"} />
                   </PrimaryButton>
                 </div>
               </div>

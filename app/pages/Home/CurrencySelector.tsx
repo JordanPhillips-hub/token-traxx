@@ -42,29 +42,30 @@ export default function CurrencySelector() {
             }) => (
               <SwiperSlide key={id}>
                 <div className="max-w-[250px]">
-                  <PrimaryButton size="xl" onClick={() => handleComparison(id)}>
-                    <div className="flex items-center gap-4 pointer-events-none">
-                      <div>
-                        <Image
-                          src={image}
-                          alt={`${id} icon`}
-                          width={32}
-                          height={32}
-                        />
-                      </div>
+                  <PrimaryButton
+                    className="p-4 w-full"
+                    onClick={() => handleComparison(id)}
+                  >
+                    <div>
+                      <Image
+                        src={image}
+                        alt={`${id} icon`}
+                        width={32}
+                        height={32}
+                      />
+                    </div>
 
-                      <div className="text-sm flex-col">
-                        <p className="font-medium text-left">
-                          {isMarketsLoading ? "Loading Coin" : name}
+                    <div className="text-sm flex-col">
+                      <p className="font-medium text-left">
+                        {isMarketsLoading ? "Loading Coin" : name}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-left">
+                          {`$${formatCurrency(price)}`} USD
                         </p>
-                        <div className="flex items-center gap-2">
-                          <p className="text-left">
-                            {`$${formatCurrency(price)}`} USD
-                          </p>
-                          <PriceChange
-                            percentage={parseFloat(priceChange.toFixed(2))}
-                          />
-                        </div>
+                        <PriceChange
+                          percentage={parseFloat(priceChange.toFixed(2))}
+                        />
                       </div>
                     </div>
                   </PrimaryButton>

@@ -1,38 +1,29 @@
+import { twMerge } from "tailwind-merge";
+
 type PrimaryButtonProps = {
-  text?: string;
-  size: string;
   children?: React.ReactNode;
-  onClick?: () => void;
-};
+  text?: string;
+  onClick: () => void;
+} & React.ComponentProps<"button">;
+
+const defaultStyles =
+  "bg-blue700 text-white flex items-center gap-2 rounded-md cursor-pointer hover:bg-purple500 focus:outline-none shadow-md focus:shadow-indigo-500/50 focus:bg-purple500";
 
 export default function PrimaryButton({
-  text,
-  size,
+  className,
   children,
+  text,
   onClick,
+  ...props
 }: PrimaryButtonProps) {
-  const defaultStyles = `bg-blue700 focus:bg-purple500 text-white w-full rounded-md focus:outline-none shadow-md focus:shadow-indigo-500/50`;
-
-  let buttonClass = `${defaultStyles}`;
-
-  switch (size) {
-    case "lrg":
-      buttonClass += " py-3 px-12";
-      break;
-    case "med":
-      buttonClass += " py-3 px-6";
-      break;
-    case "xl":
-      buttonClass += " p-4";
-      break;
-    default:
-      buttonClass += "";
-  }
-
   return (
-    <button className={buttonClass} onClick={onClick}>
-      {text}
+    <button
+      className={twMerge(defaultStyles, className)}
+      {...props}
+      onClick={onClick}
+    >
       {children}
+      {text}
     </button>
   );
 }

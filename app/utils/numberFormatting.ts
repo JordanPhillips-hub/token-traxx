@@ -29,3 +29,16 @@ export function checkNumberScale(num: number) {
     return "";
   };
 };
+
+export function calculatePercentage(value: number, total: number): number {
+  if (total === 0) {
+    return 0;
+  }
+  return (value / total) * 100;
+};
+
+export function calcPercentageChange(currentPrice: number, purchasePrice: number) {
+  const percentChange =
+    ((currentPrice - purchasePrice) / purchasePrice) * 100;
+  return percentChange;
+};

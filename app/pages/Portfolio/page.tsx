@@ -28,7 +28,10 @@ type Asset = {
 
 export default function Portfolio() {
   const [isAddingAsset, setIsAddingAsset] = useState<boolean>(false);
-  const assets = JSON.parse(localStorage.getItem("Assets") || "[]");
+  const assets =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("Assets") || "[]")
+      : [];
 
   return (
     <>

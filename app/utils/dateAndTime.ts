@@ -31,6 +31,15 @@ export function formatDateString(originalDate: string) {
     second: 'numeric',
     timeZoneName: 'short'
   });
-
   return formattedDate;
+};
+
+export const formatDateToDDMMYYYY = (inputDate: string | number | Date) => {
+  const date = new Date(inputDate);
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  };
+  return date.toLocaleDateString('en-GB', options).replace(/\//g, '-');
 };

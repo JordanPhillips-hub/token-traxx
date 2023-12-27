@@ -21,9 +21,12 @@ export const coingeckoApi = createApi({
       query: () => `/global`,
     }),
     getCoin: builder.query({
-      query: (args: { id: string }) => `https://api.coingecko.com/api/v3/coins/${args.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
+      query: (args: { id: string }) => `https://api.coingecko.com/api/v3/coins/${args.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=true&sparkline=false`
+    }),
+    getCoinHistory: builder.query({
+      query: (args: { id: string, date: string }) => `https://api.coingecko.com/api/v3/coins/${args.id}/history?date=${args.date}`
     })
   }),
 });
 
-export const { useGetMarketChartQuery, useGetMarketsQuery, useGetGlobalsQuery, useGetCoinQuery } = coingeckoApi;
+export const { useGetMarketChartQuery, useGetMarketsQuery, useGetGlobalsQuery, useGetCoinQuery, useGetCoinHistoryQuery } = coingeckoApi;

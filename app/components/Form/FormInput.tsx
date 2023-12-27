@@ -12,6 +12,8 @@ export default function FormInput({
   value,
   placeholder,
   className,
+  min,
+  max,
   onChange,
 }: FormInputProps) {
   const defaultStyles = "placeholder:text-sm rounded-md focused-primary";
@@ -29,6 +31,8 @@ export default function FormInput({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        min={min}
+        max={max}
       />
     </>
   );

@@ -1,9 +1,13 @@
 import Icon from "./Icon";
 
-type PriceChangeProps = { percentage: number };
+type PriceChangeProps = { percentage?: number };
 
 export default function PriceChange({ percentage }: PriceChangeProps) {
-  const negative = percentage < 0;
+  if (percentage === undefined) {
+    return <div>N/A</div>;
+  }
+
+  const negative = percentage && percentage < 0;
   const textColor = negative ? "text-red500" : "text-green500";
 
   function formatPercent(percentage: number) {

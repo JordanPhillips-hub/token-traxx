@@ -30,6 +30,7 @@ export default function SearchBar() {
       <div className="relative flex items-center">
         <Icon className="text-xl absolute ml-2.5" iconVariant="search" />
         <FormInput
+          className="dark:bg-blue800 py-3 pl-10 pr-4"
           label="Search"
           id="search"
           type="text"

@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 type FormInputProps = {
   label: string;
 } & React.ComponentProps<"input">;
@@ -9,21 +11,28 @@ export default function FormInput({
   name,
   value,
   placeholder,
+  className,
+  min,
+  max,
   onChange,
 }: FormInputProps) {
+  const defaultStyles = "placeholder:text-sm rounded-md focused-primary";
+
   return (
     <>
       <label className="hidden" htmlFor={id}>
         {label}
       </label>
       <input
-        className="dark:bg-blue800 placeholder:text-sm py-3 pl-10 pr-4 rounded-md focused-primary"
+        className={twMerge(defaultStyles, className)}
         id={id}
         type={type}
         name={name}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        min={min}
+        max={max}
       />
     </>
   );

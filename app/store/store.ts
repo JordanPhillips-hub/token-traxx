@@ -9,6 +9,7 @@ import tableCoinsReducer from './features/coinTableSlice';
 import globalsReducer from './features/globalSlice';
 import convertorReducer from './features/convertorSlice';
 import coinSummaryReducer from './features/coinSummarySlice';
+import portfolioReducer from './features/portfolioSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     compareCharts: compareChartsReducer,
     convertor: convertorReducer,
     coinSummary: coinSummaryReducer,
+    portfolio: portfolioReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(coingeckoApi.middleware),

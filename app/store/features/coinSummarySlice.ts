@@ -8,23 +8,23 @@ type CoinSummary = {
   image: { small: string };
   description: { en: string };
   market_data: {
-    current_price: { usd: number };
-    price_change_percentage_1h_in_currency: { usd: number };
-    ath: { usd: number };
-    ath_date: { usd: string };
-    atl: { usd: number };
-    atl_date: { usd: string };
-    total_volume: { usd: number };
-    market_cap: { usd: number };
+    current_price: { [key: string]: number };
+    price_change_percentage_1h_in_currency: { [key: string]: number };
+    ath: { [key: string]: number };
+    ath_date: { [key: string]: string };
+    atl: { [key: string]: number };
+    atl_date: { [key: string]: string };
+    total_volume: { [key: string]: number };
+    market_cap: { [key: string]: number };
     market_cap_change_24h: number;
-    fully_diluted_valuation: { usd: number };
+    fully_diluted_valuation: { [key: string]: number };
     mcap_to_tvl_ratio: number;
     max_supply: number;
     circulating_supply: number;
   };
 };
 
-type CoinSummaryState = {
+export type CoinSummaryState = {
   summaryCoin: CoinSummary;
 }
 

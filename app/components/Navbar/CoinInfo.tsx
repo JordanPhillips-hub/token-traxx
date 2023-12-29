@@ -24,9 +24,7 @@ export default function CoinInfo({
   return (
     <>
       {hasPriceChange ? (
-        <div className="text-xs">
-          <PriceChange percentage={changePercent} />
-        </div>
+        <PriceChange className="text-xs" percentage={changePercent} />
       ) : (
         <div className="font-medium flex items-center gap-1">
           <div className="flex items-center gap-1">

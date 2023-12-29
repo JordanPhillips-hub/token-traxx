@@ -18,7 +18,10 @@ function PriceOverview() {
       <p className="text-3xl font-bold">
         {`${currencySymbol}${formatCurrency(current_price[currency])}`}
       </p>
-      <PriceChange percentage={oneHourChangePercentage[currency]} />
+      <PriceChange
+        className="text-xl"
+        percentage={oneHourChangePercentage[currency]}
+      />
     </div>
   );
 }

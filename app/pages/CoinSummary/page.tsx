@@ -15,6 +15,7 @@ export default function CoinSummary() {
   const [readMore, setReadMore] = useState<boolean>(false);
   const { coinSummaryId } = useAppSelector((state) => state.activeLink);
   const { summaryCoin } = useAppSelector((state) => state.coinSummary);
+  const { currency } = useAppSelector((state) => state.coinMarkets);
   const { description } = summaryCoin;
   const { blockchain_site: siteLink } = summaryCoin.links;
   const {
@@ -36,12 +37,12 @@ export default function CoinSummary() {
   const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
   const percentage = (circulating / max) * 100;
   const stats = {
-    volume: { "Total Volume": volume.usd, "Volume/Market": ratio },
+    volume: { "Total Volume": volume[currency], "Volume/Market": ratio },
     supply: { "Max Supply": max, "Circulating Supply": circulating },
     market: {
       "Market Cap Change": changeIn24h,
-      "Market Cap": cap.usd,
-      "Fully Diluted Valuation": dilutedVal.usd,
+      "Market Cap": cap[currency],
+      "Fully Diluted Valuation": dilutedVal[currency],
     },
   };
 

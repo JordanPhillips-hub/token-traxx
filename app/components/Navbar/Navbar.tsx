@@ -2,10 +2,10 @@
 import React from "react";
 import NavInfoDisplay from "./NavInfoDisplay";
 import SearchBar from "./SearchBar";
+import CurrencyDropdown from "./CurrencyDropdown";
 import Logo from "@/app/components/UI/Logo";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setActiveLink } from "@/app/store/features/pageLinkSlice";
-import CustomSelect from "@/app/components/Form/CustomSelect";
 import ThemeButton from "@/app/components/UI/Buttons/ThemeButton";
 import Icon from "@/app/components/UI/Icon";
 import PageLink from "@/app/components/UI/Links/PageLink";
@@ -53,7 +53,7 @@ export default function NavBar() {
 
         <div className="flex gap-4">
           <SearchBar />
-          <CustomSelect iconRight="chevDown" iconLeft="dollar" />
+          <CurrencyDropdown />
           <ThemeButton />
         </div>
       </nav>

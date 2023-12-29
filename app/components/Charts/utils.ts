@@ -7,14 +7,15 @@ export function createGraphLabel(
   len: number,
   coinId: string,
   coins: any[],
+  currencySymbol: string,
   priceType: "current_price" | "total_volume",
-  unit: string
+  unit: string,
 ) {
   const isGreaterThan = comparedCoins.length >= len;
   const coinName = optionalCapitalize(coinId);
   const findCoin = coins.find((coin: { id: string }) => coin.id === coinId);
   const currentPrice = formatCurrency(findCoin?.[priceType]);
-  return isGreaterThan ? `${coinName} $${currentPrice} ${unit}` : "";
+  return isGreaterThan ? `${coinName} ${currencySymbol}${currentPrice} ${unit}` : "";
 }
 
 export function createAxisLabel(arr: number[]) {

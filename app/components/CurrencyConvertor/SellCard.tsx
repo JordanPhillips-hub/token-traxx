@@ -10,7 +10,9 @@ import {
 export default function SellCard() {
   const dispatch = useAppDispatch();
   const { sellCoinId, numToSell } = useAppSelector((state) => state.convertor);
-  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coins, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
   const selectedCoin = coins.find((coin) => coin.id === sellCoinId);
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -48,7 +50,11 @@ export default function SellCard() {
 
       <hr />
 
-      <Legend symbol={selectedCoin.symbol} price={selectedCoin.current_price} />
+      <Legend
+        symbol={selectedCoin.symbol}
+        currencySymbol={currencySymbol}
+        price={selectedCoin.current_price}
+      />
     </div>
   );
 }

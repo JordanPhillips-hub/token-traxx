@@ -11,9 +11,8 @@ import { formatCurrency } from "@/app/utils/numberFormatting";
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
-  const { coins, isMarketsLoading, marketsHasError } = useAppSelector(
-    (state) => state.coinMarkets
-  );
+  const { coins, isMarketsLoading, marketsHasError, currency, currencySymbol } =
+    useAppSelector((state) => state.coinMarkets);
 
   function handleComparison(id: string) {
     dispatch(setCoinId(id));
@@ -61,7 +60,9 @@ export default function CurrencySelector() {
                       </p>
                       <div className="flex items-center gap-2">
                         <p className="text-left">
-                          {`$${formatCurrency(price)}`} USD
+                          {`${currencySymbol}${formatCurrency(
+                            price
+                          )} ${currency.toUpperCase()}`}
                         </p>
                         <PriceChange
                           percentage={parseFloat(priceChange.toFixed(2))}

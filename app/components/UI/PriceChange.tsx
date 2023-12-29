@@ -12,7 +12,7 @@ export default function PriceChange({ percentage }: PriceChangeProps) {
 
   function formatPercent(percentage: number) {
     if (negative) {
-      return percentage.toString().substring(1);
+      return percentage.toFixed(2).toString().substring(1);
     }
     return percentage.toFixed(2);
   }

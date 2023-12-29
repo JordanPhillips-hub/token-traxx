@@ -33,9 +33,7 @@ export default function CoinInfo({
             {icon && <Icon iconVariant={icon} />}
             <div className="text-xs">
               <span className="text-gray100 mr-2">{name}</span>
-              <span>
-                {typeof data === "string" || isNaN(data) ? "N/A" : data}
-              </span>
+              <span>{data ? data : "N/A"}</span>
             </div>
           </div>
 

@@ -24,6 +24,7 @@ type Asset = {
   volume: number;
   circ_supply: number;
   max_supply: number;
+  currency: string;
 };
 
 export default function Portfolio() {
@@ -77,6 +78,7 @@ export default function Portfolio() {
                 volume,
                 circ_supply,
                 max_supply,
+                currency,
               }: Asset) => (
                 <Card className="flex bg-[191934] py-6 px-4 mb-6" key={uid()}>
                   <PersonalOverview
@@ -87,12 +89,13 @@ export default function Portfolio() {
                     currentPrice={current_price}
                     image={image}
                     symbol={symbol}
+                    currency={currency}
                   />
 
                   <div className="grid grid-cols-2 gap-5 w-full">
                     <MarketStat
                       stat="Current Price"
-                      statValue={`$${formatCurrency(current_price)}`}
+                      statValue={`${currency}${formatCurrency(current_price)}`}
                     />
                     <MarketStat
                       stat="24h%"

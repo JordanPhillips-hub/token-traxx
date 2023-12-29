@@ -18,7 +18,10 @@ type FormProps = {
 export default function Form({ onClose }: FormProps) {
   const dispatch = useAppDispatch();
   const [localSelectedCoinId, setLocalSelectedCoinId] = useState("");
-  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coins, currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
+
   const [formInputs, setFormInputs] = useState({
     formAmount: "",
     formDate: "",
@@ -75,7 +78,7 @@ export default function Form({ onClose }: FormProps) {
       id: localSelectedCoinId,
       amount_purchased: formAmount,
       purchase_date: formatDateToDDMMYYYY(formDate),
-      price_at_purchase: coinHistory.market_data.current_price.usd,
+      price_at_purchase: coinHistory.market_data.current_price[currency],
       current_price: current_price,
       symbol: symbol,
       image: image,
@@ -84,6 +87,7 @@ export default function Form({ onClose }: FormProps) {
       market_cap: market_cap,
       max_supply: max_supply,
       circ_supply: circulating_supply,
+      currency: currencySymbol,
     };
 
     coinAssets.push(asset);

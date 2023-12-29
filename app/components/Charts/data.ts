@@ -33,7 +33,7 @@ export const options = {
 export function useChartData() {
   const { prices, priceDates, priceVolumes, volumeDates } = useAppSelector((state) => state.marketChart);
   const { comparedCoins, comparedPrices, comparedVolumes } = useAppSelector((state) => state.compareCharts);
-  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coins, currencySymbol } = useAppSelector((state) => state.coinMarkets);
 
   const defaultLineDataset = {
     labels: createAxisLabel(priceDates),
@@ -46,13 +46,13 @@ export function useChartData() {
     labels: createAxisLabel(priceDates),
     datasets: [
       createLineDataset(
-        createGraphLabel(comparedCoins, 1, comparedCoins[0], coins, "current_price", "min"),
+        createGraphLabel(comparedCoins, 1, comparedCoins[0], coins, currencySymbol, "current_price", "min"),
         comparedPrices[0],
         "hsl(240, 93%, 73%)",
         "y-axis-1"
       ),
       createLineDataset(
-        createGraphLabel(comparedCoins, 2, comparedCoins[1], coins, "current_price", "min"),
+        createGraphLabel(comparedCoins, 2, comparedCoins[1], coins, currencySymbol, "current_price", "min"),
         comparedPrices[1],
         "hsl(284, 93%, 73%)",
         "y-axis-2"
@@ -73,7 +73,7 @@ export function useChartData() {
     labels: createAxisLabel(volumeDates),
     datasets: [
       createBarDataset(
-        createGraphLabel(comparedCoins, 1, comparedCoins[0], coins, "total_volume", "bin"),
+        createGraphLabel(comparedCoins, 1, comparedCoins[0], coins, currencySymbol, "total_volume", "bin"),
         comparedVolumes[0],
         "y-axis-1",
         {
@@ -81,7 +81,7 @@ export function useChartData() {
         }
       ),
       createBarDataset(
-        createGraphLabel(comparedCoins, 2, comparedCoins[1], coins, "total_volume", "bin"),
+        createGraphLabel(comparedCoins, 2, comparedCoins[1], coins, currencySymbol, "total_volume", "bin"),
         comparedVolumes[1],
         "y-axis-2",
         {

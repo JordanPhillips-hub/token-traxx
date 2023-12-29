@@ -30,25 +30,30 @@ function createPriceChange(priceChange: number) {
   return <PriceChange percentage={parseFloat(priceChange.toFixed(2))} />;
 }
 
-function createStatusBar(data1: number, data2: number) {
-  return (
-    <StatusBar
-      symbol="$"
-      data1={data1}
-      data2={data2}
-      baseColor="hsla(0, 0%, 100%)"
-      bgColor="hsl(284, 93%, 73%)"
-      width="90%"
-    />
-  );
-}
-
 export default function CoinTable() {
   const dispatch = useAppDispatch();
   let { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
+  const { currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
+
   const { data: updatedCoins, isError } = useGetMarketsQuery({
     page: coinPage,
+    currency: currency,
   });
+
+  function createStatusBar(data1: number, data2: number) {
+    return (
+      <StatusBar
+        symbol={currencySymbol}
+        data1={data1}
+        data2={data2}
+        baseColor="hsla(0, 0%, 100%)"
+        bgColor="hsl(284, 93%, 73%)"
+        width="90%"
+      />
+    );
+  }
 
   function handleActiveLink(id: string) {
     dispatch(setCoinSummaryId(id));
@@ -121,7 +126,7 @@ export default function CoinTable() {
                     {formatCoinName(id, symbol)}
                   </PageLink>
                 </td>
-                <td>{`$${formatCurrency(current_price)}`}</td>
+                <td>{`${currencySymbol}${formatCurrency(current_price)}`}</td>
                 <td>{createPriceChange(changeIn1h)}</td>
                 <td>{createPriceChange(changeIn24h)}</td>
                 <td>{createPriceChange(changeIn7d)}</td>

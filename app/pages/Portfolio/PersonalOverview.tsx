@@ -14,6 +14,7 @@ type PersonalOverviewProps = {
   currentPrice: number;
   priceAtPurchase: number;
   purchaseDate: string;
+  currency: string;
 };
 
 export default function PersonalOverview({
@@ -24,6 +25,7 @@ export default function PersonalOverview({
   currentPrice,
   priceAtPurchase,
   purchaseDate,
+  currency,
 }: PersonalOverviewProps) {
   return (
     <div className="flex rounded-xl w-2/5" key={id}>
@@ -37,9 +39,13 @@ export default function PersonalOverview({
           <p>Total Value</p>
 
           <div className="flex items-center gap-5">
-            <p className="text-3xl font-bold">{`$${formatCurrency(
-              amountPurchased * currentPrice
-            )}`}</p>
+            <div className="flex">
+              <span className="text-3xl font-bold">{currency}</span>
+              <p className="text-3xl font-bold">
+                {formatCurrency(amountPurchased * currentPrice)}
+              </p>
+            </div>
+
             <PriceChange
               percentage={calcPercentageChange(currentPrice, priceAtPurchase)}
             />

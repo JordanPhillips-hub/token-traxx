@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppSelector } from "@/app/store/hooks";
 import PriceChange from "@/app/components/UI/PriceChange";
 import { formatCurrency } from "@/app/utils/numberFormatting";

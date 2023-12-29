@@ -53,9 +53,7 @@ export default function NavInfoDisplay() {
         data=""
         completed={0}
         hasPriceChange={true}
-        changePercent={parseFloat(
-          data.market_cap_change_percentage_24h_usd.toFixed(2)
-        )}
+        changePercent={data.market_cap_change_percentage_24h_usd}
       />
       <CoinInfo
         data={`$${formatNum3_2(data.total_market_cap.btc)} ${checkNumberScale(

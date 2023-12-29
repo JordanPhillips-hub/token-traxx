@@ -64,9 +64,7 @@ export default function CurrencySelector() {
                             price
                           )} ${currency.toUpperCase()}`}
                         </p>
-                        <PriceChange
-                          percentage={parseFloat(priceChange.toFixed(2))}
-                        />
+                        <PriceChange percentage={priceChange} />
                       </div>
                     </div>
                   </PrimaryButton>

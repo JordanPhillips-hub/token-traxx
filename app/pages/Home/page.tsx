@@ -29,7 +29,9 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-  const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
+  const { coins, coinId, currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
   const selectedCoin = coins.find((coin) => coin.id === coinId);
   const { isComparing, comparedCoins } = useAppSelector(
     (state) => state.compareCharts
@@ -39,7 +41,7 @@ export default function Home() {
     data: coinMarkets,
     isLoading,
     isError,
-  } = useGetMarketsQuery({ page: 1 });
+  } = useGetMarketsQuery({ page: 1, currency: currency });
 
   useEffect(() => {
     dispatch(setIsMarketsLoading(isLoading));
@@ -49,7 +51,7 @@ export default function Home() {
       dispatch(setCoinMarkets(coinMarkets));
       dispatch(setTableCoins(coinMarkets));
     }
-  }, [coinMarkets, isError, isLoading, dispatch]);
+  }, [coinMarkets, isError, isLoading, currency, dispatch]);
 
   useEffect(() => {
     if (!isComparing) {
@@ -139,7 +141,9 @@ export default function Home() {
                           ? "Error Occurred"
                           : name
                       }
-                      price={isLoading || isError ? "" : `$${value}`}
+                      price={
+                        isLoading || isError ? "" : `${currencySymbol}${value}`
+                      }
                       date={date}
                       type={type}
                     >

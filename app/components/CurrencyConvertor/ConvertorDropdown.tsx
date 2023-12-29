@@ -29,7 +29,7 @@ export default function ConvertorDropdown({
 }: DropdownProps) {
   const dispatch = useAppDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coins, currency } = useAppSelector((state) => state.coinMarkets);
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
 
   function handleDropdown() {
@@ -66,6 +66,7 @@ export default function ConvertorDropdown({
         <div className={`${isDropdownOpen ? "rotate-180" : ""}`}>
           <Icon iconVariant="chevDown" />
         </div>
+        {currency.toUpperCase()}
       </button>
 
       <div

@@ -4,7 +4,9 @@ import { useAppSelector } from "@/app/store/hooks";
 
 export default function BuyCard() {
   const { buyCoinId, sellPrice } = useAppSelector((state) => state.convertor);
-  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coins, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
   const selectedCoin = coins.find((coin) => coin.id === buyCoinId);
 
   return (
@@ -20,7 +22,11 @@ export default function BuyCard() {
 
       <hr />
 
-      <Legend symbol={selectedCoin.symbol} price={selectedCoin.current_price} />
+      <Legend
+        symbol={selectedCoin.symbol}
+        currencySymbol={currencySymbol}
+        price={selectedCoin.current_price}
+      />
     </div>
   );
 }

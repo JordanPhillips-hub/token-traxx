@@ -8,7 +8,7 @@ type PrimaryButtonProps = {
 } & React.ComponentProps<"button">;
 
 const defaultStyles =
-  "bg-blue700 text-white flex items-center gap-2 rounded-md cursor-pointer hover:bg-purple500 focus:outline-none shadow-md focus:shadow-indigo-500/50 focus:bg-purple500 disabled:opacity-25 disabled:cursor-not-allowed";
+  "bg-blue700 text-white font-medium flex items-center gap-2 rounded-md cursor-pointer hover:bg-purple500 focus:outline-none shadow-md focus:shadow-indigo-500/50 focus:bg-purple500 disabled:opacity-25 disabled:cursor-not-allowed";
 
 export default function PrimaryButton({
   className,

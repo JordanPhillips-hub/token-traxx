@@ -47,6 +47,7 @@ ChartJS.register(
 export default function Chart({ chartType, coinId, days }: ChartProps) {
   const { theme } = useTheme();
   const dispatch = useAppDispatch();
+  const getCompareChartState = useAppSelector((state) => state.compareCharts);
 
   const {
     data: chartData,
@@ -59,10 +60,7 @@ export default function Chart({ chartType, coinId, days }: ChartProps) {
     total_volumes: [],
   });
 
-  const { isComparing, comparedPrices, comparedVolumes } = useAppSelector(
-    (state) => state.compareCharts
-  );
-
+  const { isComparing, comparedPrices, comparedVolumes } = getCompareChartState;
   const priceArr = flattenNumberArray(chartData?.prices);
   const volumeArr = flattenNumberArray(chartData?.total_volumes);
 
@@ -100,16 +98,17 @@ export default function Chart({ chartType, coinId, days }: ChartProps) {
 
   return (
     <div className="h-full">
-      {isLoading ? (
-        <p>Chart Loading</p>
-      ) : isError ? (
-        <p>Chart error, please try again later</p>
-      ) : chartType === "line" ? (
+      {isLoading && <p>Chart Loading</p>}
+      {isError && <p>Chart error, please try again later</p>}
+
+      {chartType === "line" && (
         <Line
           data={isComparing ? comparedLineDataset : defaultLineDataset}
           options={options}
         />
-      ) : (
+      )}
+
+      {chartType === "bar" && (
         <Bar
           data={isComparing ? comparedBarDataset : defaultBarDataset}
           options={options}

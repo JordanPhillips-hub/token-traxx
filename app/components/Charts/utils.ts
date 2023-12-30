@@ -1,6 +1,6 @@
+import { LineDataset, BarDataset } from "./types";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 import { optionalCapitalize } from "@/app/utils/generalHelpers";
-import { LineDataset, BarDataset } from "./types";
 
 export function createGraphLabel(
   comparedCoins: string[],
@@ -16,14 +16,14 @@ export function createGraphLabel(
   const findCoin = coins.find((coin: { id: string }) => coin.id === coinId);
   const currentPrice = formatCurrency(findCoin?.[priceType]);
   return isGreaterThan ? `${coinName} ${currencySymbol}${currentPrice} ${unit}` : "";
-}
+};
 
 export function createAxisLabel(arr: number[]) {
   const labels = arr.map((date: string | number | Date) =>
     new Date(date).getDate()
   );
   return labels;
-}
+};
 
 export function setCompareData(arr: number[][], secondIndex: number[]) {
   const newComparedArr = [...arr];

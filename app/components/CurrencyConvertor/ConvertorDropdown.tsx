@@ -1,16 +1,16 @@
 import { useState } from "react";
 import Image from "next/image";
+import Icon from "@/app/components/UI/Icon";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
+import { setCoinId } from "@/app/store/features/coinMarketSlice";
+import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import {
   setSellCoinId,
   setBuyCoinId,
   setNumToSell,
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
-import { setCoinId } from "@/app/store/features/coinMarketSlice";
-import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
-import Icon from "@/app/components/UI/Icon";
-import { formatCoinName } from "@/app/utils/generalHelpers";
 
 type DropdownProps = {
   cardType: string;

@@ -13,7 +13,7 @@ import Icon from "@/app/components/UI/Icon";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 
 type DropdownProps = {
-  componentType: string;
+  cardType: string;
   image: string;
   name: string;
   id: string;
@@ -21,7 +21,7 @@ type DropdownProps = {
 };
 
 export default function ConvertorDropdown({
-  componentType,
+  cardType,
   image,
   name,
   id,
@@ -37,7 +37,7 @@ export default function ConvertorDropdown({
   }
 
   function handleCoinSelect(id: string) {
-    componentType === "sell"
+    cardType === "sell"
       ? dispatch(setSellCoinId(id))
       : dispatch(setBuyCoinId(id));
 
@@ -48,9 +48,9 @@ export default function ConvertorDropdown({
 
   function handleCoinComparison(id: string) {
     dispatch(setCoinId(id));
-    if (componentType === "sell" || componentType === "buy") {
+    if (cardType === "sell" || cardType === "buy") {
       const updatedComparedCoins = [...comparedCoins];
-      updatedComparedCoins[componentType === "sell" ? 0 : 1] = id;
+      updatedComparedCoins[cardType === "sell" ? 0 : 1] = id;
       dispatch(setComparedCoins(updatedComparedCoins));
     }
   }

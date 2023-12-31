@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import ConvertorDropdown from "./ConvertorDropdown";
 import Legend from "./Legend";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
@@ -16,25 +16,24 @@ export default function ConvertorCard({
   cardType,
   cardName,
 }: ConvertorCardProps) {
-  const {
-    convertor: { buyCoinId, sellCoinId, sellPrice, numToSell },
-    coinMarkets: { coins, currencySymbol },
-  } = useAppSelector((state) => state);
-
   const dispatch = useAppDispatch();
-  const selectedBuyCoin = coins.find((coin) => coin.id === buyCoinId);
-  const selectedSellCoin = coins.find((coin) => coin.id === sellCoinId);
+  const { convertor, coinMarkets } = useAppSelector((state) => state);
+  const { buyCoinId, sellCoinId, sellPrice, numToSell } = convertor;
+  const { coins, currencySymbol } = coinMarkets;
 
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    const inputValue = parseFloat(e.target.value);
-    const price = inputValue * selectedSellCoin.current_price;
+  const selectedCoin = (type: string) =>
+    coins.find((coin) => coin.id === (type === "buy" ? buyCoinId : sellCoinId));
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseFloat(event.target.value);
+    const price = inputValue * selectedCoin(cardType)?.current_price;
     dispatch(setNumToSell(inputValue));
     dispatch(setSellPrice(price));
-  }
+  };
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <div className="container bg-blue600 p-6 rounded-2xl" id={cardType}>
@@ -42,21 +41,17 @@ export default function ConvertorCard({
 
       <div className="flex justify-between mb-1">
         <div className="relative">
-          {cardType === "buy" ? (
-            <ConvertorDropdown cardType="buy" {...selectedBuyCoin} />
-          ) : (
-            <ConvertorDropdown cardType="sell" {...selectedSellCoin} />
-          )}
+          <ConvertorDropdown cardType={cardType} {...selectedCoin(cardType)} />
         </div>
 
         {cardType === "buy" && (
-          <p>{Math.floor(sellPrice / selectedBuyCoin.current_price)}</p>
+          <p>{Math.floor(sellPrice / selectedCoin("buy")?.current_price)}</p>
         )}
 
         {cardType === "sell" && (
           <form onSubmit={handleSubmit}>
             <input
-              className=" p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-purple500"
+              className="p-2 border border-gray-300 rounded w-full focus:outline-none focus:border-purple500"
               type="number"
               name="toSell"
               id="toSell"
@@ -71,15 +66,9 @@ export default function ConvertorCard({
       <hr />
 
       <Legend
-        symbol={
-          cardType === "buy" ? selectedBuyCoin.symbol : selectedSellCoin.symbol
-        }
+        symbol={selectedCoin(cardType)?.symbol}
         currencySymbol={currencySymbol}
-        price={
-          cardType === "buy"
-            ? selectedBuyCoin.current_price
-            : selectedSellCoin.current_price
-        }
+        price={selectedCoin(cardType)?.current_price}
       />
     </div>
   );

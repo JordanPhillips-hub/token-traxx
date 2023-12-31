@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import SellCard from "./SellCard";
-import BuyCard from "./BuyCard";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
@@ -11,6 +9,7 @@ import Chart from "@/app/components/Charts/Chart";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
 import { formatCoinName } from "@/app/utils/generalHelpers";
+import ConvertorCard from "./ConvertorCard";
 
 type ConvertorProps = {
   isOpen: boolean;
@@ -64,8 +63,8 @@ export default function CurrencyConvertorModal({
 
       <section>
         <div className="flex gap-3">
-          <SellCard />
-          <BuyCard />
+          <ConvertorCard cardType="sell" cardName="You Sell" />
+          <ConvertorCard cardType="buy" cardName="You Buy" />
         </div>
       </section>
 

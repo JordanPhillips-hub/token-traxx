@@ -28,9 +28,10 @@ export default function ConvertorDropdown({
   symbol,
 }: DropdownProps) {
   const dispatch = useAppDispatch();
+  const { coinMarkets, compareCharts } = useAppSelector((state) => state);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { coins, currency } = useAppSelector((state) => state.coinMarkets);
-  const { comparedCoins } = useAppSelector((state) => state.compareCharts);
+  const { coins, currency } = coinMarkets;
+  const { comparedCoins } = compareCharts;
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);

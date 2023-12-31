@@ -1,11 +1,11 @@
+import { ChangeEvent } from "react";
+import ConvertorDropdown from "./ConvertorDropdown";
+import Legend from "./Legend";
+import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import {
   setNumToSell,
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
-import { useAppDispatch, useAppSelector } from "../Charts/imports";
-import ConvertorDropdown from "./ConvertorDropdown";
-import { ChangeEvent } from "react";
-import Legend from "./Legend";
 
 type ConvertorCardProps = {
   cardType: string;
@@ -16,18 +16,15 @@ export default function ConvertorCard({
   cardType,
   cardName,
 }: ConvertorCardProps) {
+  const {
+    convertor: { buyCoinId, sellCoinId, sellPrice, numToSell },
+    coinMarkets: { coins, currencySymbol },
+  } = useAppSelector((state) => state);
+
   const dispatch = useAppDispatch();
-
-  const { buyCoinId, sellCoinId, sellPrice, numToSell } = useAppSelector(
-    (state) => state.convertor
-  );
-
-  const { coins, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
-
   const selectedBuyCoin = coins.find((coin) => coin.id === buyCoinId);
   const selectedSellCoin = coins.find((coin) => coin.id === sellCoinId);
+
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const inputValue = parseFloat(e.target.value);
     const price = inputValue * selectedSellCoin.current_price;

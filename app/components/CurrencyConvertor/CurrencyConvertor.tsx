@@ -5,10 +5,10 @@ import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
 import Modal from "@/app/components/UI/Modal";
-import Icon from "@/app/components/UI/Icon";
 import ChartContainer from "@/app/components/Charts/ChartContainer";
 import Chart from "@/app/components/Charts/Chart";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
+import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 
@@ -47,15 +47,7 @@ export default function CurrencyConvertorModal({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <button
-        className="bg-blue700 focus:bg-purple500 hover:bg-purple500 absolute right-0 px-2 py-1 rounded"
-        onClick={onClose}
-      >
-        <div className="flex items-center gap-1">
-          <Icon iconVariant="exit" />
-          <p>Close</p>
-        </div>
-      </button>
+      <CloseButton className="absolute right-0" onClose={onClose} />
 
       <header className="mb-6">
         <h3 className="text-xl font-medium">Online currency convertor</h3>

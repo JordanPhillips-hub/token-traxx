@@ -48,7 +48,9 @@ export default function ConvertorCard({
         </div>
 
         {cardType === "buy" && (
-          <p>{Math.floor(sellPrice / getSelectedCoin("buy")?.current_price)}</p>
+          <p>
+            {Math.floor(sellPrice / getSelectedCoin(cardType)?.current_price)}
+          </p>
         )}
 
         {cardType === "sell" && (

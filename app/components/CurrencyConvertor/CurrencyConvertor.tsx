@@ -21,9 +21,13 @@ export default function CurrencyConvertorModal({
   onClose,
 }: ConvertorProps) {
   const dispatch = useAppDispatch();
-  const { coins, coinId } = useAppSelector((state) => state.coinMarkets);
-  const { sellCoinId, buyCoinId } = useAppSelector((state) => state.convertor);
-  const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
+  const { coinMarkets, convertor, chartTimePeriod } = useAppSelector(
+    (state) => state
+  );
+
+  const { coins, coinId } = coinMarkets;
+  const { sellCoinId, buyCoinId } = convertor;
+  const { timePeriod } = chartTimePeriod;
   const compareCoin = findCoinById(coinId);
   const sellCoin = findCoinById(sellCoinId);
   const buyCoin = findCoinById(buyCoinId);

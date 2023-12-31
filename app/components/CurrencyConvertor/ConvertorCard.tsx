@@ -21,12 +21,12 @@ export default function ConvertorCard({
   const { buyCoinId, sellCoinId, sellPrice, numToSell } = convertor;
   const { coins, currencySymbol } = coinMarkets;
 
-  const selectedCoin = (type: string) =>
+  const getSelectedCoin = (type: string) =>
     coins.find((coin) => coin.id === (type === "buy" ? buyCoinId : sellCoinId));
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseFloat(event.target.value);
-    const price = inputValue * selectedCoin(cardType)?.current_price;
+    const price = inputValue * getSelectedCoin(cardType)?.current_price;
     dispatch(setNumToSell(inputValue));
     dispatch(setSellPrice(price));
   };
@@ -41,11 +41,14 @@ export default function ConvertorCard({
 
       <div className="flex justify-between mb-1">
         <div className="relative">
-          <ConvertorDropdown cardType={cardType} {...selectedCoin(cardType)} />
+          <ConvertorDropdown
+            cardType={cardType}
+            {...getSelectedCoin(cardType)}
+          />
         </div>
 
         {cardType === "buy" && (
-          <p>{Math.floor(sellPrice / selectedCoin("buy")?.current_price)}</p>
+          <p>{Math.floor(sellPrice / getSelectedCoin("buy")?.current_price)}</p>
         )}
 
         {cardType === "sell" && (
@@ -66,9 +69,9 @@ export default function ConvertorCard({
       <hr />
 
       <Legend
-        symbol={selectedCoin(cardType)?.symbol}
+        symbol={getSelectedCoin(cardType)?.symbol}
         currencySymbol={currencySymbol}
-        price={selectedCoin(cardType)?.current_price}
+        price={getSelectedCoin(cardType)?.current_price}
       />
     </div>
   );

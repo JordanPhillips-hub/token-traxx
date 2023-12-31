@@ -24,16 +24,16 @@ export default function ConvertorCard({
   const getSelectedCoin = (type: string) =>
     coins.find((coin) => coin.id === (type === "buy" ? buyCoinId : sellCoinId));
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = parseFloat(event.target.value);
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const inputValue = parseFloat(e.target.value);
     const price = inputValue * getSelectedCoin(cardType)?.current_price;
     dispatch(setNumToSell(inputValue));
     dispatch(setSellPrice(price));
-  };
+  }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-  };
+  }
 
   return (
     <div className="container bg-blue600 p-6 rounded-2xl" id={cardType}>

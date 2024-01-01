@@ -47,6 +47,7 @@ export default function PersonalOverview({
             </div>
 
             <PriceChange
+              className="text-base"
               percentage={calcPercentageChange(currentPrice, priceAtPurchase)}
             />
           </div>

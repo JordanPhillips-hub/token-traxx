@@ -1,10 +1,9 @@
 import { useState } from "react";
-import Image from "next/image";
-import Icon from "@/app/components/UI/Icon";
+import Dropdown from "@/app/components/UI/Dropdown";
+import CoinName from "@/app/components/UI/CoinName";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
-import { formatCoinName } from "@/app/utils/generalHelpers";
 import {
   setSellCoinId,
   setBuyCoinId,
@@ -29,28 +28,18 @@ export default function ConvertorDropdown({
   const dispatch = useAppDispatch();
   const { coinMarkets, compareCharts } = useAppSelector((state) => state);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { coins, currency } = coinMarkets;
+  const { coins } = coinMarkets;
   const { comparedCoins } = compareCharts;
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-  function handleCoinSelect(id: string) {
-    cardType === "sell"
-      ? dispatch(setSellCoinId(id))
-      : dispatch(setBuyCoinId(id));
-
-    dispatch(setNumToSell(0));
-    dispatch(setSellPrice(0));
-    setIsDropdownOpen(false);
-  }
-
   function handleCoinComparison(id: string) {
     dispatch(setCoinId(id));
     if (cardType === "sell" || cardType === "buy") {
       const updatedComparedCoins = [...comparedCoins];
-      const targetIndex = componentType === "sell" ? 0 : 1;
+      const targetIndex = cardType === "sell" ? 0 : 1;
       updatedComparedCoins[targetIndex] = id;
       dispatch(setComparedCoins(updatedComparedCoins));
     }
@@ -63,7 +52,7 @@ export default function ConvertorDropdown({
   }
 
   function handleCoinSelect(id: string) {
-    componentType === "sell"
+    cardType === "sell"
       ? dispatch(setSellCoinId(id))
       : dispatch(setBuyCoinId(id));
     handleDropdownReset();

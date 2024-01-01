@@ -3,7 +3,7 @@ import { useAppSelector } from "@/app/store/hooks";
 import CoinName from "@/app/components/UI/CoinName";
 import Icon from "@/app/components/UI/Icon";
 
-type DropdownProps = {
+type CoinDropdownProps = {
   img: string;
   imgWidth: number;
   imgHeight: number;
@@ -12,21 +12,21 @@ type DropdownProps = {
   className: string;
   isOpen: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  onItemClick: (coinId: string) => void;
 };
 
-export default function Dropdown({
+export default function CoinDropdown({
   img,
   imgWidth,
   imgHeight,
   id,
   symbol,
   className,
-  onClick,
   isOpen,
-  children,
-}: DropdownProps) {
-  const { currency } = useAppSelector((state) => state.coinMarkets);
+  onClick,
+  onItemClick,
+}: CoinDropdownProps) {
+  const { coins, currency } = useAppSelector((state) => state.coinMarkets);
   const defaultStyles = "font-medium flex items-center gap-2 mb-4";
 
   return (
@@ -51,7 +51,19 @@ export default function Dropdown({
           isOpen ? "text-sm absolute bg-blue600 mt-3 px-4 rounded" : "hidden"
         }`}
       >
-        <li>{children}</li>
+        <li>
+          {coins.map((coin) => (
+            <button key={coin.id} onClick={() => onItemClick(coin.id)}>
+              <CoinName
+                img={coin.image}
+                imgWidth={25}
+                imgHeight={25}
+                id={coin.id}
+                symbol={coin.symbol}
+              />
+            </button>
+          ))}
+        </li>
       </ul>
     </div>
   );

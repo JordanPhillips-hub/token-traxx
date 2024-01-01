@@ -31,11 +31,10 @@ export const options = {
 };
 
 export function useChartData() {
-  const {
-    marketChart: { prices, priceDates, priceVolumes, volumeDates },
-    compareCharts: { comparedCoins, comparedPrices, comparedVolumes },
-    coinMarkets: { coins, currencySymbol }
-  } = useAppSelector((state) => state);
+  const { marketChart, compareCharts, coinMarkets } = useAppSelector((state) => state);
+  const { prices, priceDates, priceVolumes, volumeDates } = marketChart;
+  const { comparedCoins, comparedPrices, comparedVolumes } = compareCharts;
+  const { coins, currencySymbol } = coinMarkets;
 
   const defaultLineDataset = {
     labels: createAxisLabel(priceDates),

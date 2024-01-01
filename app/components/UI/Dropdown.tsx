@@ -3,7 +3,7 @@ import { useAppSelector } from "@/app/store/hooks";
 import CoinName from "@/app/components/UI/CoinName";
 import Icon from "@/app/components/UI/Icon";
 
-type CoinDropdownProps = {
+type DropdownProps = {
   img: string;
   imgWidth: number;
   imgHeight: number;
@@ -15,7 +15,7 @@ type CoinDropdownProps = {
   children: React.ReactNode;
 };
 
-export default function CoinDropdown({
+export default function Dropdown({
   img,
   imgWidth,
   imgHeight,
@@ -25,7 +25,7 @@ export default function CoinDropdown({
   onClick,
   isOpen,
   children,
-}: CoinDropdownProps) {
+}: DropdownProps) {
   const { currency } = useAppSelector((state) => state.coinMarkets);
   const defaultStyles = "font-medium flex items-center gap-2 mb-4";
 

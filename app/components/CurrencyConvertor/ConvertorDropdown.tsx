@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Dropdown from "@/app/components/UI/Dropdown";
-import CoinName from "@/app/components/UI/CoinName";
+import CoinDropdown from "@/app/components/UI/Dropdowns/CoinDropdown";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
@@ -26,10 +25,8 @@ export default function ConvertorDropdown({
   symbol,
 }: DropdownProps) {
   const dispatch = useAppDispatch();
-  const { coinMarkets, compareCharts } = useAppSelector((state) => state);
+  const { comparedCoins } = useAppSelector((state) => state.compareCharts);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { coins } = coinMarkets;
-  const { comparedCoins } = compareCharts;
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -55,12 +52,12 @@ export default function ConvertorDropdown({
     cardType === "sell"
       ? dispatch(setSellCoinId(id))
       : dispatch(setBuyCoinId(id));
-    handleDropdownReset();
     handleCoinComparison(id);
+    handleDropdownReset();
   }
 
   return (
-    <Dropdown
+    <CoinDropdown
       className="text-xl"
       img={image}
       imgWidth={30}
@@ -69,18 +66,7 @@ export default function ConvertorDropdown({
       symbol={symbol}
       isOpen={isDropdownOpen}
       onClick={() => handleDropdown()}
-    >
-      {coins.map((coin) => (
-        <button key={coin.id} onClick={() => handleCoinSelect(coin.id)}>
-          <CoinName
-            img={coin.image}
-            imgWidth={25}
-            imgHeight={25}
-            id={coin.id}
-            symbol={coin.symbol}
-          />
-        </button>
-      ))}
-    </Dropdown>
+      onItemClick={(id) => handleCoinSelect(id)}
+    />
   );
 }

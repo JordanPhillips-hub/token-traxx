@@ -23,7 +23,6 @@ type DropdownProps = {
 export default function ConvertorDropdown({
   cardType,
   image,
-  name,
   id,
   symbol,
 }: DropdownProps) {
@@ -51,46 +50,48 @@ export default function ConvertorDropdown({
     dispatch(setCoinId(id));
     if (cardType === "sell" || cardType === "buy") {
       const updatedComparedCoins = [...comparedCoins];
-      updatedComparedCoins[cardType === "sell" ? 0 : 1] = id;
+      const targetIndex = componentType === "sell" ? 0 : 1;
+      updatedComparedCoins[targetIndex] = id;
       dispatch(setComparedCoins(updatedComparedCoins));
     }
   }
 
-  return (
-    <div className="relative">
-      <button
-        className="text-xl font-medium flex items-center gap-2 mb-4"
-        onClick={handleDropdown}
-      >
-        <Image src={image} alt={name} width={30} height={30} />
-        <p>{formatCoinName(id ?? "", symbol ?? "")}</p>
-        <div className={`${isDropdownOpen ? "rotate-180" : ""}`}>
-          <Icon iconVariant="chevDown" />
-        </div>
-        {currency.toUpperCase()}
-      </button>
+  function handleDropdownReset() {
+    dispatch(setNumToSell(0));
+    dispatch(setSellPrice(0));
+    setIsDropdownOpen(false);
+  }
 
-      <div
-        className={`${
-          isDropdownOpen
-            ? "text-sm absolute bg-blue600 mt-3 px-4 rounded"
-            : "hidden"
-        }`}
-      >
-        {coins.map((coin) => (
-          <button
-            key={coin.id}
-            className="flex items-center gap-2 mb-3 hover:text-base hover:font-medium"
-            onClick={() => {
-              handleCoinSelect(coin.id);
-              handleCoinComparison(coin.id);
-            }}
-          >
-            <Image src={coin.image} alt={coin.name} width={25} height={25} />
-            <p> {formatCoinName(coin.id ?? "", coin.symbol ?? "")}</p>
-          </button>
-        ))}
-      </div>
-    </div>
+  function handleCoinSelect(id: string) {
+    componentType === "sell"
+      ? dispatch(setSellCoinId(id))
+      : dispatch(setBuyCoinId(id));
+    handleDropdownReset();
+    handleCoinComparison(id);
+  }
+
+  return (
+    <Dropdown
+      className="text-xl"
+      img={image}
+      imgWidth={30}
+      imgHeight={30}
+      id={id}
+      symbol={symbol}
+      isOpen={isDropdownOpen}
+      onClick={() => handleDropdown()}
+    >
+      {coins.map((coin) => (
+        <button key={coin.id} onClick={() => handleCoinSelect(coin.id)}>
+          <CoinName
+            img={coin.image}
+            imgWidth={25}
+            imgHeight={25}
+            id={coin.id}
+            symbol={coin.symbol}
+          />
+        </button>
+      ))}
+    </Dropdown>
   );
 }

@@ -26,10 +26,6 @@ const tableHeaders = [
   "Last 7d",
 ];
 
-function createPriceChange(priceChange: number) {
-  return <PriceChange percentage={parseFloat(priceChange.toFixed(2))} />;
-}
-
 export default function CoinTable() {
   const dispatch = useAppDispatch();
   let { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
@@ -127,9 +123,15 @@ export default function CoinTable() {
                   </PageLink>
                 </td>
                 <td>{`${currencySymbol}${formatCurrency(current_price)}`}</td>
-                <td>{createPriceChange(changeIn1h)}</td>
-                <td>{createPriceChange(changeIn24h)}</td>
-                <td>{createPriceChange(changeIn7d)}</td>
+                <td>
+                  <PriceChange percentage={changeIn1h} />
+                </td>
+                <td>
+                  <PriceChange percentage={changeIn24h} />
+                </td>
+                <td>
+                  <PriceChange percentage={changeIn7d} />
+                </td>
                 <td>{createStatusBar(total_volume, market_cap)}</td>
                 <td>{createStatusBar(circulating_supply, total_supply)}</td>
                 <td className="max-w-[150px] pr-3">

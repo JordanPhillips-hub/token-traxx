@@ -65,14 +65,14 @@ export default function NavInfoDisplay() {
       <CoinInfo
         name="BTC"
         data={`${Math.floor(data.market_cap_percentage.btc)}%`}
-        hasProgressBar={true}
+        hasStatBar={true}
         completed={Math.floor(data.market_cap_percentage.btc)}
         changePercent={0}
       />
       <CoinInfo
         name="ETH"
         data={`${Math.floor(data.market_cap_percentage.eth)}%`}
-        hasProgressBar={true}
+        hasStatBar={true}
         completed={Math.floor(data.market_cap_percentage.eth)}
         changePercent={0}
       />

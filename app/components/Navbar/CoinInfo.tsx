@@ -1,12 +1,12 @@
-import ProgressBar from "@ramonak/react-progress-bar";
-import Icon from "../UI/Icon";
-import PriceChange from "../UI/PriceChange";
+import Icon from "@/app/components/UI/Icon";
+import PriceChange from "@/app/components/UI/PriceChange";
+import StatBar from "@/app/components/UI/StatBar";
 
 type CoinInfoProps = {
   icon?: string;
   name?: string;
   data: number | string;
-  hasProgressBar?: boolean;
+  hasStatBar?: boolean;
   completed: number;
   hasPriceChange?: boolean;
   changePercent: number;
@@ -16,7 +16,7 @@ export default function CoinInfo({
   icon,
   name,
   data,
-  hasProgressBar,
+  hasStatBar,
   completed,
   hasPriceChange,
   changePercent,
@@ -35,14 +35,10 @@ export default function CoinInfo({
             </div>
           </div>
 
-          {hasProgressBar && (
-            <ProgressBar
+          {hasStatBar && (
+            <StatBar
               completed={completed}
-              animateOnRender={true}
-              labelColor="transparent"
-              baseBgColor="hsla(0, 0%, 100%, 0.5)"
               bgColor={`${name === "BTC" ? "#F7931A" : "#7D9EFF"}`}
-              height="5px"
             />
           )}
         </div>

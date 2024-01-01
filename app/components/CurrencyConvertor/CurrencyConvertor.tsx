@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ConvertorCard from "./ConvertorCard";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
@@ -9,7 +10,6 @@ import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
 import { formatCoinName } from "@/app/utils/generalHelpers";
-import ConvertorCard from "./ConvertorCard";
 
 type ConvertorProps = {
   isOpen: boolean;

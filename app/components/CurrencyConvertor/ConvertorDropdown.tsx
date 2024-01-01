@@ -38,19 +38,23 @@ export default function ConvertorDropdown({
     dispatch(setCoinId(id));
     if (componentType === "sell" || componentType === "buy") {
       const updatedComparedCoins = [...comparedCoins];
-      updatedComparedCoins[componentType === "sell" ? 0 : 1] = id;
+      const targetIndex = componentType === "sell" ? 0 : 1;
+      updatedComparedCoins[targetIndex] = id;
       dispatch(setComparedCoins(updatedComparedCoins));
     }
+  }
+
+  function handleDropdownReset() {
+    dispatch(setNumToSell(0));
+    dispatch(setSellPrice(0));
+    setIsDropdownOpen(false);
   }
 
   function handleCoinSelect(id: string) {
     componentType === "sell"
       ? dispatch(setSellCoinId(id))
       : dispatch(setBuyCoinId(id));
-
-    dispatch(setNumToSell(0));
-    dispatch(setSellPrice(0));
-    setIsDropdownOpen(false);
+    handleDropdownReset();
     handleCoinComparison(id);
   }
 

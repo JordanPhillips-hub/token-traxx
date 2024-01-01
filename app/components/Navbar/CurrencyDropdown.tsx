@@ -54,7 +54,9 @@ const currencies = {
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { currency } = useAppSelector((state) => state.coinMarkets);
+  const { currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   const { data: coinMarkets } = useGetMarketsQuery({
     page: 1,
@@ -83,8 +85,8 @@ export default function CurrencyDropdown() {
         className="text-sm flex items-center gap-2"
         onClick={handleDropdown}
       >
-        <div>
-          <Icon className="text-lg" iconVariant="dollar" />
+        <div className="text-lg">
+          <span>{currencySymbol}</span>
         </div>
         {currency.toUpperCase()}
         <Icon

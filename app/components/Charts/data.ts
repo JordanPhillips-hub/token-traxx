@@ -1,5 +1,5 @@
-import { useAppSelector } from "@/app/store/hooks";
 import { createAxisLabel, createBarDataset, createGraphLabel, createLineDataset } from "./utils";
+import { useAppSelector } from "@/app/store/hooks";
 
 export const options = {
   responsive: true,
@@ -31,9 +31,11 @@ export const options = {
 };
 
 export function useChartData() {
-  const { prices, priceDates, priceVolumes, volumeDates } = useAppSelector((state) => state.marketChart);
-  const { comparedCoins, comparedPrices, comparedVolumes } = useAppSelector((state) => state.compareCharts);
-  const { coins, currencySymbol } = useAppSelector((state) => state.coinMarkets);
+  const {
+    marketChart: { prices, priceDates, priceVolumes, volumeDates },
+    compareCharts: { comparedCoins, comparedPrices, comparedVolumes },
+    coinMarkets: { coins, currencySymbol }
+  } = useAppSelector((state) => state);
 
   const defaultLineDataset = {
     labels: createAxisLabel(priceDates),

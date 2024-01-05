@@ -4,14 +4,19 @@ import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 import FormInput from "@/app/components/Form/FormInput";
 import Icon from "@/app/components/UI/Icon";
 import PageLink from "@/app/components/UI/Links/PageLink";
+import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
+
+type PageLinkItem = {
+  id: string;
+  name: string;
+};
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();
   const [searchInput, setSearchInput] = useState<string>("");
-  const { coins, coinSummaryId } = useAppSelector((state) => ({
-    coins: state.coinMarkets.coins,
-    coinSummaryId: state.activeLink.coinSummaryId,
-  }));
+  const { coinMarkets, activeLink } = useAppSelector((state) => state);
+  const { coins } = coinMarkets;
+  const { coinSummaryId } = activeLink;
 
   useEffect(() => {
     setSearchInput("");
@@ -23,6 +28,16 @@ export default function SearchBar() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+  }
+
+  function renderPageLink(item: PageLinkItem) {
+    return (
+      <PageLink href="./pages/CoinSummary" id={item.id}>
+        {searchInput && item.name.toLowerCase().includes(searchInput)
+          ? item.name
+          : ""}
+      </PageLink>
+    );
   }
 
   return (
@@ -41,21 +56,13 @@ export default function SearchBar() {
         />
       </div>
 
-      <ul className={searchInput !== "" ? "absolute bg-blue800 p-3 w-3/4" : ""}>
-        {coins.map(({ id, name }) => (
-          <li className="text-sm" key={name}>
-            <PageLink
-              href="./pages/CoinSummary"
-              id={id}
-              onClick={() => dispatch(setCoinSummaryId(id))}
-            >
-              {searchInput && name.toLowerCase().includes(searchInput)
-                ? name
-                : ""}
-            </PageLink>
-          </li>
-        ))}
-      </ul>
+      <Dropdown
+        itemClass="bg-transparent w-full justify-center hover:bg-transparent"
+        isOpen={searchInput !== ""}
+        items={coins}
+        renderItem={(item) => renderPageLink(item)}
+        onItemClick={(id) => dispatch(setCoinSummaryId(id))}
+      />
     </form>
   );
 }

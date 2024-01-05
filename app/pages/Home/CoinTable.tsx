@@ -1,8 +1,8 @@
 import Image from "next/image";
 import InfiniteScroll from "react-infinite-scroll-component";
+import TableStatBar from "./TableStatBar";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import Sparkline from "@/app/components/Charts/Sparkline";
-import StatusBar from "@/app/components/UI/StatusBar";
 import PriceChange from "@/app/components/UI/PriceChange";
 import PageLink from "@/app/components/UI/Links/PageLink";
 import { formatCurrency } from "@/app/utils/numberFormatting";
@@ -37,19 +37,6 @@ export default function CoinTable() {
     page: coinPage,
     currency: currency,
   });
-
-  function createStatusBar(data1: number, data2: number) {
-    return (
-      <StatusBar
-        symbol={currencySymbol}
-        data1={data1}
-        data2={data2}
-        baseColor="hsla(0, 0%, 100%)"
-        bgColor="hsl(284, 93%, 73%)"
-        width="90%"
-      />
-    );
-  }
 
   function handleActiveLink(id: string) {
     dispatch(setCoinSummaryId(id));
@@ -98,7 +85,7 @@ export default function CoinTable() {
                 price_change_percentage_7d_in_currency: changeIn7d,
                 total_volume,
                 market_cap,
-                circulating_supply,
+                circulating_supply: circ_supply,
                 total_supply,
                 sparkline_in_7d: sparkline,
               },
@@ -132,8 +119,12 @@ export default function CoinTable() {
                 <td>
                   <PriceChange percentage={changeIn7d} />
                 </td>
-                <td>{createStatusBar(total_volume, market_cap)}</td>
-                <td>{createStatusBar(circulating_supply, total_supply)}</td>
+                <td>
+                  <TableStatBar data1={total_volume} data2={market_cap} />
+                </td>
+                <td>
+                  <TableStatBar data1={circ_supply} data2={total_supply} />
+                </td>
                 <td className="max-w-[150px] pr-3">
                   <Sparkline sparklinePrice={sparkline.price} />
                 </td>

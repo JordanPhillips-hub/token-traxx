@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import getSymbolFromCurrency from "currency-symbol-map";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -9,46 +10,46 @@ import {
   setCurrencySymbol,
 } from "@/app/store/features/coinMarketSlice";
 
-const currencies = [
-  { id: "AED", symbol: "د.إ", name: "aed" },
-  { id: "ARS", symbol: "AR$", name: "ars" },
-  { id: "AUD", symbol: "$", name: "aud" },
-  { id: "BDT", symbol: "৳", name: "bdt" },
-  { id: "BHD", symbol: "ب.د", name: "bhd" },
-  { id: "BRL", symbol: "R$", name: "brl" },
-  { id: "CAD", symbol: "$", name: "cad" },
-  { id: "CHF", symbol: "CHF", name: "chf" },
-  { id: "CNY", symbol: "¥", name: "cny" },
-  { id: "CZK", symbol: "Kč", name: "czk" },
-  { id: "DKK", symbol: "kr", name: "dkk" },
-  { id: "EUR", symbol: "€", name: "eur" },
-  { id: "GBP", symbol: "£", name: "gbp" },
-  { id: "HKD", symbol: "HK$", name: "hkd" },
-  { id: "HUF", symbol: "Ft", name: "huf" },
-  { id: "IDR", symbol: "Rp", name: "idr" },
-  { id: "ILS", symbol: "₪", name: "ils" },
-  { id: "INR", symbol: "₹", name: "inr" },
-  { id: "JPY", symbol: "¥", name: "jpy" },
-  { id: "KRW", symbol: "₩", name: "krw" },
-  { id: "KWD", symbol: "د.ك", name: "kwd" },
-  { id: "LKR", symbol: "₨", name: "lkr" },
-  { id: "MYR", symbol: "RM", name: "myr" },
-  { id: "NGN", symbol: "₦", name: "ngn" },
-  { id: "NOK", symbol: "kr", name: "nok" },
-  { id: "PHP", symbol: "₱", name: "php" },
-  { id: "PKR", symbol: "₨", name: "pkr" },
-  { id: "PLN", symbol: "zł", name: "pln" },
-  { id: "RUB", symbol: "₽", name: "rub" },
-  { id: "SAR", symbol: "ر.س", name: "sar" },
-  { id: "SEK", symbol: "kr", name: "sek" },
-  { id: "SGD", symbol: "$", name: "sgd" },
-  { id: "THB", symbol: "฿", name: "thb" },
-  { id: "TRY", symbol: "₺", name: "try" },
-  { id: "TWD", symbol: "NT$", name: "twd" },
-  { id: "UAH", symbol: "₴", name: "uah" },
-  { id: "USD", symbol: "$", name: "usd" },
-  { id: "VND", symbol: "₫", name: "vnd" },
-  { id: "ZAR", symbol: "R", name: "zar" },
+const currencyCodes = [
+  "AED",
+  "ARS",
+  "AUD",
+  "BDT",
+  "BHD",
+  "BRL",
+  "CAD",
+  "CHF",
+  "CNY",
+  "CZK",
+  "DKK",
+  "EUR",
+  "GBP",
+  "HKD",
+  "HUF",
+  "IDR",
+  "ILS",
+  "INR",
+  "JPY",
+  "KRW",
+  "KWD",
+  "LKR",
+  "MYR",
+  "NGN",
+  "NOK",
+  "PHP",
+  "PKR",
+  "PLN",
+  "RUB",
+  "SAR",
+  "SEK",
+  "SGD",
+  "THB",
+  "TRY",
+  "TWD",
+  "UAH",
+  "USD",
+  "VND",
+  "ZAR",
 ];
 
 type CurrencyItem = {
@@ -66,6 +67,12 @@ export default function CurrencyDropdown() {
     page: 1,
     currency: currency,
   });
+
+  const currencies = currencyCodes.map((code) => ({
+    id: code,
+    symbol: getSymbolFromCurrency(code) || "",
+    name: code.toLowerCase(),
+  }));
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);

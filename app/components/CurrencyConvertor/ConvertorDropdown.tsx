@@ -1,5 +1,8 @@
 import { useState } from "react";
-import CoinDropdown from "@/app/components/UI/Dropdowns/CoinDropdown";
+import { DropdownProps, DropdownItem } from "./types";
+import Dropdown from "@/app/components/UI/Dropdowns/Dropdown";
+import { DropdownOpener } from "@/app/components/UI/Dropdowns/DropdownOpener";
+import CoinName from "@/app/components/UI/CoinName";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
@@ -10,14 +13,6 @@ import {
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
 
-type DropdownProps = {
-  cardType: string;
-  image: string;
-  name: string;
-  id: string;
-  symbol: string;
-};
-
 export default function ConvertorDropdown({
   cardType,
   image,
@@ -25,8 +20,10 @@ export default function ConvertorDropdown({
   symbol,
 }: DropdownProps) {
   const dispatch = useAppDispatch();
-  const { comparedCoins } = useAppSelector((state) => state.compareCharts);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const { compareCharts, coinMarkets } = useAppSelector((state) => state);
+  const { comparedCoins } = compareCharts;
+  const { coins } = coinMarkets;
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -56,17 +53,34 @@ export default function ConvertorDropdown({
     handleDropdownReset();
   }
 
+  function dropdownItem(item: DropdownItem) {
+    return (
+      <CoinName
+        image={item.image}
+        imageWidth={25}
+        imageHeight={25}
+        id={item.id}
+        symbol={item.symbol}
+      />
+    );
+  }
+
   return (
-    <CoinDropdown
-      className="text-xl"
-      img={image}
-      imgWidth={30}
-      imgHeight={30}
-      id={id}
-      symbol={symbol}
+    <Dropdown
       isOpen={isDropdownOpen}
-      onClick={() => handleDropdown()}
+      items={coins}
+      renderItem={(item) => dropdownItem(item)}
       onItemClick={(id) => handleCoinSelect(id)}
-    />
+    >
+      <DropdownOpener onClick={handleDropdown} isOpen={isDropdownOpen}>
+        <CoinName
+          image={image}
+          imageWidth={30}
+          imageHeight={30}
+          id={id}
+          symbol={symbol}
+        />
+      </DropdownOpener>
+    </Dropdown>
   );
 }

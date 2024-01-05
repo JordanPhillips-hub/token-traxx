@@ -1,14 +1,27 @@
 import { useState, useEffect } from "react";
-import Icon from "@/app/components/UI/Icon";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setSelectedCoinId } from "@/app/store/features/portfolioSlice";
-import { optionalCapitalize } from "@/app/utils/generalHelpers";
+import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
+import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
+import CoinName from "@/app/components/UI/CoinName";
 
 type CoinDropdownProps = {
+  image: string;
+  id: string;
+  symbol: string;
   onSelectedCoinChange: (coinId: string) => void;
 };
 
+type DropdownItem = {
+  image: string;
+  id: string;
+  symbol: string;
+};
+
 export default function CoinDropdown({
+  image,
+  id,
+  symbol,
   onSelectedCoinChange,
 }: CoinDropdownProps) {
   const dispatch = useAppDispatch();
@@ -25,32 +38,39 @@ export default function CoinDropdown({
     setIsSelectingCoin(false);
   }
 
-  return (
-    <div className="bg-blue700 p-2 relative rounded">
-      <button
-        className="flex items-center justify-between w-full"
-        onClick={() => setIsSelectingCoin(!isSelectingCoin)}
-      >
-        {selectedCoinId ? optionalCapitalize(selectedCoinId) : "Select Coin"}
-        <Icon iconVariant="chevDown" />
-      </button>
+  function renderDropdownItem(item: DropdownItem) {
+    return (
+      <CoinName
+        image={item.image}
+        imageWidth={20}
+        imageHeight={20}
+        id={item.id}
+        symbol={item.symbol}
+      />
+    );
+  }
 
-      {isSelectingCoin && (
-        <div className="bg-blue700 absolute left-0 w-1/2">
-          <ul className="text-sm p-4">
-            {coins.map((coin) => (
-              <li key={coin.name}>
-                <button
-                  className="hover:text-base"
-                  onClick={() => handleSelectedCoin(coin.id)}
-                >
-                  {optionalCapitalize(coin.id)}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+  return (
+    <Dropdown
+      itemClass=" w-full justify-center mb-1 p-1"
+      isOpen={isSelectingCoin}
+      items={coins}
+      renderItem={(item) => renderDropdownItem(item)}
+      onItemClick={(id) => handleSelectedCoin(id)}
+    >
+      <DropdownOpener
+        className="bg-blue700 text-sm w-full p-2 m-0"
+        onClick={() => setIsSelectingCoin(!isSelectingCoin)}
+        isOpen={isSelectingCoin}
+      >
+        <CoinName
+          image={image}
+          imageWidth={30}
+          imageHeight={30}
+          id={id}
+          symbol={symbol}
+        />
+      </DropdownOpener>
+    </Dropdown>
   );
 }

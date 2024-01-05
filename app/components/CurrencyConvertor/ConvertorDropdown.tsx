@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DropdownProps, DropdownItem } from "./types";
-import Dropdown from "@/app/components/UI/Dropdowns/Dropdown";
-import { DropdownOpener } from "@/app/components/UI/Dropdowns/DropdownOpener";
+import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
+import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import CoinName from "@/app/components/UI/CoinName";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
@@ -53,12 +53,12 @@ export default function ConvertorDropdown({
     handleDropdownReset();
   }
 
-  function dropdownItem(item: DropdownItem) {
+  function renderDropdownItem(item: DropdownItem) {
     return (
       <CoinName
         image={item.image}
-        imageWidth={25}
-        imageHeight={25}
+        imageWidth={20}
+        imageHeight={20}
         id={item.id}
         symbol={item.symbol}
       />
@@ -67,9 +67,10 @@ export default function ConvertorDropdown({
 
   return (
     <Dropdown
+      itemClass="text-xs rounded-none w-full justify-center mb-1 p-1"
       isOpen={isDropdownOpen}
       items={coins}
-      renderItem={(item) => dropdownItem(item)}
+      renderItem={(item) => renderDropdownItem(item)}
       onItemClick={(id) => handleCoinSelect(id)}
     >
       <DropdownOpener onClick={handleDropdown} isOpen={isDropdownOpen}>

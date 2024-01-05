@@ -10,6 +10,7 @@ import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
 import { formatCoinName } from "@/app/utils/generalHelpers";
+import { Heading } from "../UI/Heading";
 
 type ConvertorProps = {
   isOpen: boolean;
@@ -52,10 +53,9 @@ export default function CurrencyConvertorModal({
     >
       <CloseButton className="absolute right-0" onClose={onClose} />
 
-      <header className="mb-6">
-        <h3 className="text-xl font-medium">Online currency convertor</h3>
+      <Heading size={1} text="Online currency convertor">
         <p className="text-gray500">{getDateTime24H()}</p>
-      </header>
+      </Heading>
 
       <section>
         <div className="flex gap-3">

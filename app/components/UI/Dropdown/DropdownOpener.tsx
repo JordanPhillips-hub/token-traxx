@@ -1,6 +1,6 @@
-import Icon from "../Icon";
-import { useAppSelector } from "@/app/store/hooks";
 import { twMerge } from "tailwind-merge";
+import { useAppSelector } from "@/app/store/hooks";
+import Icon from "@/app/components/UI/Icon";
 
 type DropdownOpenerProps = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export function DropdownOpener({
   onClick,
 }: DropdownOpenerProps) {
   const { currency } = useAppSelector((state) => state.coinMarkets);
-  const defaultStyles = "font-medium flex items-center gap-2 mb-4";
+  const defaultStyles = "font-medium flex items-center gap-2 mb-4 rounded-md";
 
   return (
     <button className={twMerge(defaultStyles, className)} onClick={onClick}>

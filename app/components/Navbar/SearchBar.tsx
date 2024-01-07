@@ -1,15 +1,11 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { PageLinkItem } from "./types";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 import FormInput from "@/app/components/Form/FormInput";
 import Icon from "@/app/components/UI/Icon";
 import PageLink from "@/app/components/UI/Links/PageLink";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
-
-type PageLinkItem = {
-  id: string;
-  name: string;
-};
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();

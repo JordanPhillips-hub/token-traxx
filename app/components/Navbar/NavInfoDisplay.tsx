@@ -10,6 +10,14 @@ export default function NavInfoDisplay() {
   const { data: coinGlobals } = useGetGlobalsQuery<any>({});
   const { data } = useAppSelector((state) => state.globals);
 
+  const {
+    active_cryptocurrencies: activeCurrencies,
+    markets,
+    market_cap_change_percentage_24h_usd: marketCapChangeIn24h,
+    total_market_cap: marketCap,
+    market_cap_percentage: marketCapPercent,
+  } = data;
+
   useEffect(() => {
     if (coinGlobals) {
       dispatch(setCoinGlobals({ data: coinGlobals.data }));
@@ -21,14 +29,14 @@ export default function NavInfoDisplay() {
       <CoinInfo
         name="Coins"
         icon="coin"
-        data={data.active_cryptocurrencies}
+        data={activeCurrencies}
         completed={0}
         changePercent={0}
       />
       <CoinInfo
         name="Exchange"
         icon="exchange"
-        data={data.markets}
+        data={markets}
         completed={0}
         changePercent={0}
       />
@@ -36,27 +44,27 @@ export default function NavInfoDisplay() {
         data=""
         completed={0}
         hasPriceChange={true}
-        changePercent={data.market_cap_change_percentage_24h_usd}
+        changePercent={marketCapChangeIn24h}
       />
       <CoinInfo
-        data={`$${formatNum3_2(data.total_market_cap.btc)} ${checkNumberScale(
-          data.total_market_cap.btc
+        data={`$${formatNum3_2(marketCap.btc)} ${checkNumberScale(
+          marketCap.btc
         )}`}
         completed={0}
         changePercent={0}
       />
       <CoinInfo
         name="BTC"
-        data={`${Math.floor(data.market_cap_percentage.btc)}%`}
+        data={`${Math.floor(marketCapPercent.btc)}%`}
         hasStatBar={true}
-        completed={Math.floor(data.market_cap_percentage.btc)}
+        completed={Math.floor(marketCapPercent.btc)}
         changePercent={0}
       />
       <CoinInfo
         name="ETH"
-        data={`${Math.floor(data.market_cap_percentage.eth)}%`}
+        data={`${Math.floor(marketCapPercent.eth)}%`}
         hasStatBar={true}
-        completed={Math.floor(data.market_cap_percentage.eth)}
+        completed={Math.floor(marketCapPercent.eth)}
         changePercent={0}
       />
     </div>

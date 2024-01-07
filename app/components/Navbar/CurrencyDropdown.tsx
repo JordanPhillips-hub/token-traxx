@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { CurrencyItem } from "./types";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -51,11 +52,6 @@ const currencyCodes = [
   "VND",
   "ZAR",
 ];
-
-type CurrencyItem = {
-  id: string;
-  symbol: string;
-};
 
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();

@@ -74,8 +74,6 @@ export default function CurrencyDropdown() {
     name: code.toLowerCase(),
   }));
 
-  function handleDropdown() {}
-
   function handleCurrencyChange(currency: string, symbol: string) {
     dispatch(setCurrency(currency));
     dispatch(setCurrencySymbol(symbol));

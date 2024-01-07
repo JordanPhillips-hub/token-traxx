@@ -12,24 +12,7 @@ export default function NavInfoDisplay() {
 
   useEffect(() => {
     if (coinGlobals) {
-      dispatch(
-        setCoinGlobals({
-          data: {
-            active_cryptocurrencies: coinGlobals.data.active_cryptocurrencies,
-            markets: coinGlobals.data.markets,
-            market_cap_change_percentage_24h_usd:
-              coinGlobals.data.market_cap_change_percentage_24h_usd,
-            total_market_cap: {
-              btc: coinGlobals.data.total_market_cap.btc,
-              eth: coinGlobals.data.total_market_cap.eth,
-            },
-            market_cap_percentage: {
-              btc: coinGlobals.data.market_cap_percentage.btc,
-              eth: coinGlobals.data.market_cap_percentage.eth,
-            },
-          },
-        })
-      );
+      dispatch(setCoinGlobals({ data: coinGlobals.data }));
     }
   }, [coinGlobals, dispatch]);
 

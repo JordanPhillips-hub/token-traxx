@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { ConvertorProps } from "./types";
 import ConvertorCard from "./ConvertorCard";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setIsComparing } from "@/app/store/features/charts/compareChartSlice";
+import { Heading } from "@/app/components/UI/Heading";
 import Modal from "@/app/components/UI/Modal";
 import ChartContainer from "@/app/components/Charts/ChartContainer";
 import Chart from "@/app/components/Charts/Chart";
@@ -10,12 +12,6 @@ import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 import { getDateTime24H } from "@/app/utils/dateAndTime";
 import { formatCoinName } from "@/app/utils/generalHelpers";
-import { Heading } from "../UI/Heading";
-
-type ConvertorProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
 
 export default function CurrencyConvertorModal({
   isOpen,

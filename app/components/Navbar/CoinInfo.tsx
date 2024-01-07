@@ -1,16 +1,7 @@
+import { CoinInfoProps } from "./types";
 import Icon from "@/app/components/UI/Icon";
 import PriceChange from "@/app/components/UI/PriceChange";
 import StatBar from "@/app/components/UI/StatBar";
-
-type CoinInfoProps = {
-  icon?: string;
-  name?: string;
-  data: number | string;
-  hasStatBar?: boolean;
-  completed: number;
-  hasPriceChange?: boolean;
-  changePercent: number;
-};
 
 export default function CoinInfo({
   icon,

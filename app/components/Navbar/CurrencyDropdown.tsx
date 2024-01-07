@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { CurrencyItem } from "./types";
 import { currencyCodes } from "./data";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
@@ -10,11 +11,6 @@ import {
   setCurrency,
   setCurrencySymbol,
 } from "@/app/store/features/coinMarketSlice";
-
-type CurrencyItem = {
-  id: string;
-  symbol: string;
-};
 
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();

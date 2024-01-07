@@ -78,12 +78,6 @@ export default function CurrencyDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-  useEffect(() => {
-    if (markets) {
-      dispatch(setCoinMarkets(markets));
-    }
-  }, [markets, currency, dispatch]);
-
   function handleCurrencyChange(currency: string, symbol: string) {
     dispatch(setCurrency(currency));
     dispatch(setCurrencySymbol(symbol));
@@ -93,6 +87,12 @@ export default function CurrencyDropdown() {
   function renderCurrencyItem(item: CurrencyItem) {
     return <span>{`${item.symbol} ${item.id}`}</span>;
   }
+
+  useEffect(() => {
+    if (markets) {
+      dispatch(setCoinMarkets(markets));
+    }
+  }, [markets, currency, dispatch]);
 
   return (
     <Dropdown

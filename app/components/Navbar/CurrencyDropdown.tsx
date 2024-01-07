@@ -74,9 +74,7 @@ export default function CurrencyDropdown() {
     name: code.toLowerCase(),
   }));
 
-  function handleDropdown() {
-    setIsDropdownOpen(!isDropdownOpen);
-  }
+  function handleDropdown() {}
 
   function handleCurrencyChange(currency: string, symbol: string) {
     dispatch(setCurrency(currency));
@@ -106,7 +104,7 @@ export default function CurrencyDropdown() {
       <DropdownOpener
         className="dark:bg-blue800 font-normal h-full px-3 "
         isOpen={isDropdownOpen}
-        onClick={handleDropdown}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <span className="text-lg">{currencySymbol}</span>
       </DropdownOpener>

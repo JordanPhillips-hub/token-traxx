@@ -18,10 +18,6 @@ export default function SearchBar() {
   const { coins } = coinMarkets;
   const { coinSummaryId } = activeLink;
 
-  useEffect(() => {
-    setSearchInput("");
-  }, [coinSummaryId]);
-
   function handleSearch({ target: { value } }: ChangeEvent<HTMLInputElement>) {
     setSearchInput(value.toLowerCase());
   }
@@ -39,6 +35,10 @@ export default function SearchBar() {
       </PageLink>
     );
   }
+
+  useEffect(() => {
+    setSearchInput("");
+  }, [coinSummaryId]);
 
   return (
     <form className=" relative gap-4" onSubmit={handleSubmit} action="">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
-import Icon from "@/app/components/UI/Icon";
+import getSymbolFromCurrency from "currency-symbol-map";
+import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
+import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import {
@@ -9,69 +10,79 @@ import {
   setCurrencySymbol,
 } from "@/app/store/features/coinMarketSlice";
 
-const currencies = {
-  AED: { symbol: "د.إ" },
-  ARS: { symbol: "AR$" },
-  AUD: { symbol: "$" },
-  BDT: { symbol: "৳" },
-  BHD: { symbol: "ب.د" },
-  BRL: { symbol: "R$" },
-  CAD: { symbol: "$" },
-  CHF: { symbol: "CHF" },
-  CNY: { symbol: "¥" },
-  CZK: { symbol: "Kč" },
-  DKK: { symbol: "kr" },
-  EUR: { symbol: "€" },
-  GBP: { symbol: "£" },
-  HKD: { symbol: "HK$" },
-  HUF: { symbol: "Ft" },
-  IDR: { symbol: "Rp" },
-  ILS: { symbol: "₪" },
-  INR: { symbol: "₹" },
-  JPY: { symbol: "¥" },
-  KRW: { symbol: "₩" },
-  KWD: { symbol: "د.ك" },
-  LKR: { symbol: "₨" },
-  MYR: { symbol: "RM" },
-  NGN: { symbol: "₦" },
-  NOK: { symbol: "kr" },
-  PHP: { symbol: "₱" },
-  PKR: { symbol: "₨" },
-  PLN: { symbol: "zł" },
-  RUB: { symbol: "₽" },
-  SAR: { symbol: "ر.س" },
-  SEK: { symbol: "kr" },
-  SGD: { symbol: "$" },
-  THB: { symbol: "฿" },
-  TRY: { symbol: "₺" },
-  TWD: { symbol: "NT$" },
-  UAH: { symbol: "₴" },
-  USD: { symbol: "$" },
-  VND: { symbol: "₫" },
-  ZAR: { symbol: "R" },
+const currencyCodes = [
+  "AED",
+  "ARS",
+  "AUD",
+  "BDT",
+  "BHD",
+  "BRL",
+  "CAD",
+  "CHF",
+  "CNY",
+  "CZK",
+  "DKK",
+  "EUR",
+  "GBP",
+  "HKD",
+  "HUF",
+  "IDR",
+  "ILS",
+  "INR",
+  "JPY",
+  "KRW",
+  "KWD",
+  "LKR",
+  "MYR",
+  "NGN",
+  "NOK",
+  "PHP",
+  "PKR",
+  "PLN",
+  "RUB",
+  "SAR",
+  "SEK",
+  "SGD",
+  "THB",
+  "TRY",
+  "TWD",
+  "UAH",
+  "USD",
+  "VND",
+  "ZAR",
+];
+
+type CurrencyItem = {
+  id: string;
+  symbol: string;
 };
 
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
+  const { coinMarkets } = useAppSelector((state) => state);
+  const { currency, currencySymbol } = coinMarkets;
 
-  const { data: coinMarkets } = useGetMarketsQuery({
+  const { data: markets } = useGetMarketsQuery({
     page: 1,
     currency: currency,
   });
+
+  const currencies = currencyCodes.map((code) => ({
+    id: code,
+    symbol: getSymbolFromCurrency(code) || "",
+    name: code.toLowerCase(),
+  }));
 
   function handleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
   useEffect(() => {
-    if (coinMarkets) {
-      dispatch(setCoinMarkets(coinMarkets));
+    if (markets) {
+      dispatch(setCoinMarkets(markets));
     }
-  }, [coinMarkets, currency, dispatch]);
+  }, [markets, currency, dispatch]);
 
   function handleCurrencyChange(currency: string, symbol: string) {
     dispatch(setCurrency(currency));
@@ -79,37 +90,26 @@ export default function CurrencyDropdown() {
     setIsDropdownOpen(false);
   }
 
+  function renderCurrencyItem(item: CurrencyItem) {
+    return <span>{`${item.symbol} ${item.id}`}</span>;
+  }
+
   return (
-    <div className="relative dark:bg-blue800 flex py-2.5 px-3 rounded-md">
-      <button
-        className="text-sm flex items-center gap-2"
+    <Dropdown
+      containerClass="flex flex-wrap w-[270px] gap-2 right-0"
+      itemClass="p-1 rounded-none"
+      isOpen={isDropdownOpen}
+      items={currencies}
+      renderItem={(item) => renderCurrencyItem(item)}
+      onItemClick={(name, symbol) => handleCurrencyChange(name, symbol)}
+    >
+      <DropdownOpener
+        className="dark:bg-blue800 font-normal h-full px-3 "
+        isOpen={isDropdownOpen}
         onClick={handleDropdown}
       >
-        <div className="text-lg">
-          <span>{currencySymbol}</span>
-        </div>
-        {currency.toUpperCase()}
-        <Icon
-          className={`${isDropdownOpen ? "rotate-180" : ""}`}
-          iconVariant="chevDown"
-        />
-      </button>
-
-      <div
-        className={`${
-          isDropdownOpen
-            ? "text-sm absolute dark:bg-blue800 flex justify-center flex-wrap w-[300px] top-14 right-0 p-2 rounded z-50"
-            : "hidden"
-        }`}
-      >
-        {Object.entries(currencies).map(([currency, { symbol }]) => (
-          <PrimaryButton
-            className="w-1/4 mr-2 mb-2 p-1 justify-center rounded-none"
-            key={currency}
-            onClick={() => handleCurrencyChange(currency.toLowerCase(), symbol)}
-          >{`${symbol} ${currency}`}</PrimaryButton>
-        ))}
-      </div>
-    </div>
+        <span className="text-lg">{currencySymbol}</span>
+      </DropdownOpener>
+    </Dropdown>
   );
 }

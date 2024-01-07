@@ -39,6 +39,7 @@ export default function Form({ onClose }: FormProps) {
   const selectedCoin = coins.find((coin) => coin.id === selectedCoinId);
   const { formAmount, formDate } = formInputs;
   const {
+    id,
     current_price,
     symbol,
     image,
@@ -98,7 +99,12 @@ export default function Form({ onClose }: FormProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <CoinDropdown onSelectedCoinChange={handleSelectedCoinChange} />
+      <CoinDropdown
+        image={image}
+        id={id}
+        symbol={symbol}
+        onSelectedCoinChange={handleSelectedCoinChange}
+      />
       <form className="flex flex-col gap-4" onSubmit={handleSubmit} action="">
         <FormInput
           className="dark:bg-blue700 p-2 w-full placeholder:text-white"

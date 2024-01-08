@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent } from "react";
+import { ConvertorCardProps } from "./types";
 import ConvertorDropdown from "./ConvertorDropdown";
 import Legend from "./Legend";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
@@ -6,11 +7,6 @@ import {
   setNumToSell,
   setSellPrice,
 } from "@/app/store/features/convertorSlice";
-
-type ConvertorCardProps = {
-  cardType: string;
-  cardName: string;
-};
 
 export default function ConvertorCard({
   cardType,

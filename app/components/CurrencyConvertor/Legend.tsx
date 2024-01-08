@@ -1,10 +1,5 @@
+import { LegendProps } from "./types";
 import { formatCurrency } from "@/app/utils/numberFormatting";
-
-type LegendProps = {
-  symbol: string;
-  price: number;
-  currencySymbol: string;
-};
 
 export default function Legend({ symbol, price, currencySymbol }: LegendProps) {
   return (

@@ -1,4 +1,4 @@
-import Icon from "../Icon";
+import Icon from "@/app/components/UI/Icon";
 import { copyToClipboard } from "@/app/utils/generalHelpers";
 
 type CopyLinkProps = {

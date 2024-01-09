@@ -6,10 +6,9 @@ import { formatDateString } from "@/app/utils/dateAndTime";
 type AllTimeOverviewProps = { allTime: string };
 
 export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
+  const { coinMarkets, coinSummary } = useAppSelector((state) => state);
+  const { summaryCoin } = coinSummary;
+  const { currency, currencySymbol } = coinMarkets;
 
   const {
     ath,

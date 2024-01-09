@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { pageLinks } from "./data";
 import NavInfoDisplay from "./NavInfoDisplay";
 import SearchBar from "./SearchBar";
 import CurrencyDropdown from "./CurrencyDropdown";
@@ -9,11 +10,6 @@ import { setActiveLink } from "@/app/store/features/pageLinkSlice";
 import ThemeButton from "@/app/components/UI/Buttons/ThemeButton";
 import Icon from "@/app/components/UI/Icon";
 import PageLink from "@/app/components/UI/Links/PageLink";
-
-const pageLinks = [
-  { id: "coinsLink", href: "/", text: "Home" },
-  { id: "portfolioLink", href: "../pages/Portfolio", text: "Portfolio" },
-];
 
 export default function NavBar() {
   const dispatch = useAppDispatch();

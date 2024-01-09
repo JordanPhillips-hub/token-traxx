@@ -1,3 +1,4 @@
+import { CoinInfoProps } from "./types";
 import Icon from "@/app/components/UI/Icon";
 import PriceChange from "@/app/components/UI/PriceChange";
 import StatBar from "@/app/components/UI/StatBar";

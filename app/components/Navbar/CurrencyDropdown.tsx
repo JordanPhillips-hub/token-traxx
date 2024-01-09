@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { CurrencyItem } from "./types";
+import { currencyCodes } from "./data";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -9,53 +11,6 @@ import {
   setCurrency,
   setCurrencySymbol,
 } from "@/app/store/features/coinMarketSlice";
-
-const currencyCodes = [
-  "AED",
-  "ARS",
-  "AUD",
-  "BDT",
-  "BHD",
-  "BRL",
-  "CAD",
-  "CHF",
-  "CNY",
-  "CZK",
-  "DKK",
-  "EUR",
-  "GBP",
-  "HKD",
-  "HUF",
-  "IDR",
-  "ILS",
-  "INR",
-  "JPY",
-  "KRW",
-  "KWD",
-  "LKR",
-  "MYR",
-  "NGN",
-  "NOK",
-  "PHP",
-  "PKR",
-  "PLN",
-  "RUB",
-  "SAR",
-  "SEK",
-  "SGD",
-  "THB",
-  "TRY",
-  "TWD",
-  "UAH",
-  "USD",
-  "VND",
-  "ZAR",
-];
-
-type CurrencyItem = {
-  id: string;
-  symbol: string;
-};
 
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();

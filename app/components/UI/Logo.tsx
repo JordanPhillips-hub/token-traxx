@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CompanyLogo from "../../assets/images/token-trax-logo.svg";
+import CompanyLogo from "@/app/assets/images/token-trax-logo.svg";
 
 export default function Logo() {
   return (

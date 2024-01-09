@@ -20,6 +20,10 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
   const allTimeIsHigh = allTime === "high";
   const iconClass = allTimeIsHigh ? "text-green500" : "text-red500 rotate-180";
 
+  function createPrice(allTimePrice: number) {
+    return `${currencySymbol}${formatCurrency(allTimePrice)}`;
+  }
+
   return (
     <div className="mt-7">
       <div className="flex items-center justify-between">
@@ -38,8 +42,8 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         <div>
           <span className="text-2xl	font-medium">
             {allTimeIsHigh
-              ? `${currencySymbol}${formatCurrency(ath[currency])}`
-              : `${currencySymbol}${formatCurrency(atl[currency])}`}
+              ? createPrice(ath[currency])
+              : createPrice(atl[currency])}
           </span>
         </div>
       </div>

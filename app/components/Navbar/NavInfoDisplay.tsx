@@ -10,71 +10,39 @@ export default function NavInfoDisplay() {
   const { data: coinGlobals } = useGetGlobalsQuery<any>({});
   const { data } = useAppSelector((state) => state.globals);
 
+  const {
+    active_cryptocurrencies: activeCurrencies,
+    markets,
+    market_cap_change_percentage_24h_usd: marketCapChangeIn24h,
+    total_market_cap: marketCap,
+    market_cap_percentage: marketCapPercent,
+  } = data;
+
+  const formattedMarketCap = `$${formatNum3_2(
+    marketCap.btc
+  )} ${checkNumberScale(marketCap.btc)}`;
+
   useEffect(() => {
     if (coinGlobals) {
-      dispatch(
-        setCoinGlobals({
-          data: {
-            active_cryptocurrencies: coinGlobals.data.active_cryptocurrencies,
-            markets: coinGlobals.data.markets,
-            market_cap_change_percentage_24h_usd:
-              coinGlobals.data.market_cap_change_percentage_24h_usd,
-            total_market_cap: {
-              btc: coinGlobals.data.total_market_cap.btc,
-              eth: coinGlobals.data.total_market_cap.eth,
-            },
-            market_cap_percentage: {
-              btc: coinGlobals.data.market_cap_percentage.btc,
-              eth: coinGlobals.data.market_cap_percentage.eth,
-            },
-          },
-        })
-      );
+      dispatch(setCoinGlobals({ data: coinGlobals.data }));
     }
   }, [coinGlobals, dispatch]);
 
   return (
     <div className="bg-purple700 flex items-center justify-center gap-8 mb-6 px-16 py-4 border-b-[1px] border-white border-opacity-[0.1]">
-      <CoinInfo
-        name="Coins"
-        icon="coin"
-        data={data.active_cryptocurrencies}
-        completed={0}
-        changePercent={0}
-      />
-      <CoinInfo
-        name="Exchange"
-        icon="exchange"
-        data={data.markets}
-        completed={0}
-        changePercent={0}
-      />
-      <CoinInfo
-        data=""
-        completed={0}
-        hasPriceChange={true}
-        changePercent={data.market_cap_change_percentage_24h_usd}
-      />
-      <CoinInfo
-        data={`$${formatNum3_2(data.total_market_cap.btc)} ${checkNumberScale(
-          data.total_market_cap.btc
-        )}`}
-        completed={0}
-        changePercent={0}
-      />
+      <CoinInfo name="Coins" icon="coin" data={activeCurrencies} />
+      <CoinInfo name="Exchange" icon="exchange" data={markets} />
+      <CoinInfo changePercent={marketCapChangeIn24h} />
+      <CoinInfo data={formattedMarketCap} />
       <CoinInfo
         name="BTC"
-        data={`${Math.floor(data.market_cap_percentage.btc)}%`}
-        hasStatBar={true}
-        completed={Math.floor(data.market_cap_percentage.btc)}
-        changePercent={0}
+        data={`${Math.floor(marketCapPercent.btc)}%`}
+        completed={Math.floor(marketCapPercent.btc)}
       />
       <CoinInfo
         name="ETH"
-        data={`${Math.floor(data.market_cap_percentage.eth)}%`}
-        hasStatBar={true}
-        completed={Math.floor(data.market_cap_percentage.eth)}
-        changePercent={0}
+        data={`${Math.floor(marketCapPercent.eth)}%`}
+        completed={Math.floor(marketCapPercent.eth)}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { useAppSelector } from "@/app/store/hooks";
 import PriceChange from "@/app/components/UI/PriceChange";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 
-function PriceOverview() {
+export default function PriceOverview() {
   const { coinSummary, coinMarkets } = useAppSelector((state) => state);
   const { summaryCoin } = coinSummary;
   const { currency, currencySymbol } = coinMarkets;
@@ -24,5 +24,3 @@ function PriceOverview() {
     </div>
   );
 }
-
-export default PriceOverview;

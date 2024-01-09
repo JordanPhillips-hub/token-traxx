@@ -1,11 +1,11 @@
 export type CoinInfoProps = {
   icon?: string;
   name?: string;
-  data: number | string;
+  data?: number | string;
   hasStatBar?: boolean;
-  completed: number;
+  completed?: number;
   hasPriceChange?: boolean;
-  changePercent: number;
+  changePercent?: number;
 };
 
 export type CurrencyItem = {

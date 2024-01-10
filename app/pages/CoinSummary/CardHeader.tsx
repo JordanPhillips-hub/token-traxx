@@ -13,8 +13,8 @@ export default function CardHeader() {
     .replace(/\//g, "");
 
   return (
-    <>
-      <div className="inline-block mr-6">
+    <div className="flex gap-6">
+      <div>
         <Image src={coinImage} alt={`${name} icon`} width={48} height={48} />
       </div>
 
@@ -25,6 +25,6 @@ export default function CardHeader() {
       >
         <CopyButton toCopy={formattedLink} />
       </Heading>
-    </>
+    </div>
   );
 }

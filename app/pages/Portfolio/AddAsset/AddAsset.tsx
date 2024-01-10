@@ -2,7 +2,8 @@ import { CoinCard } from "./CoinCard";
 import Form from "./Form";
 import { useAppSelector } from "@/app/store/hooks";
 import Modal from "@/app/components/UI/Modal";
-import Icon from "@/app/components/UI/Icon";
+import { Heading } from "@/app/components/UI/Heading";
+import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 
 type AddAssetProps = {
   isAddingAsset: boolean;
@@ -21,15 +22,10 @@ export default function AddAsset({ isAddingAsset, onClose }: AddAssetProps) {
       isOpen={isAddingAsset}
       onClose={onClose}
     >
-      <header className="flex items-center justify-between mb-8">
-        <h3 className="text-xl">Select Coin</h3>
-        <button
-          className="bg-transparent w-5 h-5 flex items-center justify-center border border-white rounded-full"
-          onClick={onClose}
-        >
-          <Icon iconVariant="exit" />
-        </button>
-      </header>
+      <div className="flex items-center justify-between mb-8">
+        <Heading size={2} text="Select Coin" />
+        <CloseButton onClose={onClose} />
+      </div>
 
       <div className="grid grid-cols-2 gap-8">
         <CoinCard image={image} name={name} symbol={symbol} />

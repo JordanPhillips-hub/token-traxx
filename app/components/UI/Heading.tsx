@@ -15,7 +15,7 @@ export function Heading({
   textClass,
   containerClass,
 }: HeadingProps) {
-  let defaultTextStyles = "text-base font-normal";
+  let defaultTextStyles;
   switch (size) {
     case 1:
       defaultTextStyles = "text-2xl font-bold";
@@ -27,7 +27,7 @@ export function Heading({
       defaultTextStyles = "text-lg font-medium";
       break;
     default:
-      defaultTextStyles;
+      defaultTextStyles = "text-base font-normal";
       break;
   }
 

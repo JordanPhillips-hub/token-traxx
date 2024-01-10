@@ -16,7 +16,22 @@ export function Heading({
   containerClass,
 }: HeadingProps) {
   const defaultContainerStyles = "mb-2";
-  const defaultTextStyles = "text-xl font-medium";
+  let defaultTextStyles = "";
+  switch (size) {
+    case 1:
+      defaultTextStyles = "text-2xl font-bold";
+      break;
+    case 2:
+      defaultTextStyles = "text-xl font-semibold";
+      break;
+    case 3:
+      defaultTextStyles = "text-lg font-medium";
+      break;
+    default:
+      "text-base font-normal";
+      break;
+  }
+
   const Header = `h${Math.max(
     1,
     Math.min(6, size)

@@ -53,11 +53,9 @@ export default function CurrencyConvertorModal({
         <p className="text-gray500">{getDateTime24H()}</p>
       </Heading>
 
-      <section>
-        <div className="flex gap-3">
-          <ConvertorCard cardType="sell" cardName="You Sell" />
-          <ConvertorCard cardType="buy" cardName="You Buy" />
-        </div>
+      <section className="flex gap-3 mt-2">
+        <ConvertorCard cardType="sell" cardName="You Sell" />
+        <ConvertorCard cardType="buy" cardName="You Buy" />
       </section>
 
       <section className="mt-10">

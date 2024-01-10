@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import Sparkline from "@/app/components/Charts/Sparkline";
 import PriceChange from "@/app/components/UI/PriceChange";
 import PageLink from "@/app/components/UI/Links/PageLink";
+import { Heading } from "@/app/components/UI/Heading";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
@@ -55,19 +56,23 @@ export default function CoinTable() {
       }}
       hasMore={true}
       loader={
-        <h4 className="text-center mb-4">
-          {isError
-            ? "We are experiencing technical difficulties. Please try again later"
-            : "Loading Coins..."}
-        </h4>
+        <Heading
+          containerClass="mt-2 text-center"
+          size={4}
+          text={
+            isError
+              ? "We are experiencing technical difficulties. Please try again later"
+              : "Loading Coins..."
+          }
+        />
       }
     >
       <table className="min-w-full border-separate border-spacing-y-2 text-sm">
         <thead className="text-left text-sm text-gray100">
           <tr>
-            {tableHeaders.map((header, index) => (
-              <th className="pl-3" key={index}>
-                {header}
+            {tableHeaders.map((header) => (
+              <th className="pl-3" key={header}>
+                <Heading size={4} text={header} />
               </th>
             ))}
           </tr>

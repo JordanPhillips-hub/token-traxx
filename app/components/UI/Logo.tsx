@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Heading } from "./Heading";
 import CompanyLogo from "@/app/assets/images/token-trax-logo.svg";
 
 export default function Logo() {
@@ -10,7 +11,7 @@ export default function Logo() {
         width={36}
         height={20}
       />
-      <h1 className="text-xl font-bold">Token Trax</h1>
+      <Heading size={1} text="Token Traxx" />
     </div>
   );
 }

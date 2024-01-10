@@ -15,8 +15,7 @@ export function Heading({
   textClass,
   containerClass,
 }: HeadingProps) {
-  const defaultContainerStyles = "mb-2";
-  let defaultTextStyles = "";
+  let defaultTextStyles = "text-base font-normal";
   switch (size) {
     case 1:
       defaultTextStyles = "text-2xl font-bold";
@@ -28,7 +27,7 @@ export function Heading({
       defaultTextStyles = "text-lg font-medium";
       break;
     default:
-      "text-base font-normal";
+      defaultTextStyles;
       break;
   }
 
@@ -38,7 +37,7 @@ export function Heading({
   )}` as keyof JSX.IntrinsicElements;
 
   return (
-    <header className={twMerge(defaultContainerStyles, containerClass)}>
+    <header className={containerClass}>
       <Header className={twMerge(defaultTextStyles, textClass)}>{text}</Header>
       {children}
     </header>

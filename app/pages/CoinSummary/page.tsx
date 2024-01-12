@@ -13,11 +13,13 @@ import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 export default function CoinSummary() {
   const dispatch = useAppDispatch();
   const [readMore, setReadMore] = useState<boolean>(false);
-  const { coinSummaryId } = useAppSelector((state) => state.activeLink);
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { currency } = useAppSelector((state) => state.coinMarkets);
-  const { description } = summaryCoin;
-  const { blockchain_site: siteLink } = summaryCoin.links;
+  const { activeLink, coinSummary, coinMarkets } = useAppSelector(
+    (state) => state
+  );
+
+  const { description } = coinSummary.summaryCoin;
+  const { currency } = coinMarkets;
+  const { blockchain_site: siteLink } = coinSummary.summaryCoin.links;
   const {
     total_volume: volume,
     mcap_to_tvl_ratio: ratio,
@@ -26,18 +28,21 @@ export default function CoinSummary() {
     fully_diluted_valuation: dilutedVal,
     max_supply: max,
     circulating_supply: circulating,
-  } = summaryCoin.market_data;
+  } = coinSummary.summaryCoin.market_data;
 
   const {
     data: coinInfo,
     isLoading,
     isError,
-  } = useGetCoinQuery({ id: coinSummaryId });
+  } = useGetCoinQuery({ id: activeLink.coinSummaryId });
 
   const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
   const percentage = (circulating / max) * 100;
   const stats = {
-    volume: { "Total Volume": volume[currency], "Volume/Market": ratio },
+    volume: {
+      "Total Volume": volume[currency],
+      "Volume/Market": ratio,
+    },
     supply: { "Max Supply": max, "Circulating Supply": circulating },
     market: {
       "Market Cap Change": changeIn24h,

@@ -1,6 +1,6 @@
-import ProgressBar from "@ramonak/react-progress-bar";
 import Card from "@/app/components/UI/Card";
 import CoinStat from "@/app/components/UI/CoinStat";
+import StatBar from "@/app/components/UI/StatBar";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 
 type StatCardProps = {
@@ -28,14 +28,7 @@ export default function StatCard({
                 : "N/A"}
             </p>
             <p className="text-xs absolute bottom-2 right-0">100%</p>
-            <ProgressBar
-              completed={completed}
-              animateOnRender={true}
-              labelColor="transparent"
-              baseBgColor="hsla(0, 0%, 100%, 0.5)"
-              bgColor="hsl(33, 93%, 54%)"
-              height="5px"
-            />
+            <StatBar completed={completed} bgColor="hsl(33, 93%, 54%)" />
           </div>
         )}
       </div>

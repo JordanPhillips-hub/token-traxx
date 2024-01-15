@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 import MainCard from "./MainCard";
 import StatCard from "./StatCard";
@@ -8,16 +8,18 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinQuery } from "@/app/store/api/coingecko";
 import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
 import Card from "@/app/components/UI/Card";
+import CoinDescriptionToggle from "@/app/components/UI/CoinDescriptionToggle";
 import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 
 export default function CoinSummary() {
   const dispatch = useAppDispatch();
-  const [readMore, setReadMore] = useState<boolean>(false);
-  const { coinSummaryId } = useAppSelector((state) => state.activeLink);
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { currency } = useAppSelector((state) => state.coinMarkets);
-  const { description } = summaryCoin;
-  const { blockchain_site: siteLink } = summaryCoin.links;
+  const { activeLink, coinSummary, coinMarkets } = useAppSelector(
+    (state) => state
+  );
+
+  const { description } = coinSummary.summaryCoin;
+  const { currency } = coinMarkets;
+  const { blockchain_site: siteLink } = coinSummary.summaryCoin.links;
   const {
     total_volume: volume,
     mcap_to_tvl_ratio: ratio,
@@ -26,18 +28,20 @@ export default function CoinSummary() {
     fully_diluted_valuation: dilutedVal,
     max_supply: max,
     circulating_supply: circulating,
-  } = summaryCoin.market_data;
+  } = coinSummary.summaryCoin.market_data;
 
   const {
     data: coinInfo,
     isLoading,
     isError,
-  } = useGetCoinQuery({ id: coinSummaryId });
+  } = useGetCoinQuery({ id: activeLink.coinSummaryId });
 
-  const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
   const percentage = (circulating / max) * 100;
   const stats = {
-    volume: { "Total Volume": volume[currency], "Volume/Market": ratio },
+    volume: {
+      "Total Volume": volume[currency],
+      "Volume/Market": ratio,
+    },
     supply: { "Max Supply": max, "Circulating Supply": circulating },
     market: {
       "Market Cap Change": changeIn24h,
@@ -52,17 +56,18 @@ export default function CoinSummary() {
     }
   });
 
-  function toggleReadMore() {
-    setReadMore(!readMore);
-  }
+  const links = [siteLink[0], siteLink[1], siteLink[2]];
+  const siteLinks = links.map((link) => (
+    <Card key={link} className="w-fit rounded-xl py-4 px-6">
+      <CopyButton toCopy={link} />
+    </Card>
+  ));
 
+  if (isLoading) return <p className="text-xl text-center">Loading...</p>;
+  if (isError) return <p className="text-xl text-center">Error</p>;
   return (
     <Provider store={store}>
-      {isLoading && <p className="text-xl text-center">Loading...</p>}
-      {isError && (
-        <p className="text-xl text-center">Error loading coin information</p>
-      )}
-      {!isLoading && !isError && coinInfo && (
+      {coinInfo && (
         <main className="container mx-auto">
           <section className="grid grid-cols-2 gap-8 mb-8">
             <section>
@@ -70,27 +75,11 @@ export default function CoinSummary() {
             </section>
 
             <section>
-              <div
-                className={
-                  !readMore
-                    ? "overflow-hidden max-h-48"
-                    : "overflow-visible max-h-full"
-                }
-              >
-                <p>{description.en}</p>
-              </div>
-
-              <button className="text-purple500" onClick={toggleReadMore}>{`${
-                !readMore ? "Read More..." : "Read Less..."
-              }`}</button>
-
-              <div className="flex flex-wrap gap-6 mt-6">
-                {siteLinks.map((link) => (
-                  <Card key={link} className="w-fit rounded-xl py-4 px-6">
-                    <CopyButton toCopy={link} />
-                  </Card>
-                ))}
-              </div>
+              <CoinDescriptionToggle
+                coinName={coinSummary.summaryCoin.name}
+                description={description.en}
+              />
+              <div className="flex flex-wrap gap-6 mt-6">{siteLinks}</div>
             </section>
           </section>
 

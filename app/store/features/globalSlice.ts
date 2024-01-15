@@ -5,8 +5,8 @@ type GlobalState = {
     active_cryptocurrencies: number;
     markets: number;
     market_cap_change_percentage_24h_usd: number;
-    total_market_cap: Record<string, number>;
     market_cap_percentage: Record<string, number>;
+    total_volume: Record<string, number>;
   };
 };
 
@@ -15,8 +15,8 @@ const initialState: GlobalState = {
     active_cryptocurrencies: 0,
     markets: 0,
     market_cap_change_percentage_24h_usd: 0,
-    total_market_cap: {},
-    market_cap_percentage: {}
+    market_cap_percentage: {},
+    total_volume: {},
   },
 };
 

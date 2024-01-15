@@ -7,18 +7,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { SparklineProps } from "./types";
+import { sparklineOptions } from "./data";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: { display: false },
-  },
-  scales: {
-    x: { display: false },
-    y: { display: false },
-  },
-};
 
 export default function Sparkline({ sparklinePrice }: SparklineProps) {
   const data = {
@@ -34,5 +24,7 @@ export default function Sparkline({ sparklinePrice }: SparklineProps) {
     ],
   };
 
-  return <Line width={150} height={30} options={options} data={data} />;
+  return (
+    <Line width={150} height={30} options={sparklineOptions} data={data} />
+  );
 }

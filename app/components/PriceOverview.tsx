@@ -2,11 +2,10 @@ import { useAppSelector } from "@/app/store/hooks";
 import PriceChange from "@/app/components/UI/PriceChange";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 
-function PriceOverview() {
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
+export default function PriceOverview() {
+  const { coinSummary, coinMarkets } = useAppSelector((state) => state);
+  const { summaryCoin } = coinSummary;
+  const { currency, currencySymbol } = coinMarkets;
 
   const {
     current_price,
@@ -25,5 +24,3 @@ function PriceOverview() {
     </div>
   );
 }
-
-export default PriceOverview;

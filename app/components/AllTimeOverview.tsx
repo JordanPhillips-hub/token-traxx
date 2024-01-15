@@ -6,10 +6,9 @@ import { formatDateString } from "@/app/utils/dateAndTime";
 type AllTimeOverviewProps = { allTime: string };
 
 export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
-  const { summaryCoin } = useAppSelector((state) => state.coinSummary);
-  const { currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
+  const { coinMarkets, coinSummary } = useAppSelector((state) => state);
+  const { summaryCoin } = coinSummary;
+  const { currency, currencySymbol } = coinMarkets;
 
   const {
     ath,
@@ -20,6 +19,10 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
 
   const allTimeIsHigh = allTime === "high";
   const iconClass = allTimeIsHigh ? "text-green500" : "text-red500 rotate-180";
+
+  function createPrice(allTimePrice: number) {
+    return `${currencySymbol}${formatCurrency(allTimePrice)}`;
+  }
 
   return (
     <div className="mt-7">
@@ -39,8 +42,8 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         <div>
           <span className="text-2xl	font-medium">
             {allTimeIsHigh
-              ? `${currencySymbol}${formatCurrency(ath[currency])}`
-              : `${currencySymbol}${formatCurrency(atl[currency])}`}
+              ? createPrice(ath[currency])
+              : createPrice(atl[currency])}
           </span>
         </div>
       </div>

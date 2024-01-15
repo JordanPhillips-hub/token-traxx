@@ -9,18 +9,30 @@ export default function NavInfoDisplay() {
   const dispatch = useAppDispatch();
   const { data: coinGlobals } = useGetGlobalsQuery<any>({});
   const { data } = useAppSelector((state) => state.globals);
+  const { currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   const {
-    active_cryptocurrencies: activeCurrencies,
     markets,
+    active_cryptocurrencies: activeCurrencies,
+    total_volume: volume,
     market_cap_change_percentage_24h_usd: marketCapChangeIn24h,
-    total_market_cap: marketCap,
     market_cap_percentage: marketCapPercent,
   } = data;
 
-  const formattedMarketCap = `$${formatNum3_2(
-    marketCap.btc
-  )} ${checkNumberScale(marketCap.btc)}`;
+  function findVolumeCurrency() {
+    const foundCurrency = Object.entries(volume).find(
+      ([key]) => key === currency.toLowerCase()
+    );
+
+    if (foundCurrency) {
+      const [, volume] = foundCurrency;
+      return `${currencySymbol}${formatNum3_2(volume)}${checkNumberScale(
+        Number(volume)
+      )}`;
+    }
+  }
 
   useEffect(() => {
     if (coinGlobals) {
@@ -33,7 +45,7 @@ export default function NavInfoDisplay() {
       <CoinInfo name="Coins" icon="coin" data={activeCurrencies} />
       <CoinInfo name="Exchange" icon="exchange" data={markets} />
       <CoinInfo changePercent={marketCapChangeIn24h} />
-      <CoinInfo data={formattedMarketCap} />
+      <CoinInfo data={findVolumeCurrency()} />
       <CoinInfo
         name="BTC"
         data={`${Math.floor(marketCapPercent.btc)}%`}

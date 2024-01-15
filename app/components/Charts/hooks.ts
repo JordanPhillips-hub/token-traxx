@@ -1,5 +1,6 @@
-import { useAppSelector, useGetMarketChartQuery } from "./imports";
 import { createAxisLabel, createBarDataset, createGraphLabel, createLineDataset } from "./utils";
+import { useAppSelector } from "@/app/store/hooks";
+import { useGetMarketChartQuery } from "@/app/store/api/coingecko";
 
 export function useChartData(coinId: string, days: number) {
   const {

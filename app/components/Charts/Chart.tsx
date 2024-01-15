@@ -1,26 +1,26 @@
+import { useEffect } from "react";
+import { Line, Bar } from "react-chartjs-2";
+import { useTheme } from "next-themes";
+import { setCompareData } from "./utils";
+import { chartOptions } from "./data";
+import { ChartProps } from "./types";
+import { useChartData, useDefaultDatasets, useComparedDatasets } from "./hooks";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import {
-  useEffect,
-  Line,
-  Bar,
-  useTheme,
-  useAppDispatch,
-  useAppSelector,
-  ChartProps,
   setPriceDates,
   setPriceVolumes,
   setPrices,
   setVolumeDates,
+} from "@/app/store/features/charts/marketChartSlice";
+import {
   setComparedPrices,
   setComparedVolumes,
-  setCompareData,
+} from "@/app/store/features/charts/compareChartSlice";
+import {
   flattenNumberArray,
   filterIntegers,
   filterNonIntegers,
-  useChartData,
-  useDefaultDatasets,
-  useComparedDatasets,
-  chartOptions,
-} from "./imports";
+} from "@/app/utils/arrayHelpers";
 
 import {
   Chart as ChartJS,

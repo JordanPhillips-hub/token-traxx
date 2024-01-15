@@ -2,7 +2,7 @@ export { useEffect, useCallback } from "react";
 export { Line, Bar } from "react-chartjs-2";
 export { useTheme } from "next-themes";
 export { setCompareData } from "./utils";
-export { options } from "./data";
+export { chartOptions } from "./data";
 export { useChartData, useDefaultDatasets, useComparedDatasets } from './hooks';
 export type { ChartProps } from "./types";
 export { useAppDispatch, useAppSelector } from "@/app/store/hooks";

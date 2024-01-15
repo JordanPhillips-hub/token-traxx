@@ -1,4 +1,4 @@
-export const options = {
+export const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -24,5 +24,16 @@ export const options = {
         display: false,
       },
     },
+  },
+};
+
+export const sparklineOptions = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+  },
+  scales: {
+    x: { display: false },
+    y: { display: false },
   },
 };

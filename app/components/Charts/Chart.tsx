@@ -19,7 +19,7 @@ import {
   useChartData,
   useDefaultDatasets,
   useComparedDatasets,
-  options,
+  chartOptions,
 } from "./imports";
 
 import {
@@ -88,14 +88,14 @@ export default function Chart({ chartType, coinId, days }: ChartProps) {
       {chartType === "line" && (
         <Line
           data={isComparing ? comparedLineDataset : defaultLineDataset}
-          options={options}
+          options={chartOptions}
         />
       )}
 
       {chartType === "bar" && (
         <Bar
           data={isComparing ? comparedBarDataset : defaultBarDataset}
-          options={options}
+          options={chartOptions}
         />
       )}
     </div>

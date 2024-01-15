@@ -1,3 +1,4 @@
+import { Heading } from "../UI/Heading";
 import { ChartContainerProps } from "./types";
 import { useAppSelector } from "@/app/store/hooks";
 
@@ -20,7 +21,7 @@ export default function ChartContainer({
       <div className="mb-3">
         {!isComparing && <p className="text-3xl">{price}</p>}
         {(!isComparing || location === "convertor") && (
-          <p className="text-xl">{name}</p>
+          <Heading textClass="font-normal" size={2} text={name} />
         )}
         {isComparing && (
           <p className="text-gray100 text-sm">

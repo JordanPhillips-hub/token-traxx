@@ -5,6 +5,7 @@ import {
   formatCurrency,
   calcPercentageChange,
 } from "@/app/utils/numberFormatting";
+import { Heading } from "@/app/components/UI/Heading";
 
 type PersonalOverviewProps = {
   id: string;
@@ -30,10 +31,14 @@ export default function PersonalOverview({
   return (
     <div className="flex rounded-xl w-2/5" key={id}>
       <div>
-        <div className="flex items-center gap-2 mb-8">
+        <Heading
+          size={2}
+          containerClass="flex flex-row-reverse justify-end items-center gap-2 mb-8"
+          textClass="text-2xl"
+          text={formatCoinName(id, symbol)}
+        >
           <Image src={image} alt={`${id} icon`} width={32} height={32} />
-          <p className="text-2xl font-bold">{formatCoinName(id, symbol)}</p>
-        </div>
+        </Heading>
 
         <div className="flex flex-col gap-2">
           <p>Total Value</p>

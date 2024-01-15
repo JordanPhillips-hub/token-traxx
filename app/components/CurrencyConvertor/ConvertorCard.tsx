@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent } from "react";
 import { ConvertorCardProps } from "./types";
 import ConvertorDropdown from "./ConvertorDropdown";
 import Legend from "./Legend";
+import { Heading } from "@/app/components/UI/Heading";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import {
   setNumToSell,
@@ -33,7 +34,12 @@ export default function ConvertorCard({
 
   return (
     <div className="container bg-blue600 p-6 rounded-2xl" id={cardType}>
-      <p className="text-sm text-gray100 mb-10">{cardName}</p>
+      <Heading
+        containerClass="mb-10"
+        textClass="text-gray100"
+        size={2}
+        text={cardName}
+      />
 
       <div className="flex justify-between mb-1">
         <div className="relative">

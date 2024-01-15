@@ -11,12 +11,7 @@ export default function Logo() {
         width={36}
         height={20}
       />
-      <Heading
-        containerClass="mb-0"
-        textClass="font-bold"
-        text="Token Traxx"
-        size={1}
-      />
+      <Heading size={1} text="Token Traxx" />
     </div>
   );
 }

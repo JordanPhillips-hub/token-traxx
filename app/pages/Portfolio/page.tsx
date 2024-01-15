@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { uid } from "uid";
 import AddAsset from "./AddAsset/AddAsset";
-import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import PersonalOverview from "./PersonalOverview";
 import MarketStat from "./MarketStat";
+import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Card from "@/app/components/UI/Card";
+import { Heading } from "@/app/components/UI/Heading";
 import {
   formatCurrency,
   calculatePercentage,
@@ -45,15 +46,14 @@ export default function Portfolio() {
         </aside>
       )}
       <main className={`container mx-auto ${isAddingAsset && "blur-sm"}`}>
-        <header className="flex justify-between mb-10">
-          <h1 className="text-xl font-medium">Portfolio</h1>
-
+        <div className="flex justify-between mb-10">
+          <Heading size={1} text="Portfolio" />
           <PrimaryButton
             className="py-3 px-16"
             text="Add Asset"
             onClick={() => setIsAddingAsset(true)}
           />
-        </header>
+        </div>
 
         {(!assets || assets.length === 0) && (
           <p>

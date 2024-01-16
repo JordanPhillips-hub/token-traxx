@@ -1,5 +1,5 @@
 import ConvertorDropdown from "./ConvertorDropdown";
-import SellForm from "./SellForm";
+import SellInput from "./SellInput";
 import Legend from "./Legend";
 import { ConvertorCardProps } from "./types";
 import { useGetSelectedCoin } from "./hooks";
@@ -32,7 +32,7 @@ export default function ConvertorCard({
           {...useGetSelectedCoin(cardType)}
         />
         {isBuyCard && <p>{Math.floor(sellPrice / currentPrice)}</p>}
-        {isSellCard && <SellForm cardType={cardType} />}
+        {isSellCard && <SellInput cardType={cardType} />}
       </div>
 
       <hr />

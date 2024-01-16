@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 type HeadingProps = {
   size: number;
-  text: string;
+  text: string | React.ReactNode;
   children?: React.ReactNode;
   textClass?: string;
   containerClass?: string;

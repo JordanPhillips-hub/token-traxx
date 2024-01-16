@@ -16,7 +16,8 @@ export default function FormInput({
   max,
   onChange,
 }: FormInputProps) {
-  const defaultStyles = "placeholder:text-sm rounded-md focused-primary";
+  const defaultStyles =
+    "placeholder:text-sm rounded-md border border-gray-300 focus:outline-none focus:border-purple500";
 
   return (
     <>

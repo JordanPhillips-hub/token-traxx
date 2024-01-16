@@ -1,6 +1,6 @@
 export type ChartContainerProps = {
   children: React.ReactNode;
-  name: string;
+  name: string | React.ReactNode;
   price?: number | string;
   date?: string;
   type: string;

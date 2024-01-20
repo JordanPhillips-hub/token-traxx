@@ -15,8 +15,9 @@ import {
 export default function CurrencyDropdown() {
   const dispatch = useAppDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { coinMarkets } = useAppSelector((state) => state);
-  const { currency, currencySymbol } = coinMarkets;
+  const { currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   const { data: markets } = useGetMarketsQuery({
     page: 1,

@@ -10,9 +10,8 @@ import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 export default function SearchBar() {
   const dispatch = useAppDispatch();
   const [searchInput, setSearchInput] = useState<string>("");
-  const { coinMarkets, activeLink } = useAppSelector((state) => state);
-  const { coins } = coinMarkets;
-  const { coinSummaryId } = activeLink;
+  const { coins } = useAppSelector((state) => state.coinMarkets);
+  const { coinSummaryId } = useAppSelector((state) => state.activeLink);
 
   function handleSearch({ target: { value } }: ChangeEvent<HTMLInputElement>) {
     setSearchInput(value.toLowerCase());

@@ -17,8 +17,7 @@ export function useChartData(coinId: string, days: number) {
 };
 
 export function useDefaultDatasets() {
-  const { marketChart } = useAppSelector((state) => state);
-  const { prices, priceVolumes, priceDates, volumeDates } = marketChart
+  const { prices, priceVolumes, priceDates, volumeDates } = useAppSelector((state) => state.marketChart);
 
   const defaultLineDataset = {
     labels: createAxisLabel(priceDates),
@@ -39,10 +38,9 @@ export function useDefaultDatasets() {
 };
 
 export function useComparedDatasets() {
-  const { marketChart, compareCharts, coinMarkets } = useAppSelector((state) => state);
-  const { priceDates, volumeDates } = marketChart;
-  const { comparedCoins, comparedPrices, comparedVolumes } = compareCharts;
-  const { coins, currencySymbol } = coinMarkets;
+  const { priceDates, volumeDates } = useAppSelector((state) => state.marketChart);
+  const { coins, currencySymbol } = useAppSelector((state) => state.coinMarkets);
+  const { comparedCoins, comparedPrices, comparedVolumes } = useAppSelector((state) => state.compareCharts);
 
   const comparedLineDataset = {
     labels: createAxisLabel(priceDates),

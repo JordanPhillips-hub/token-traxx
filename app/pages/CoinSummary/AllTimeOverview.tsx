@@ -40,11 +40,11 @@ export default function AllTimeOverview({ allTime }: AllTimeOverviewProps) {
         </div>
 
         <div>
-          <span className="text-2xl	font-medium">
+          <p className="text-2xl	font-medium">
             {allTimeIsHigh
               ? createPrice(ath[currency])
               : createPrice(atl[currency])}
-          </span>
+          </p>
         </div>
       </div>
     </div>

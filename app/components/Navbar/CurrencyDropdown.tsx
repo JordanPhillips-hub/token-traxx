@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import getSymbolFromCurrency from "currency-symbol-map";
 import { CurrencyItem } from "./types";
-import { currencyCodes } from "./data";
+import { convertCurrencyCodes } from "./utils";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -24,12 +23,6 @@ export default function CurrencyDropdown() {
     currency: currency,
   });
 
-  const currencies = currencyCodes.map((code) => ({
-    id: code,
-    symbol: getSymbolFromCurrency(code) || "",
-    name: code.toLowerCase(),
-  }));
-
   function handleCurrencyChange(currency: string, symbol: string) {
     dispatch(setCurrency(currency));
     dispatch(setCurrencySymbol(symbol));
@@ -51,7 +44,7 @@ export default function CurrencyDropdown() {
       containerClass="flex flex-wrap w-[270px] gap-2 right-0"
       itemClass="p-1 rounded-none"
       isOpen={isDropdownOpen}
-      items={currencies}
+      items={convertCurrencyCodes()}
       renderItem={(item) => renderCurrencyItem(item)}
       onItemClick={(name, symbol) => handleCurrencyChange(name, symbol)}
     >

@@ -1,7 +1,7 @@
 import CardHeader from "./CardHeader";
+import AllTimeOverview from "./AllTimeOverview";
+import PriceOverview from "./PriceOverview";
 import Card from "@/app/components/UI/Card";
-import PriceOverview from "@/app/pages/CoinSummary/PriceOverview";
-import AllTimeOverview from "@/app/pages/CoinSummary/AllTimeOverview";
 
 export default function MainCard() {
   return (

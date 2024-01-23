@@ -17,7 +17,7 @@ export default function CoinSummary() {
     (state) => state
   );
 
-  const { description } = coinSummary.summaryCoin;
+  const { description, name } = coinSummary.summaryCoin;
   const { currency } = coinMarkets;
   const { blockchain_site: siteLink } = coinSummary.summaryCoin.links;
   const {
@@ -37,6 +37,13 @@ export default function CoinSummary() {
   } = useGetCoinQuery({ id: activeLink.coinSummaryId });
 
   const percentage = (circulating / max) * 100;
+  const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
+  const links = siteLinks.map((link) => (
+    <Card key={link} className="w-fit rounded-xl py-4 px-6">
+      <CopyButton toCopy={link} />
+    </Card>
+  ));
+
   const stats = {
     volume: {
       "Total Volume": volume[currency],
@@ -56,13 +63,6 @@ export default function CoinSummary() {
     }
   });
 
-  const links = [siteLink[0], siteLink[1], siteLink[2]];
-  const siteLinks = links.map((link) => (
-    <Card key={link} className="w-fit rounded-xl py-4 px-6">
-      <CopyButton toCopy={link} />
-    </Card>
-  ));
-
   if (isLoading) return <p className="text-xl text-center">Loading...</p>;
   if (isError) return <p className="text-xl text-center">Error</p>;
   return (
@@ -73,26 +73,25 @@ export default function CoinSummary() {
             <section>
               <MainCard />
             </section>
-
             <section>
               <CoinDescriptionToggle
-                coinName={coinSummary.summaryCoin.name}
+                coinName={name}
                 description={description.en}
               />
-              <div className="flex flex-wrap gap-6 mt-6">{siteLinks}</div>
+              <div className="flex flex-wrap gap-6 mt-6">{links}</div>
             </section>
           </section>
 
           <hr />
 
           <section className="grid grid-cols-2 gap-6 my-8">
-            <StatCard stats={stats.market} hasStatusBar={false} />
+            <StatCard stats={stats.market} />
             <StatCard
               stats={stats.supply}
               hasStatusBar={true}
               completed={percentage}
             />
-            <StatCard stats={stats.volume} hasStatusBar={false} />
+            <StatCard stats={stats.volume} />
           </section>
         </main>
       )}

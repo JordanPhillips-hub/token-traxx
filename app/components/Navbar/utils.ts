@@ -1,5 +1,5 @@
-import { currencyCodes } from "./data";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { currencyCodes } from "./data";
 
 export function convertCurrencyCodes() {
   const currencies = currencyCodes.map((code) => ({
@@ -7,5 +7,5 @@ export function convertCurrencyCodes() {
     symbol: getSymbolFromCurrency(code) || "",
     name: code.toLowerCase(),
   }));
-  return currencies
-}
+  return currencies;
+};

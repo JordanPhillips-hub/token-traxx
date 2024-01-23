@@ -3,13 +3,11 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 import MainCard from "./MainCard";
 import StatCard from "./StatCard";
+import DescriptionOverview from "./DescriptionOverview";
 import { store } from "@/app/store/store";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinQuery } from "@/app/store/api/coingecko";
 import { setSummaryCoin } from "@/app/store/features/coinSummarySlice";
-import Card from "@/app/components/UI/Card";
-import CoinDescriptionToggle from "@/app/components/UI/CoinDescriptionToggle";
-import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 
 export default function CoinSummary() {
   const dispatch = useAppDispatch();
@@ -17,9 +15,7 @@ export default function CoinSummary() {
     (state) => state
   );
 
-  const { description, name } = coinSummary.summaryCoin;
   const { currency } = coinMarkets;
-  const { blockchain_site: siteLink } = coinSummary.summaryCoin.links;
   const {
     total_volume: volume,
     mcap_to_tvl_ratio: ratio,
@@ -37,13 +33,6 @@ export default function CoinSummary() {
   } = useGetCoinQuery({ id: activeLink.coinSummaryId });
 
   const percentage = (circulating / max) * 100;
-  const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
-  const links = siteLinks.map((link) => (
-    <Card key={link} className="w-fit rounded-xl py-4 px-6">
-      <CopyButton toCopy={link} />
-    </Card>
-  ));
-
   const stats = {
     volume: {
       "Total Volume": volume[currency],
@@ -73,13 +62,7 @@ export default function CoinSummary() {
             <section>
               <MainCard />
             </section>
-            <section>
-              <CoinDescriptionToggle
-                coinName={name}
-                description={description.en}
-              />
-              <div className="flex flex-wrap gap-6 mt-6">{links}</div>
-            </section>
+            <DescriptionOverview />
           </section>
 
           <hr />

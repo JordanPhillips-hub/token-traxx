@@ -59,14 +59,10 @@ export default function CoinSummary() {
       {coinInfo && (
         <main className="container mx-auto">
           <section className="grid grid-cols-2 gap-8 mb-8">
-            <section>
-              <MainCard />
-            </section>
+            <MainCard />
             <DescriptionOverview />
           </section>
-
           <hr />
-
           <section className="grid grid-cols-2 gap-6 my-8">
             <StatCard stats={stats.market} />
             <StatCard

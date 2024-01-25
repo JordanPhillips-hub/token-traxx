@@ -1,10 +1,10 @@
 import Image from "next/image";
-import InfiniteScroll from "react-infinite-scroll-component";
 import TableStatBar from "./TableStatBar";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import Sparkline from "@/app/components/Charts/Sparkline";
 import PriceChange from "@/app/components/UI/PriceChange";
 import PageLink from "@/app/components/UI/Links/PageLink";
+import InfiniteLoader from "@/app/components/UI/InfiniteLoader";
 import { Heading } from "@/app/components/UI/Heading";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
@@ -43,29 +43,20 @@ export default function CoinTable() {
     dispatch(setCoinSummaryId(id));
   }
 
+  function handleLoaderNext() {
+    if (updatedCoins && !isError) {
+      setTimeout(() => {
+        dispatch(setCoinPage(coinPage + 1));
+        dispatch(setTableCoins(tableCoins.concat(updatedCoins)));
+      }, 5000);
+    }
+  }
+
   return (
-    <InfiniteScroll
-      dataLength={tableCoins.length}
-      next={() => {
-        if (updatedCoins && !isError) {
-          setTimeout(() => {
-            dispatch(setCoinPage(coinPage + 1));
-            dispatch(setTableCoins(tableCoins.concat(updatedCoins)));
-          }, 7000);
-        }
-      }}
-      hasMore={true}
-      loader={
-        <Heading
-          containerClass="mt-2 text-center"
-          size={4}
-          text={
-            isError
-              ? "We are experiencing technical difficulties. Please try again later"
-              : "Loading Coins..."
-          }
-        />
-      }
+    <InfiniteLoader
+      length={tableCoins.length}
+      next={handleLoaderNext}
+      err={isError}
     >
       <table className="min-w-full border-separate border-spacing-y-2 text-sm">
         <thead className="text-left text-sm text-gray100">
@@ -138,6 +129,6 @@ export default function CoinTable() {
           )}
         </tbody>
       </table>
-    </InfiniteScroll>
+    </InfiniteLoader>
   );
 }

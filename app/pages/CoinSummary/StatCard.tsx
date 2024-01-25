@@ -5,7 +5,7 @@ import { formatCurrency } from "@/app/utils/numberFormatting";
 
 type StatCardProps = {
   stats: Record<string, number>;
-  hasStatusBar: boolean;
+  hasStatusBar?: boolean;
   completed?: number;
 };
 

@@ -11,8 +11,9 @@ import { formatCurrency } from "@/app/utils/numberFormatting";
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
-  const { coins, isMarketsLoading, marketsHasError, currency, currencySymbol } =
-    useAppSelector((state) => state.coinMarkets);
+  const { coins, marketsHasError, currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   function handleComparison(id: string) {
     dispatch(setCoinId(id));

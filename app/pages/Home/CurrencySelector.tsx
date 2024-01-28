@@ -5,13 +5,13 @@ import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice"
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import Carousel from "@/app/components/UI/Carousel";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import Price from "@/app/components/UI/Price";
 import PriceChange from "@/app/components/UI/PriceChange";
-import { formatCurrency } from "@/app/utils/numberFormatting";
 
 export default function CurrencySelector() {
   const dispatch = useAppDispatch();
   const { comparedCoins } = useAppSelector((state) => state.compareCharts);
-  const { coins, marketsHasError, currency, currencySymbol } = useAppSelector(
+  const { coins, marketsHasError } = useAppSelector(
     (state) => state.coinMarkets
   );
 
@@ -32,7 +32,7 @@ export default function CurrencySelector() {
           id,
           image,
           name,
-          current_price: price,
+          current_price,
           price_change_percentage_24h: priceChange,
         }) => (
           <SwiperSlide key={id}>
@@ -42,15 +42,10 @@ export default function CurrencySelector() {
                 onClick={() => handleComparison(id)}
               >
                 <Image src={image} alt={`${id} icon`} width={32} height={32} />
-
                 <div className="text-sm flex-col">
                   <p className="font-medium text-left">{name}</p>
                   <div className="flex items-center gap-2">
-                    <p>
-                      {`${currencySymbol}${formatCurrency(
-                        price
-                      )} ${currency.toUpperCase()}`}
-                    </p>
+                    <Price price={current_price} hasCode />
                     <PriceChange percentage={priceChange} />
                   </div>
                 </div>

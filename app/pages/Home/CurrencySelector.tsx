@@ -23,57 +23,50 @@ export default function CurrencySelector() {
     }
   }
 
+  if (marketsHasError) return "";
   return (
-    <>
-      {marketsHasError ? (
-        <p>
-          We are experiencing technical difficulties. Please try again later
-        </p>
-      ) : (
-        <Carousel>
-          {coins.map(
-            ({
-              id,
-              image,
-              name,
-              current_price: price,
-              price_change_percentage_24h: priceChange,
-            }) => (
-              <SwiperSlide key={id}>
-                <div className="max-w-[250px]">
-                  <PrimaryButton
-                    className="p-4 w-full"
-                    onClick={() => handleComparison(id)}
-                  >
-                    <div>
-                      <Image
-                        src={image}
-                        alt={`${id} icon`}
-                        width={32}
-                        height={32}
-                      />
-                    </div>
-
-                    <div className="text-sm flex-col">
-                      <p className="font-medium text-left">
-                        {isMarketsLoading ? "Loading Coin" : name}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <p className="text-left">
-                          {`${currencySymbol}${formatCurrency(
-                            price
-                          )} ${currency.toUpperCase()}`}
-                        </p>
-                        <PriceChange percentage={priceChange} />
-                      </div>
-                    </div>
-                  </PrimaryButton>
+    <Carousel>
+      {coins.map(
+        ({
+          id,
+          image,
+          name,
+          current_price: price,
+          price_change_percentage_24h: priceChange,
+        }) => (
+          <SwiperSlide key={id}>
+            <div className="max-w-[250px]">
+              <PrimaryButton
+                className="p-4 w-full"
+                onClick={() => handleComparison(id)}
+              >
+                <div>
+                  <Image
+                    src={image}
+                    alt={`${id} icon`}
+                    width={32}
+                    height={32}
+                  />
                 </div>
-              </SwiperSlide>
-            )
-          )}
-        </Carousel>
+
+                <div className="text-sm flex-col">
+                  <p className="font-medium text-left">
+                    {isMarketsLoading ? "Loading Coin" : name}
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-left">
+                      {`${currencySymbol}${formatCurrency(
+                        price
+                      )} ${currency.toUpperCase()}`}
+                    </p>
+                    <PriceChange percentage={priceChange} />
+                  </div>
+                </div>
+              </PrimaryButton>
+            </div>
+          </SwiperSlide>
+        )
       )}
-    </>
+    </Carousel>
   );
 }

@@ -50,9 +50,7 @@ export default function CurrencySelector() {
                 </div>
 
                 <div className="text-sm flex-col">
-                  <p className="font-medium text-left">
-                    {isMarketsLoading ? "Loading Coin" : name}
-                  </p>
+                  <p className="font-medium text-left">{name}</p>
                   <div className="flex items-center gap-2">
                     <p className="text-left">
                       {`${currencySymbol}${formatCurrency(

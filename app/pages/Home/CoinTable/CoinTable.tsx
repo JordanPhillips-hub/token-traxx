@@ -22,7 +22,7 @@ const tableHeaders = [
 
 export default function CoinTable() {
   const dispatch = useAppDispatch();
-  let { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
+  const { tableCoins, coinPage } = useAppSelector((state) => state.tableCoins);
   const { currency } = useAppSelector((state) => state.coinMarkets);
 
   const { data: updatedCoins, isError } = useGetMarketsQuery({

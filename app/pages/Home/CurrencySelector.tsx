@@ -33,7 +33,7 @@ export default function CurrencySelector() {
           image,
           name,
           current_price,
-          price_change_percentage_24h: priceChange,
+          price_change_percentage_24h: priceChangeIn24h,
         }) => (
           <SwiperSlide key={id}>
             <div className="max-w-[250px]">
@@ -46,7 +46,7 @@ export default function CurrencySelector() {
                   <p className="font-medium text-left">{name}</p>
                   <div className="flex items-center gap-2">
                     <Price price={current_price} hasCode />
-                    <PriceChange percentage={priceChange} />
+                    <PriceChange percentage={priceChangeIn24h} />
                   </div>
                 </div>
               </PrimaryButton>

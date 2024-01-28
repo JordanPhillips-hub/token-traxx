@@ -41,19 +41,12 @@ export default function CurrencySelector() {
                 className="p-4 w-full"
                 onClick={() => handleComparison(id)}
               >
-                <div>
-                  <Image
-                    src={image}
-                    alt={`${id} icon`}
-                    width={32}
-                    height={32}
-                  />
-                </div>
+                <Image src={image} alt={`${id} icon`} width={32} height={32} />
 
                 <div className="text-sm flex-col">
                   <p className="font-medium text-left">{name}</p>
                   <div className="flex items-center gap-2">
-                    <p className="text-left">
+                    <p>
                       {`${currencySymbol}${formatCurrency(
                         price
                       )} ${currency.toUpperCase()}`}

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
-import CoinTable from "./CoinTable";
+import CoinTable from "./CoinTable/CoinTable";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";

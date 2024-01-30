@@ -61,6 +61,7 @@ export default function Home() {
     }
   }, [isComparing]);
 
+  // Create useChartData Hook
   const charts = [
     {
       type: "line",
@@ -80,22 +81,29 @@ export default function Home() {
     },
   ];
 
+  const convertorButtons = {
+    coins: { type: "Coins", clickEvent: () => setIsModalOpen(false) },
+    convertor: { type: "Convertor", clickEvent: () => setIsModalOpen(true) },
+  };
+
   return (
     <>
       <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
         <section className="container mx-auto">
           <div className="bg-blue800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">
-            <CoinConvertorButton
-              isModalOpen={isModalOpen}
-              text="Coins"
-              activeStyles="Coins"
-            />
-            <CoinConvertorButton
-              isModalOpen={isModalOpen}
-              text="Convertor"
-              activeStyles="Convertor"
-              onClick={() => setIsModalOpen(true)}
-            />
+            {Object.keys(convertorButtons).map((key) => {
+              const { type, clickEvent } =
+                convertorButtons[key as keyof typeof convertorButtons];
+              return (
+                <CoinConvertorButton
+                  key={key}
+                  isModalOpen={isModalOpen}
+                  text={type}
+                  activeStyles={type}
+                  onClick={clickEvent}
+                />
+              );
+            })}
           </div>
         </section>
 

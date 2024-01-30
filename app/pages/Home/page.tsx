@@ -32,10 +32,17 @@ export default function Home() {
   const { coins, coinId, currency, currencySymbol } = useAppSelector(
     (state) => state.coinMarkets
   );
-  const selectedCoin = coins.find((coin) => coin.id === coinId);
   const { isComparing, comparedCoins } = useAppSelector(
     (state) => state.compareCharts
   );
+
+  const selectedCoin = coins.find((coin) => coin.id === coinId);
+  const {
+    id: selectedCoinId,
+    symbol: selectedCoinSymbol,
+    current_price,
+    total_volume,
+  } = selectedCoin || {};
 
   const {
     data: coinMarkets,
@@ -61,14 +68,13 @@ export default function Home() {
     }
   }, [isComparing]);
 
-  // Create useChartData Hook
   const charts = [
     {
       type: "line",
-      name: formatCoinName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
+      name: formatCoinName(selectedCoinId ?? "", selectedCoinSymbol ?? ""),
       err: "Prices not available",
       loading: "Loading Price",
-      value: `${formatCurrency(selectedCoin?.current_price) ?? ""} min`,
+      value: `${formatCurrency(current_price) ?? ""} min`,
       date: new Date().toDateString(),
     },
     {
@@ -76,7 +82,7 @@ export default function Home() {
       name: "Volume 24hr",
       err: "Volumes not available",
       loading: "Loading Volumes",
-      value: `${formatCurrency(selectedCoin?.total_volume) ?? ""} bin`,
+      value: `${formatCurrency(total_volume) ?? ""} bin`,
       date: new Date().toDateString(),
     },
   ];

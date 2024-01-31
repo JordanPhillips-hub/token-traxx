@@ -36,6 +36,12 @@ export default function Home() {
     (state) => state.compareCharts
   );
 
+  const {
+    data: coinMarkets,
+    isLoading,
+    isError,
+  } = useGetMarketsQuery({ page: 1, currency: currency });
+
   const selectedCoin = coins.find((coin) => coin.id === coinId);
   const {
     id: selectedCoinId,
@@ -43,12 +49,6 @@ export default function Home() {
     current_price,
     total_volume,
   } = selectedCoin || {};
-
-  const {
-    data: coinMarkets,
-    isLoading,
-    isError,
-  } = useGetMarketsQuery({ page: 1, currency: currency });
 
   useEffect(() => {
     dispatch(setIsMarketsLoading(isLoading));
@@ -143,21 +143,13 @@ export default function Home() {
             <section className=" container flex-col mb-16 mx-auto">
               <div className="flex gap-8">
                 {charts.map((chart) => {
-                  const { name, value, date, type } = chart;
+                  const { name, value, date, type, loading, err } = chart;
                   return (
                     <ChartContainer
                       location="home"
                       key={name}
-                      name={
-                        isLoading
-                          ? "Loading"
-                          : isError
-                          ? "Error Occurred"
-                          : name
-                      }
-                      price={
-                        isLoading || isError ? "" : `${currencySymbol}${value}`
-                      }
+                      name={isLoading ? loading : isError ? err : name}
+                      price={isLoading ? "" : `${currencySymbol}${value}`}
                       date={date}
                       type={type}
                     >

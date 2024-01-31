@@ -2,6 +2,15 @@
 import { useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import CoinTable from "./CoinTable/CoinTable";
+import ChartContainer from "@/app/components/Charts/ChartContainer";
+import Chart from "@/app/components/Charts/Chart";
+import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
+import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
+import Icon from "@/app/components/UI/Icon";
+import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
+import { formatCurrency } from "@/app/utils/numberFormatting";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -15,15 +24,6 @@ import {
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
-import ChartContainer from "@/app/components/Charts/ChartContainer";
-import Chart from "@/app/components/Charts/Chart";
-import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
-import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
-import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
-import Icon from "@/app/components/UI/Icon";
-import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { formatCurrency } from "@/app/utils/numberFormatting";
-import { formatCoinName } from "@/app/utils/generalHelpers";
 
 export default function Home() {
   const dispatch = useAppDispatch();

@@ -1,22 +1,10 @@
 import Image from "next/image";
+import { PersonalOverviewProps } from "./types";
+import Price from "@/app/components/UI/Price";
 import PriceChange from "@/app/components/UI/PriceChange";
 import { formatCoinName } from "@/app/utils/generalHelpers";
-import {
-  formatCurrency,
-  calcPercentageChange,
-} from "@/app/utils/numberFormatting";
 import { Heading } from "@/app/components/UI/Heading";
-
-type PersonalOverviewProps = {
-  id: string;
-  image: string;
-  symbol: string;
-  amountPurchased: number;
-  currentPrice: number;
-  priceAtPurchase: number;
-  purchaseDate: string;
-  currency: string;
-};
+import { calcPercentageChange } from "@/app/utils/numberFormatting";
 
 export default function PersonalOverview({
   id,
@@ -28,6 +16,9 @@ export default function PersonalOverview({
   purchaseDate,
   currency,
 }: PersonalOverviewProps) {
+  const changePercent = calcPercentageChange(currentPrice, priceAtPurchase);
+  const totalValue = amountPurchased * currentPrice;
+  
   return (
     <div className="flex rounded-xl w-2/5" key={id}>
       <div>
@@ -45,16 +36,13 @@ export default function PersonalOverview({
 
           <div className="flex items-center gap-5">
             <div className="flex">
-              <span className="text-3xl font-bold">{currency}</span>
-              <p className="text-3xl font-bold">
-                {formatCurrency(amountPurchased * currentPrice)}
-              </p>
+              <Price className="text-3xl font-bold" 
+                storedCurrency={currency} 
+                price={totalValue} 
+                hasCode={false}
+              />
             </div>
-
-            <PriceChange
-              className="text-base"
-              percentage={calcPercentageChange(currentPrice, priceAtPurchase)}
-            />
+            <PriceChange className="text-base" percentage={changePercent}/>
           </div>
 
           <p className="text-sm text-gray100">{`${amountPurchased} Purchased On ${purchaseDate}`}</p>

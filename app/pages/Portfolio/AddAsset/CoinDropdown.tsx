@@ -1,22 +1,10 @@
 import { useState, useEffect } from "react";
+import { CoinDropdownProps, DropdownItem } from "./types";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setSelectedCoinId } from "@/app/store/features/portfolioSlice";
 import Dropdown from "@/app/components/UI/Dropdown/Dropdown";
 import { DropdownOpener } from "@/app/components/UI/Dropdown/DropdownOpener";
 import CoinName from "@/app/components/UI/CoinName";
-
-type CoinDropdownProps = {
-  image: string;
-  id: string;
-  symbol: string;
-  onSelectedCoinChange: (coinId: string) => void;
-};
-
-type DropdownItem = {
-  image: string;
-  id: string;
-  symbol: string;
-};
 
 export default function CoinDropdown({
   image,

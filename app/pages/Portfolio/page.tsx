@@ -12,10 +12,13 @@ import { formatCurrency, calculatePercentage } from "@/app/utils/numberFormattin
 
 export default function Portfolio() {
   const [isAddingAsset, setIsAddingAsset] = useState<boolean>(false);
-  const assets =
-    typeof window !== "undefined"
+  const assets = getStoredAssets();
+
+  function getStoredAssets() {
+    return typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("Assets") || "[]")
       : [];
+  }
 
   return (
     <>
@@ -27,6 +30,7 @@ export default function Portfolio() {
           />
         </aside>
       )}
+
       <main className={`container mx-auto ${isAddingAsset && "blur-sm"}`}>
         <div className="flex justify-between mb-10">
           <Heading size={1} text="Portfolio" />

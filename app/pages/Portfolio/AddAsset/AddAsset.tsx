@@ -1,15 +1,11 @@
 import { CoinCard } from "./CoinCard";
 import Form from "./Form";
+import { AddAssetProps } from "./types";
 import { useAppSelector } from "@/app/store/hooks";
 import Modal from "@/app/components/UI/Modal";
 import { Heading } from "@/app/components/UI/Heading";
 import CloseButton from "@/app/components/UI/Buttons/CloseButton";
 import { useFindSelectedCoin } from "@/app/hooks/helpers";
-
-type AddAssetProps = {
-  isAddingAsset: boolean;
-  onClose: () => void;
-};
 
 export default function AddAsset({ isAddingAsset, onClose }: AddAssetProps) {
   const { selectedCoinId } = useAppSelector((state) => state.portfolio);

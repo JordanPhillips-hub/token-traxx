@@ -21,3 +21,7 @@ export type DropdownItem = {
   id: string;
   symbol: string;
 };
+
+export type FormProps = {
+  onClose: () => void;
+};

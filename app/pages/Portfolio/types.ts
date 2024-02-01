@@ -8,3 +8,14 @@ export type MarketStatProps = {
   completed?: number;
   maxCompleted?: number;
 };
+
+export type PersonalOverviewProps = {
+  id: string;
+  image: string;
+  symbol: string;
+  amountPurchased: number;
+  currentPrice: number;
+  priceAtPurchase: number;
+  purchaseDate: string;
+  currency: string;
+};

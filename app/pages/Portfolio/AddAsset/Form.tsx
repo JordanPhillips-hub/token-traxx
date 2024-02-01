@@ -1,24 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import CoinDropdown from "./CoinDropdown";
+import { FormProps } from "./types";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useGetCoinHistoryQuery } from "@/app/store/api/coingecko";
 import FormInput from "@/app/components/Form/FormInput";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import { formatDateToDDMMYYYY } from "@/app/utils/dateAndTime";
 import { setPurchaseAmount, setPurchaseDate, setSelectedCoinId } from "@/app/store/features/portfolioSlice";
-
-type FormProps = {
-  onClose: () => void;
-};
+import { useFindSelectedCoin } from "@/app/hooks/helpers";
 
 export default function Form({ onClose }: FormProps) {
   const dispatch = useAppDispatch();
   const [localSelectedCoinId, setLocalSelectedCoinId] = useState("");
   const [formInputs, setFormInputs] = useState({ formAmount: "", formDate: "" });
-  const { coins, currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
+  const { currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
   const { purchaseDate, selectedCoinId } = useAppSelector((state) => state.portfolio);
   const { data: coinHistory } = useGetCoinHistoryQuery({ id: selectedCoinId, date: purchaseDate });
-  const selectedCoin = coins.find((coin) => coin.id === selectedCoinId);
+  const selectedCoin = useFindSelectedCoin(selectedCoinId);
   const { formAmount, formDate } = formInputs;
   const {
     id,
@@ -77,6 +75,12 @@ export default function Form({ onClose }: FormProps) {
     onClose();
   }
 
+  function disableSubmit() {
+    if (Number(formAmount) < 1 || formDate === "" || localSelectedCoinId === "") {
+      return true;
+    };
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <CoinDropdown
@@ -117,11 +121,7 @@ export default function Form({ onClose }: FormProps) {
             text="Save And Continue"
             type="submit"
             onClick={() => handleSubmit}
-            isDisabled={
-              Number(formAmount) < 1 ||
-              formDate === "" ||
-              localSelectedCoinId === ""
-            }
+            isDisabled={disableSubmit()}
           />
         </div>
       </form>

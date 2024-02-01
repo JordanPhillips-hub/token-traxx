@@ -27,14 +27,10 @@ export default function CurrencySelector() {
   if (marketsHasError) return "";
   return (
     <Carousel>
-      {coins.map(
-        ({
-          id,
-          image,
-          name,
-          current_price,
-          price_change_percentage_24h: priceChangeIn24h,
-        }) => (
+      {coins.map((coin) => {
+        const { id, image, name, current_price, price_change_percentage_24h } =
+          coin;
+        return (
           <SwiperSlide key={id}>
             <div className="max-w-[250px]">
               <PrimaryButton
@@ -46,14 +42,14 @@ export default function CurrencySelector() {
                   <p className="font-medium text-left">{name}</p>
                   <div className="flex items-center gap-2">
                     <Price price={current_price} hasCode />
-                    <PriceChange percentage={priceChangeIn24h} />
+                    <PriceChange percentage={price_change_percentage_24h} />
                   </div>
                 </div>
               </PrimaryButton>
             </div>
           </SwiperSlide>
-        )
-      )}
+        );
+      })}
     </Carousel>
   );
 }

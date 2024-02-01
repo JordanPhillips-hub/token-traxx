@@ -2,6 +2,15 @@
 import { useEffect, useState } from "react";
 import CurrencySelector from "./CurrencySelector";
 import CoinTable from "./CoinTable/CoinTable";
+import ChartContainer from "@/app/components/Charts/ChartContainer";
+import Chart from "@/app/components/Charts/Chart";
+import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
+import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
+import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
+import Icon from "@/app/components/UI/Icon";
+import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
+import { formatCurrency } from "@/app/utils/numberFormatting";
+import { formatCoinName } from "@/app/utils/generalHelpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
@@ -15,15 +24,6 @@ import {
   setIsMarketsLoading,
   setMarketsHasError,
 } from "@/app/store/features/coinMarketSlice";
-import ChartContainer from "@/app/components/Charts/ChartContainer";
-import Chart from "@/app/components/Charts/Chart";
-import CurrencyConvertor from "@/app/components/CurrencyConvertor/CurrencyConvertor";
-import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
-import CoinConvertorButton from "@/app/components/UI/Buttons/CoinConvertorButton";
-import Icon from "@/app/components/UI/Icon";
-import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
-import { formatCurrency } from "@/app/utils/numberFormatting";
-import { formatCoinName } from "@/app/utils/generalHelpers";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -32,7 +32,6 @@ export default function Home() {
   const { coins, coinId, currency, currencySymbol } = useAppSelector(
     (state) => state.coinMarkets
   );
-  const selectedCoin = coins.find((coin) => coin.id === coinId);
   const { isComparing, comparedCoins } = useAppSelector(
     (state) => state.compareCharts
   );
@@ -42,6 +41,14 @@ export default function Home() {
     isLoading,
     isError,
   } = useGetMarketsQuery({ page: 1, currency: currency });
+
+  const selectedCoin = coins.find((coin) => coin.id === coinId);
+  const {
+    id: selectedCoinId,
+    symbol: selectedCoinSymbol,
+    current_price,
+    total_volume,
+  } = selectedCoin || {};
 
   useEffect(() => {
     dispatch(setIsMarketsLoading(isLoading));
@@ -64,10 +71,10 @@ export default function Home() {
   const charts = [
     {
       type: "line",
-      name: formatCoinName(selectedCoin?.id ?? "", selectedCoin?.symbol ?? ""),
+      name: formatCoinName(selectedCoinId ?? "", selectedCoinSymbol ?? ""),
       err: "Prices not available",
       loading: "Loading Price",
-      value: `${formatCurrency(selectedCoin?.current_price) ?? ""} min`,
+      value: `${formatCurrency(current_price) ?? ""} min`,
       date: new Date().toDateString(),
     },
     {
@@ -75,27 +82,34 @@ export default function Home() {
       name: "Volume 24hr",
       err: "Volumes not available",
       loading: "Loading Volumes",
-      value: `${formatCurrency(selectedCoin?.total_volume) ?? ""} bin`,
+      value: `${formatCurrency(total_volume) ?? ""} bin`,
       date: new Date().toDateString(),
     },
   ];
+
+  const convertorButtons = {
+    coins: { type: "Coins", clickEvent: () => setIsModalOpen(false) },
+    convertor: { type: "Convertor", clickEvent: () => setIsModalOpen(true) },
+  };
 
   return (
     <>
       <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
         <section className="container mx-auto">
           <div className="bg-blue800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">
-            <CoinConvertorButton
-              isModalOpen={isModalOpen}
-              text="Coins"
-              activeStyles="Coins"
-            />
-            <CoinConvertorButton
-              isModalOpen={isModalOpen}
-              text="Convertor"
-              activeStyles="Convertor"
-              onClick={() => setIsModalOpen(true)}
-            />
+            {Object.keys(convertorButtons).map((key) => {
+              const { type, clickEvent } =
+                convertorButtons[key as keyof typeof convertorButtons];
+              return (
+                <CoinConvertorButton
+                  key={key}
+                  isModalOpen={isModalOpen}
+                  text={type}
+                  activeStyles={type}
+                  onClick={clickEvent}
+                />
+              );
+            })}
           </div>
         </section>
 
@@ -129,21 +143,13 @@ export default function Home() {
             <section className=" container flex-col mb-16 mx-auto">
               <div className="flex gap-8">
                 {charts.map((chart) => {
-                  const { name, value, date, type } = chart;
+                  const { name, value, date, type, loading, err } = chart;
                   return (
                     <ChartContainer
                       location="home"
                       key={name}
-                      name={
-                        isLoading
-                          ? "Loading"
-                          : isError
-                          ? "Error Occurred"
-                          : name
-                      }
-                      price={
-                        isLoading || isError ? "" : `${currencySymbol}${value}`
-                      }
+                      name={isLoading ? loading : isError ? err : name}
+                      price={isLoading ? "" : `${currencySymbol}${value}`}
                       date={date}
                       type={type}
                     >

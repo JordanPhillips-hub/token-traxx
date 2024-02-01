@@ -5,11 +5,7 @@ import { useGetCoinHistoryQuery } from "@/app/store/api/coingecko";
 import FormInput from "@/app/components/Form/FormInput";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import { formatDateToDDMMYYYY } from "@/app/utils/dateAndTime";
-import {
-  setPurchaseAmount,
-  setPurchaseDate,
-  setSelectedCoinId,
-} from "@/app/store/features/portfolioSlice";
+import { setPurchaseAmount, setPurchaseDate, setSelectedCoinId } from "@/app/store/features/portfolioSlice";
 
 type FormProps = {
   onClose: () => void;
@@ -18,24 +14,10 @@ type FormProps = {
 export default function Form({ onClose }: FormProps) {
   const dispatch = useAppDispatch();
   const [localSelectedCoinId, setLocalSelectedCoinId] = useState("");
-  const { coins, currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
-
-  const [formInputs, setFormInputs] = useState({
-    formAmount: "",
-    formDate: "",
-  });
-
-  const { purchaseDate, selectedCoinId } = useAppSelector(
-    (state) => state.portfolio
-  );
-
-  const { data: coinHistory } = useGetCoinHistoryQuery({
-    id: selectedCoinId,
-    date: purchaseDate,
-  });
-
+  const [formInputs, setFormInputs] = useState({ formAmount: "", formDate: "" });
+  const { coins, currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
+  const { purchaseDate, selectedCoinId } = useAppSelector((state) => state.portfolio);
+  const { data: coinHistory } = useGetCoinHistoryQuery({ id: selectedCoinId, date: purchaseDate });
   const selectedCoin = coins.find((coin) => coin.id === selectedCoinId);
   const { formAmount, formDate } = formInputs;
   const {
@@ -50,9 +32,7 @@ export default function Form({ onClose }: FormProps) {
     circulating_supply,
   } = selectedCoin;
 
-  function handleChange({
-    target: { value, name },
-  }: ChangeEvent<HTMLInputElement>) {
+  function handleChange({ target: { value, name } }: ChangeEvent<HTMLInputElement>) {
     setFormInputs((prevState) => {
       return { ...prevState, [name]: value };
     });

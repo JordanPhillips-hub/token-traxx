@@ -1,16 +1,6 @@
+import { MarketStatProps } from "./types";
 import PriceChange from "@/app/components/UI/PriceChange";
 import StatBar from "@/app/components/UI/StatBar";
-
-type MarketStatProps = {
-  stat: string;
-  statValue?: number | string;
-  percentChange?: boolean;
-  percentage?: number;
-  hasStatBar?: boolean;
-  hasStatusBar?: boolean;
-  completed?: number;
-  maxCompleted?: number;
-};
 
 export default function MarketStat({
   stat,

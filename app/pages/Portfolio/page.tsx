@@ -1,39 +1,24 @@
 "use client";
 import { useState } from "react";
 import { uid } from "uid";
+import { Asset } from "./types";
 import AddAsset from "./AddAsset/AddAsset";
 import PersonalOverview from "./PersonalOverview";
 import MarketStat from "./MarketStat";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import Card from "@/app/components/UI/Card";
 import { Heading } from "@/app/components/UI/Heading";
-import {
-  formatCurrency,
-  calculatePercentage,
-} from "@/app/utils/numberFormatting";
-
-type Asset = {
-  id: string;
-  price_at_purchase: number;
-  amount_purchased: number;
-  purchase_date: string;
-  current_price: number;
-  image: string;
-  symbol: string;
-  price_change_24H: number;
-  market_cap: number;
-  volume: number;
-  circ_supply: number;
-  max_supply: number;
-  currency: string;
-};
+import { formatCurrency, calculatePercentage } from "@/app/utils/numberFormatting";
 
 export default function Portfolio() {
   const [isAddingAsset, setIsAddingAsset] = useState<boolean>(false);
-  const assets =
-    typeof window !== "undefined"
+  const assets = getStoredAssets();
+
+  function getStoredAssets() {
+    return typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("Assets") || "[]")
       : [];
+  }
 
   return (
     <>
@@ -45,6 +30,7 @@ export default function Portfolio() {
           />
         </aside>
       )}
+
       <main className={`container mx-auto ${isAddingAsset && "blur-sm"}`}>
         <div className="flex justify-between mb-10">
           <Heading size={1} text="Portfolio" />

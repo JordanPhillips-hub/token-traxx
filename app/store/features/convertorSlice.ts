@@ -18,20 +18,11 @@ const convertorSlice = createSlice({
   name: 'convertor',
   initialState,
   reducers: {
-    setSellCoinId(state, action: PayloadAction<string>) {
-      state.sellCoinId = action.payload
+    setConvertorData(state, action: PayloadAction<Partial<ConvertorState>>) {
+      Object.assign(state, action.payload);
     },
-    setBuyCoinId(state, action: PayloadAction<string>) {
-      state.buyCoinId = action.payload
-    },
-    setSellPrice(state, action: PayloadAction<number>) {
-      state.sellPrice = action.payload
-    },
-    setNumToSell(state, action: PayloadAction<number>) {
-      state.numToSell = action.payload
-    },
-  }
+  },
 });
 
-export const { setSellCoinId, setBuyCoinId, setSellPrice, setNumToSell } = convertorSlice.actions;
+export const { setConvertorData } = convertorSlice.actions
 export default convertorSlice.reducer;

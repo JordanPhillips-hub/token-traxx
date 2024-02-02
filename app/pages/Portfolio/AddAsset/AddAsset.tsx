@@ -1,20 +1,15 @@
 import { CoinCard } from "./CoinCard";
 import Form from "./Form";
+import { AddAssetProps } from "./types";
 import { useAppSelector } from "@/app/store/hooks";
 import Modal from "@/app/components/UI/Modal";
 import { Heading } from "@/app/components/UI/Heading";
 import CloseButton from "@/app/components/UI/Buttons/CloseButton";
-
-type AddAssetProps = {
-  isAddingAsset: boolean;
-  onClose: () => void;
-};
+import { useFindSelectedCoin } from "@/app/hooks/helpers";
 
 export default function AddAsset({ isAddingAsset, onClose }: AddAssetProps) {
-  const { coins } = useAppSelector((state) => state.coinMarkets);
   const { selectedCoinId } = useAppSelector((state) => state.portfolio);
-  const selectedCoin = coins.find((coin) => coin.id === selectedCoinId);
-  const { image, name, symbol } = selectedCoin;
+  const { image, name, symbol } = useFindSelectedCoin(selectedCoinId);
 
   return (
     <Modal

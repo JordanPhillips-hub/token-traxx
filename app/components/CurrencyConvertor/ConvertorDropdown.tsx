@@ -35,7 +35,7 @@ export default function ConvertorDropdown({
   }
 
   function handleDropdownReset() {
-    dispatch(setConvertorData({numToSell: 0, sellPrice: 0}))
+    dispatch(setConvertorData({numToSell: 0, sellPrice: 0}));
     setIsDropdownOpen(false);
   }
 

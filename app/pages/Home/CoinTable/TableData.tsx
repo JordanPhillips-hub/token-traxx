@@ -1,17 +1,17 @@
 import Image from "next/image";
 import TableStatBar from "./TableStatBar";
 import PageLink from "@/app/components/UI/Links/PageLink";
+import Price from "@/app/components/UI/Price";
 import PriceChange from "@/app/components/UI/PriceChange";
 import Sparkline from "@/app/components/Charts/Sparkline";
 import { setCoinSummaryId } from "@/app/store/features/pageLinkSlice";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { formatCoinName } from "@/app/utils/generalHelpers";
-import { formatCurrency } from "@/app/utils/numberFormatting";
 
 export default function TableData() {
   const dispatch = useAppDispatch();
   const { tableCoins } = useAppSelector((state) => state.tableCoins);
-  const { currencySymbol } = useAppSelector((state) => state.coinMarkets);
+
   function handleActiveLink(id: string) {
     dispatch(setCoinSummaryId(id));
   }
@@ -60,7 +60,7 @@ export default function TableData() {
       <tr className="bg-blue800" key={id}>
         <td className="pl-3 py-5">{index + 1}</td>
         <td className="flex gap-1 py-5">{renderName(image, id, symbol)}</td>
-        <td>{`${currencySymbol}${formatCurrency(current_price)}`}</td>
+        <td><Price price={current_price} hasCode={false}/></td>
         <td>{renderPriceChange(changeIn1h)}</td>
         <td>{renderPriceChange(changeIn24h)}</td>
         <td>{renderPriceChange(changeIn7d)}</td>

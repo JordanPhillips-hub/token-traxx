@@ -11,30 +11,20 @@ import Icon from "@/app/components/UI/Icon";
 import TimePeriodSelector from "@/app/components/UI/TimePeriodSelector";
 import { formatCurrency } from "@/app/utils/numberFormatting";
 import { formatCoinName } from "@/app/utils/generalHelpers";
+import { useFindSelectedCoin } from "@/app/hooks/helpers";
 import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setTableCoins } from "@/app/store/features/coinTableSlice";
-import {
-  setIsComparing,
-  setComparedCoins,
-} from "@/app/store/features/charts/compareChartSlice";
-import {
-  setCoinMarkets,
-  setIsMarketsLoading,
-  setMarketsHasError,
-} from "@/app/store/features/coinMarketSlice";
+import { setIsComparing, setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
+import { setCoinMarkets, setIsMarketsLoading, setMarketsHasError } from "@/app/store/features/coinMarketSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-  const { coins, coinId, currency, currencySymbol } = useAppSelector(
-    (state) => state.coinMarkets
-  );
-  const { isComparing, comparedCoins } = useAppSelector(
-    (state) => state.compareCharts
-  );
+  const { isComparing, comparedCoins } = useAppSelector((state) => state.compareCharts);
+  const { coinId, currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
 
   const {
     data: coinMarkets,
@@ -42,13 +32,12 @@ export default function Home() {
     isError,
   } = useGetMarketsQuery({ page: 1, currency: currency });
 
-  const selectedCoin = coins.find((coin) => coin.id === coinId);
   const {
     id: selectedCoinId,
     symbol: selectedCoinSymbol,
     current_price,
     total_volume,
-  } = selectedCoin || {};
+  } = useFindSelectedCoin(coinId) || {};
 
   useEffect(() => {
     dispatch(setIsMarketsLoading(isLoading));

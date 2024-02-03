@@ -6,12 +6,7 @@ import CoinName from "@/app/components/UI/CoinName";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
 import { setCoinId } from "@/app/store/features/coinMarketSlice";
 import { setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
-import {
-  setSellCoinId,
-  setBuyCoinId,
-  setNumToSell,
-  setSellPrice,
-} from "@/app/store/features/convertorSlice";
+import { setConvertorData } from "@/app/store/features/convertorSlice";
 
 export default function ConvertorDropdown({
   cardType,
@@ -40,15 +35,14 @@ export default function ConvertorDropdown({
   }
 
   function handleDropdownReset() {
-    dispatch(setNumToSell(0));
-    dispatch(setSellPrice(0));
+    dispatch(setConvertorData({numToSell: 0, sellPrice: 0}));
     setIsDropdownOpen(false);
   }
 
   function handleCoinSelect(id: string) {
     cardType === "sell"
-      ? dispatch(setSellCoinId(id))
-      : dispatch(setBuyCoinId(id));
+      ? dispatch(setConvertorData({sellCoinId: id}))
+      : dispatch(setConvertorData({buyCoinId: id}));
     handleCoinComparison(id);
     handleDropdownReset();
   }

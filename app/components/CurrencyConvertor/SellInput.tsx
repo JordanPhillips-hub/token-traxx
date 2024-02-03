@@ -2,10 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useGetSelectedCoin } from "./hooks";
 import FormInput from "@/app/components/Form/FormInput";
 import { useAppSelector, useAppDispatch } from "@/app/store/hooks";
-import {
-  setNumToSell,
-  setSellPrice,
-} from "@/app/store/features/convertorSlice";
+import { setConvertorData } from "@/app/store/features/convertorSlice";
 
 export default function SellInput({ cardType }: { cardType: string }) {
   const dispatch = useAppDispatch();
@@ -15,8 +12,7 @@ export default function SellInput({ cardType }: { cardType: string }) {
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const inputValue = parseFloat(e.target.value);
     const price = inputValue * currentPrice;
-    dispatch(setNumToSell(inputValue));
-    dispatch(setSellPrice(price));
+    dispatch(setConvertorData({numToSell: inputValue, sellPrice: price}));
   }
 
   return (

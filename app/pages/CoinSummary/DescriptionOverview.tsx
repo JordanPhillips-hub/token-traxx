@@ -1,3 +1,4 @@
+import { uid } from "uid";
 import CoinDescriptionToggle from "@/app/components/UI/CoinDescriptionToggle";
 import CopyButton from "@/app/components/UI/Buttons/CopyButton";
 import Card from "@/app/components/UI/Card";
@@ -9,7 +10,7 @@ export default function DescriptionOverview() {
   const { blockchain_site: siteLink } = coinSummary.summaryCoin.links;
   const siteLinks = [siteLink[0], siteLink[1], siteLink[2]];
   const copyLinks = siteLinks.map((link) => (
-    <Card key={link} className="w-fit rounded-xl py-4 px-6">
+    <Card key={uid()} className="w-fit rounded-xl py-4 px-6">
       <CopyButton toCopy={link} />
     </Card>
   ));

@@ -7,7 +7,8 @@ type TableProps = {
   className?: string;
 };
 
-const defaultStyles = "min-w-full border-separate border-spacing-y-2 text-sm";
+const defaultStyles =
+  "min-w-full border-separate border-spacing-y-2 text-sm text-white";
 export default function Table({ headers, children, className }: TableProps) {
   return (
     <table className={twMerge(defaultStyles, className)}>

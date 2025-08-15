@@ -6,7 +6,7 @@ type TableHeadProps = {
 
 export default function TableHead({ headers }: TableHeadProps) {
   return (
-    <thead className="text-left text-sm text-gray100">
+    <thead className="text-left text-sm text-neutral-900 dark:text-gray100">
       <tr>
         {headers.map((header) => (
           <th className="pl-3" key={header}>

@@ -18,13 +18,11 @@ export default function ConvertorCard({
   const isSellCard = cardType === "sell";
 
   return (
-    <div className="container bg-blue600 p-6 rounded-2xl" id={cardType}>
-      <Heading
-        containerClass="mb-10"
-        textClass="text-gray100"
-        size={2}
-        text={cardName}
-      />
+    <div
+      className="text-gray100 container bg-blue600 p-6 rounded-2xl"
+      id={cardType}
+    >
+      <Heading containerClass="mb-10" size={2} text={cardName} />
 
       <div className="flex justify-between mb-1">
         <ConvertorDropdown

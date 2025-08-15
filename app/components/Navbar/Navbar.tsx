@@ -31,7 +31,7 @@ export default function NavBar() {
         <div className="flex gap-20">
           <Logo />
 
-          <ul className="flex gap-6 py-1 px-1  rounded-md">
+          <ul className="flex gap-6 py-1 px-1 rounded-md">
             {pageLinks.map(({ id, href, text }) => (
               <li key={id}>
                 <PageLink

@@ -20,8 +20,8 @@ export default function ChartContainer({
     if (!isComparing || location === "convertor") {
       return (
         <>
-          <p className="text-3xl">{price}</p>
-          <Heading textClass="font-normal" size={2} text={name} />
+          <p className="text-3xl text-white">{price}</p>
+          <Heading textClass="font-normal text-white" size={2} text={name} />
         </>
       );
     }
@@ -42,7 +42,11 @@ export default function ChartContainer({
       <div className="mb-3">
         {displayHeading()}
         {displayMessage()}
-        <p className={`${isComparing ? "text-3xl mb-1" : "text-base"}`}>
+        <p
+          className={`${
+            isComparing ? "text-3xl mb-1" : "text-base"
+          } text-white`}
+        >
           {date}
         </p>
       </div>

@@ -11,14 +11,14 @@ export default function CoinInfo({
   changePercent,
 }: CoinInfoProps) {
   return (
-    <div className="font-medium flex items-center gap-1">
+    <div className="text-gray100 font-medium flex items-center gap-1">
       {changePercent ? (
         <PriceChange className="text-xs" percentage={changePercent} />
       ) : (
         <>
           {icon && <Icon iconVariant={icon} />}
           <div className="text-xs">
-            <span className="text-gray100 mr-2">{name}</span>
+            <span className="mr-2">{name}</span>
             <span>{data ? data : "N/A"}</span>
           </div>
           {completed !== undefined && (

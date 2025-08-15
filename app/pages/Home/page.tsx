@@ -16,15 +16,26 @@ import { useGetMarketsQuery } from "@/app/store/api/coingecko";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { setChartTimePeriod } from "@/app/store/features/charts/timePeriodSlice";
 import { setTableCoins } from "@/app/store/features/coinTableSlice";
-import { setIsComparing, setComparedCoins } from "@/app/store/features/charts/compareChartSlice";
-import { setCoinMarkets, setIsMarketsLoading, setMarketsHasError } from "@/app/store/features/coinMarketSlice";
+import {
+  setIsComparing,
+  setComparedCoins,
+} from "@/app/store/features/charts/compareChartSlice";
+import {
+  setCoinMarkets,
+  setIsMarketsLoading,
+  setMarketsHasError,
+} from "@/app/store/features/coinMarketSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { timePeriod } = useAppSelector((state) => state.chartTimePeriod);
-  const { isComparing, comparedCoins } = useAppSelector((state) => state.compareCharts);
-  const { coinId, currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
+  const { isComparing, comparedCoins } = useAppSelector(
+    (state) => state.compareCharts
+  );
+  const { coinId, currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
 
   const {
     data: coinMarkets,
@@ -83,7 +94,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="bg-grey100 dark:bg-slate700 max-w-8xl mx-auto px-24">
+      <main className="max-w-8xl mx-auto px-24">
         <section className="container mx-auto">
           <div className="bg-blue800 text-1xl flex w-1/3 mb-10 py-1 px-1 rounded-md">
             {Object.keys(convertorButtons).map((key) => {

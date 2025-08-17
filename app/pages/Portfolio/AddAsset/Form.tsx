@@ -6,16 +6,30 @@ import { useGetCoinHistoryQuery } from "@/app/store/api/coingecko";
 import FormInput from "@/app/components/Form/FormInput";
 import PrimaryButton from "@/app/components/UI/Buttons/PrimaryButton";
 import { formatDateToDDMMYYYY } from "@/app/utils/dateAndTime";
-import { setPurchaseAmount, setPurchaseDate, setSelectedCoinId } from "@/app/store/features/portfolioSlice";
+import {
+  setPurchaseAmount,
+  setPurchaseDate,
+  setSelectedCoinId,
+} from "@/app/store/features/portfolioSlice";
 import { useFindSelectedCoin } from "@/app/hooks/helpers";
 
 export default function Form({ onClose }: FormProps) {
   const dispatch = useAppDispatch();
   const [localSelectedCoinId, setLocalSelectedCoinId] = useState("");
-  const [formInputs, setFormInputs] = useState({ formAmount: "", formDate: "" });
-  const { currency, currencySymbol } = useAppSelector((state) => state.coinMarkets);
-  const { purchaseDate, selectedCoinId } = useAppSelector((state) => state.portfolio);
-  const { data: coinHistory } = useGetCoinHistoryQuery({ id: selectedCoinId, date: purchaseDate });
+  const [formInputs, setFormInputs] = useState({
+    formAmount: "",
+    formDate: "",
+  });
+  const { currency, currencySymbol } = useAppSelector(
+    (state) => state.coinMarkets
+  );
+  const { purchaseDate, selectedCoinId } = useAppSelector(
+    (state) => state.portfolio
+  );
+  const { data: coinHistory } = useGetCoinHistoryQuery({
+    id: selectedCoinId,
+    date: purchaseDate,
+  });
   const selectedCoin = useFindSelectedCoin(selectedCoinId);
   const { formAmount, formDate } = formInputs;
   const {
@@ -30,7 +44,9 @@ export default function Form({ onClose }: FormProps) {
     circulating_supply,
   } = selectedCoin;
 
-  function handleChange({ target: { value, name } }: ChangeEvent<HTMLInputElement>) {
+  function handleChange({
+    target: { value, name },
+  }: ChangeEvent<HTMLInputElement>) {
     setFormInputs((prevState) => {
       return { ...prevState, [name]: value };
     });
@@ -76,9 +92,13 @@ export default function Form({ onClose }: FormProps) {
   }
 
   function disableSubmit() {
-    if (Number(formAmount) < 1 || formDate === "" || localSelectedCoinId === "") {
+    if (
+      Number(formAmount) < 1 ||
+      formDate === "" ||
+      localSelectedCoinId === ""
+    ) {
       return true;
-    };
+    }
   }
 
   return (

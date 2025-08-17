@@ -40,14 +40,14 @@ export default function CoinDropdown({
 
   return (
     <Dropdown
-      itemClass=" w-full justify-center mb-1 p-1"
+      itemClass="bg-white text-blue900 w-full justify-center mb-1 p-1 dark:bg-blue700 dark:text-white"
       isOpen={isSelectingCoin}
       items={coins}
       renderItem={(item) => renderDropdownItem(item)}
       onItemClick={(id) => handleSelectedCoin(id)}
     >
       <DropdownOpener
-        className="bg-blue700 text-sm w-full p-2 m-0"
+        className="text-sm w-full p-2 m-0 border-[1px] border-gray-300"
         onClick={() => setIsSelectingCoin(!isSelectingCoin)}
         isOpen={isSelectingCoin}
       >

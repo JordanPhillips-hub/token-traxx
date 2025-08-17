@@ -24,7 +24,7 @@ export default function Dropdown<
 }: DropdownProps<T>) {
   const itemStyles = "rounded-none";
   const containerStyles = isOpen
-    ? "text-sm absolute bg-blue800 mt-3 p-4 rounded z-50"
+    ? "text-sm absolute bg-white dark:bg-blue800 mt-3 p-4 rounded z-50"
     : "hidden";
 
   return (

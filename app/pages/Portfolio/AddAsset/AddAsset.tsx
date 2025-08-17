@@ -13,7 +13,7 @@ export default function AddAsset({ isAddingAsset, onClose }: AddAssetProps) {
 
   return (
     <Modal
-      className="bg-blue900 w-1/2 rounded-2xl p-12"
+      className="dark:bg-blue900 w-1/2 rounded-2xl p-12"
       isOpen={isAddingAsset}
       onClose={onClose}
     >

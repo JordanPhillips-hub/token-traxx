@@ -81,8 +81,9 @@ export default function Chart({ chartType, coinId, days }: ChartProps) {
     }
   }, [chartData, chartType]);
 
-  if (isLoading) return <p>Chart Loading</p>;
-  if (isError) return <p>Chart error, please try again later</p>;
+  if (isLoading) return <p className="text-gray100">Chart Loading</p>;
+  if (isError)
+    return <p className="text-gray100">Chart error, please try again later</p>;
   return (
     <div className="h-full">
       {chartType === "line" && (

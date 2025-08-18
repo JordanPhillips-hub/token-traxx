@@ -13,15 +13,17 @@ export default function MarketStat({
   return (
     <div className="py-3 px-6 border border-solid border-[#2d2d54] rounded-lg">
       {!percentChange && !hasStatusBar && <p>{statValue}</p>}
-      {percentChange && (<PriceChange className="text-base" percentage={percentage} />)}
+      {percentChange && (
+        <PriceChange className="text-base" percentage={percentage} />
+      )}
       {hasStatusBar && completed !== undefined && (
         <div className="relative mt-8">
-          <p className="text-green500 text-xs absolute bottom-2 left-0">
+          <p className="text-purple500 dark:text-green500 text-xs absolute bottom-2 left-0">
             {completed && isFinite(completed)
               ? Math.floor(completed) + "%"
               : "N/A"}
           </p>
-          <StatBar completed={completed} bgColor="hsl(176, 100%, 48%)"/>
+          <StatBar completed={completed} />
         </div>
       )}
       <p className="text-sm mt-2">{stat}</p>

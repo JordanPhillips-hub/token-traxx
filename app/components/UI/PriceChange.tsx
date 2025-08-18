@@ -8,7 +8,8 @@ export default function PriceChange({
   className,
 }: PriceChangeProps) {
   const negative = percentage && percentage < 0;
-  const textColor = negative ? "text-red500" : "text-green500";
+  const lightColor = negative ? "text-red500" : "text-purple500";
+  const darkColor = negative ? "text-red500" : "text-green500";
   const defaultStyles = "text-sm flex items-center gap-1";
 
   if (percentage === undefined) {
@@ -26,9 +27,11 @@ export default function PriceChange({
     <div className={twMerge(defaultStyles, className)}>
       <Icon
         iconVariant={negative ? "chevDown" : "chevUp"}
-        className={textColor}
+        className={`${lightColor} dark:${darkColor}`}
       />
-      <span className={textColor}>{formatPercent(percentage)}%</span>
+      <span className={`${lightColor} dark:${darkColor}`}>
+        {formatPercent(percentage)}%
+      </span>
     </div>
   );
 }

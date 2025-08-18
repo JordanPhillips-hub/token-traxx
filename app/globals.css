@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 /* Custom styles or overrides */
+:root {
+  --statbar-fill: #6263DE;
+  /* light mode fill */
+  --statbar-track: hsla(240, 10%, 20%, 0.35);
+  /* light mode track */
+}
+
+.dark {
+  --statbar-fill: hsl(176, 100%, 60%);
+  /* dark mode fill (a touch brighter) */
+  --statbar-track: hsla(0, 0%, 100%, 0.18);
+  /* dark mode track */
+}
+
 .swiper {
   @apply static !important
 }

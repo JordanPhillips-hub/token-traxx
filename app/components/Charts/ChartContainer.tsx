@@ -12,9 +12,6 @@ export default function ChartContainer({
   location,
 }: ChartContainerProps) {
   const { isComparing } = useAppSelector((state) => state.compareCharts);
-  const containerClass = `w-full h-auto max-h-[465px] p-4 rounded-xl`;
-  const lineBg = "bg-blue600";
-  const barBg = "bg-purple700";
 
   function displayHeading() {
     if (!isComparing || location === "convertor") {
@@ -38,7 +35,7 @@ export default function ChartContainer({
   }
 
   return (
-    <div className={twMerge(containerClass, type === "line" ? lineBg : barBg)}>
+    <div className="w-full h-auto max-h-[465px] p-4 rounded-xl bg-purple700">
       <div className="mb-3">
         {displayHeading()}
         {displayMessage()}

@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} bg-gray100 dark:bg-blue900`}>
+      <body className={`${spaceGrotesk.className} bg-white dark:bg-blue900`}>
         <StoreProvider>
           <Theme>
             <Navbar />

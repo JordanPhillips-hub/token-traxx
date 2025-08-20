@@ -55,7 +55,7 @@ export default function CurrencyConvertorModal({
       <CloseButton className="absolute right-0" onClose={onClose} />
 
       <Heading size={1} text="Online currency convertor">
-        <p className="text-gray500">{getDateTime24H()}</p>
+        <p className="text-blue700 dark:text-gray500">{getDateTime24H()}</p>
       </Heading>
 
       <section className="flex gap-3 mt-2">

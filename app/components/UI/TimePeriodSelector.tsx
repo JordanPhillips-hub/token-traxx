@@ -14,7 +14,7 @@ export default function TimePeriodSelector({
   };
 
   return (
-    <div className="bg-blue700 flex w-fit mt-10 rounded-md">
+    <div className="bg-blue900 dark:bg-blue700 flex w-fit mt-10 rounded-md">
       {timePeriods.map((timePeriod) => (
         <PeriodToggleButton
           key={timePeriod}

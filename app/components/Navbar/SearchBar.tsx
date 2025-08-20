@@ -36,7 +36,7 @@ export default function SearchBar() {
   }, [coinSummaryId]);
 
   return (
-    <form className=" relative gap-4" onSubmit={handleSubmit} action="">
+    <form className="relative gap-4" onSubmit={handleSubmit} action="">
       <div className="relative flex items-center">
         <Icon className="text-xl absolute ml-2.5" iconVariant="search" />
         <FormInput
@@ -52,7 +52,7 @@ export default function SearchBar() {
       </div>
 
       <Dropdown
-        itemClass="bg-transparent w-full justify-center hover:bg-transparent"
+        itemClass="w-full justify-center text-base"
         isOpen={searchInput !== ""}
         items={coins}
         renderItem={(item) => renderPageLink(item)}

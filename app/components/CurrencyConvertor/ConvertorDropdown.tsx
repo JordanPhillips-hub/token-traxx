@@ -35,14 +35,14 @@ export default function ConvertorDropdown({
   }
 
   function handleDropdownReset() {
-    dispatch(setConvertorData({numToSell: 0, sellPrice: 0}));
+    dispatch(setConvertorData({ numToSell: 0, sellPrice: 0 }));
     setIsDropdownOpen(false);
   }
 
   function handleCoinSelect(id: string) {
     cardType === "sell"
-      ? dispatch(setConvertorData({sellCoinId: id}))
-      : dispatch(setConvertorData({buyCoinId: id}));
+      ? dispatch(setConvertorData({ sellCoinId: id }))
+      : dispatch(setConvertorData({ buyCoinId: id }));
     handleCoinComparison(id);
     handleDropdownReset();
   }
@@ -61,7 +61,7 @@ export default function ConvertorDropdown({
 
   return (
     <Dropdown
-      itemClass="text-xs rounded-none w-full justify-center mb-1 p-1"
+      itemClass="text-xs rounded-none w-full justify-center mb-1 p-1 dark:text-gray100 dark:hover:text-white"
       isOpen={isDropdownOpen}
       items={coins}
       renderItem={(item) => renderDropdownItem(item)}

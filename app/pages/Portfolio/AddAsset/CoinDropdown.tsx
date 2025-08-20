@@ -40,7 +40,7 @@ export default function CoinDropdown({
 
   return (
     <Dropdown
-      itemClass="bg-white text-blue900 w-full justify-center mb-1 p-1 dark:bg-blue700 dark:text-white"
+      itemClass="justify-center mb-1 p-1 dark:bg-transparent dark:text-gray100 dark:hover:text-white"
       isOpen={isSelectingCoin}
       items={coins}
       renderItem={(item) => renderDropdownItem(item)}

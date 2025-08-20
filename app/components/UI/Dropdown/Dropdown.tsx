@@ -22,9 +22,10 @@ export default function Dropdown<
   onItemClick,
   renderItem,
 }: DropdownProps<T>) {
-  const itemStyles = "rounded-none";
+  const itemStyles =
+    "text-blue900 hover:text-purple500 rounded-none bg-transparent hover:bg-transparent shadow-none";
   const containerStyles = isOpen
-    ? "text-sm absolute bg-white dark:bg-blue800 mt-3 p-4 rounded z-50"
+    ? "bg-white dark:bg-blue800 w-full text-sm absolute mt-3 p-4 rounded z-50"
     : "hidden";
 
   return (

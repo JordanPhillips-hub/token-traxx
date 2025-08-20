@@ -19,7 +19,7 @@ export default function ConvertorCard({
 
   return (
     <div
-      className="text-gray100 container bg-blue600 p-6 rounded-2xl"
+      className="bg-white text-blue900 dark:bg-blue600 dark:text-gray100 container p-6 rounded-2xl"
       id={cardType}
     >
       <Heading containerClass="mb-10" size={2} text={cardName} />

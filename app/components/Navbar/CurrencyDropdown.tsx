@@ -42,7 +42,7 @@ export default function CurrencyDropdown() {
   return (
     <Dropdown
       containerClass="flex flex-wrap w-[270px] gap-2 right-0"
-      itemClass="p-1 rounded-none"
+      itemClass="p-1 rounded-none dark:text-gray100 dark:hover:text-purple500 dark:focus:bg-transparent"
       isOpen={isDropdownOpen}
       items={convertCurrencyCodes()}
       renderItem={(item) => renderCurrencyItem(item)}

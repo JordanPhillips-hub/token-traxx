@@ -2,19 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles or overrides */
-:root {
-  --statbar-fill: #6263DE;
-  /* light mode fill */
-  --statbar-track: hsla(240, 10%, 20%, 0.35);
-  /* light mode track */
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    /* white */
+    --foreground: 247 20% 9%;
+    /* blue900 as text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 247 20% 9%;
+
+    --primary: 240 65% 63%;
+    /* purple500 as primary */
+    --primary-foreground: 0 0% 100%;
+    /* white text on primary */
+
+    --secondary: 240 1% 73%;
+    /* gray200 */
+    --secondary-foreground: 247 20% 9%;
+
+    --muted: 0 0% 96%;
+    /* subtle bg (optional) */
+    --muted-foreground: 0 0% 40%;
+
+    --statbar-fill: #6263DE;
+    /* light mode fill */
+    --statbar-track: hsla(240, 10%, 20%, 0.35);
+    /* light mode track */
+  }
+
+  .dark {
+    /* Dark theme */
+    --background: 240 35% 15%;
+    /* blue700 */
+    --foreground: 0 0% 82%;
+    /* gray100 */
+
+    --card: 240 21% 12%;
+    /* blue800 */
+    --card-foreground: 0 0% 82%;
+
+    --primary: 240 35% 15%;
+    /* blue600 or pick a dark-accent */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 253 35% 15%;
+    /* purple700 */
+    --secondary-foreground: 0 0% 82%;
+
+    --muted: 240 21% 12%;
+    --muted-foreground: 0 0% 70%;
+
+    --statbar-fill: hsl(176, 100%, 60%);
+    /* dark mode fill (a touch brighter) */
+    --statbar-track: hsla(0, 0%, 100%, 0.18);
+    /* dark mode track */
+  }
 }
 
-.dark {
-  --statbar-fill: hsl(176, 100%, 60%);
-  /* dark mode fill (a touch brighter) */
-  --statbar-track: hsla(0, 0%, 100%, 0.18);
-  /* dark mode track */
+body {
+  @apply bg-background text-foreground
+}
+
+dialog::backdrop {
+  @apply bg-transparent;
+}
+
+.focused-primary {
+  @apply focus:border focus:border-purple500 bg-purple500 focus:outline-none focus:ring-0;
+}
+
+.card-shadow {
+  @apply container backdrop-blur-sm p-6 rounded-2xl shadow-md ring-1 ring-gray-300 dark:shadow-lg dark:ring-gray-800;
 }
 
 .swiper {
@@ -37,8 +97,4 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   @apply text-white text-[1rem] !important
-}
-
-.focused-primary {
-  @apply focus:border focus:border-purple500 bg-purple500 focus:outline-none focus:ring-0;
 }

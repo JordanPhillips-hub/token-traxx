@@ -18,10 +18,7 @@ export default function ConvertorCard({
   const isSellCard = cardType === "sell";
 
   return (
-    <div
-      className="bg-white text-blue900 dark:bg-blue600 dark:text-gray100 container p-6 rounded-2xl"
-      id={cardType}
-    >
+    <div id={cardType} className="bg-background card-shadow p-6 rounded-2xl">
       <Heading containerClass="mb-10" size={2} text={cardName} />
 
       <div className="flex justify-between mb-1">

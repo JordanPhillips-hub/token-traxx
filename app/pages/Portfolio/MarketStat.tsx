@@ -11,7 +11,7 @@ export default function MarketStat({
   completed,
 }: MarketStatProps) {
   return (
-    <div className="py-3 px-6 border border-solid border-[#2d2d54] rounded-lg">
+    <div className="py-3 px-6 rounded-lg shadow-lg ring-1 ring-gray-300 dark:shadow-xl dark:ring-gray-700">
       {!percentChange && !hasStatusBar && <p>{statValue}</p>}
       {percentChange && (
         <PriceChange className="text-base" percentage={percentage} />

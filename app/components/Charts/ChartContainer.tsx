@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { ChartContainerProps } from "./types";
 import { Heading } from "@/app/components/UI/Heading";
 import { useAppSelector } from "@/app/store/hooks";
@@ -8,7 +7,6 @@ export default function ChartContainer({
   name,
   price,
   date,
-  type,
   location,
 }: ChartContainerProps) {
   const { isComparing } = useAppSelector((state) => state.compareCharts);
@@ -17,8 +15,8 @@ export default function ChartContainer({
     if (!isComparing || location === "convertor") {
       return (
         <>
-          <p className="text-3xl text-white">{price}</p>
-          <Heading textClass="font-normal text-white" size={2} text={name} />
+          <p className="text-3xl">{price}</p>
+          <Heading textClass="font-normal" size={2} text={name} />
         </>
       );
     }
@@ -27,23 +25,17 @@ export default function ChartContainer({
   function displayMessage() {
     if (isComparing) {
       return (
-        <p className="text-gray100 text-sm">
-          Please select currency to view statistics
-        </p>
+        <p className="text-sm">Please select currency to view statistics</p>
       );
     }
   }
 
   return (
-    <div className="w-full h-auto max-h-[465px] p-4 rounded-xl bg-purple700">
+    <div className="bg-background card-shadow w-full h-auto max-h-[465px] p-4 rounded-xl">
       <div className="mb-3">
         {displayHeading()}
         {displayMessage()}
-        <p
-          className={`${
-            isComparing ? "text-3xl mb-1" : "text-base"
-          } text-white`}
-        >
+        <p className={`${isComparing ? "text-3xl mb-1" : "text-base"}`}>
           {date}
         </p>
       </div>

@@ -74,7 +74,7 @@ dialog::backdrop {
 }
 
 .card-shadow {
-  @apply container backdrop-blur-sm p-6 rounded-2xl shadow-md ring-1 ring-gray-300 dark:shadow-lg dark:ring-gray-800;
+  @apply container backdrop-blur-sm p-6 shadow-lg ring-1 ring-gray-300 dark:shadow-lg dark:ring-gray-800;
 }
 
 .swiper {

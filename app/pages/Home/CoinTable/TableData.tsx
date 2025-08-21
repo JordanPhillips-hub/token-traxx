@@ -57,10 +57,12 @@ export default function TableData() {
       },
       index
     ) => (
-      <tr className="bg-blue800" key={id}>
+      <tr className="bg-background text-foreground card-shadow" key={id}>
         <td className="pl-3 py-5">{index + 1}</td>
         <td className="flex gap-1 py-5">{renderName(image, id, symbol)}</td>
-        <td><Price price={current_price} hasCode={false}/></td>
+        <td>
+          <Price price={current_price} hasCode={false} />
+        </td>
         <td>{renderPriceChange(changeIn1h)}</td>
         <td>{renderPriceChange(changeIn24h)}</td>
         <td>{renderPriceChange(changeIn7d)}</td>
